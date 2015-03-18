@@ -1,0 +1,33 @@
+\select@language {czech}
+\select@language {czech}
+\contentsline {subsection}{Odkaz na tuto pr{\' a}ci}{viii}{section*.1}
+\contentsline {chapter}{{\' U}vod}{1}{chapter*.5}
+\contentsline {chapter}{\chapternumberline {1}Sou\IeC {\v c}asn\IeC {\'y} stav a pou\IeC {\v z}it\IeC {\'e} technologie}{3}{chapter.1}
+\contentsline {section}{\numberline {1.1}Hadoop}{3}{section.1.1}
+\contentsline {subsection}{\numberline {1.1.1}Z\IeC {\'a}kladn\IeC {\'\i } principy}{3}{subsection.1.1.1}
+\contentsline {subsection}{\numberline {1.1.2}MapReduce}{4}{subsection.1.1.2}
+\contentsline {subsection}{\numberline {1.1.3}Hadoop Ekosyst\IeC {\'e}m}{6}{subsection.1.1.3}
+\contentsline {paragraph}{N\IeC {\'a}stroje pro v\IeC {\'y}voj}{6}{section*.6}
+\contentsline {paragraph}{Ukl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } dat a spr\IeC {\'a}va metadat}{7}{section*.7}
+\contentsline {paragraph}{N\IeC {\'a}stroje pro \IeC {\v r}\IeC {\'\i }zen\IeC {\'\i }}{7}{section*.8}
+\contentsline {paragraph}{Z\IeC {\'\i }sk\IeC {\'a}v\IeC {\'a}n\IeC {\'\i } a agregace dat}{7}{section*.9}
+\contentsline {subsection}{\numberline {1.1.4}HDFS}{8}{subsection.1.1.4}
+\contentsline {subsection}{\numberline {1.1.5}HBase}{9}{subsection.1.1.5}
+\contentsline {subsubsection}{\numberline {1.1.5.1}Data model HBase}{9}{subsubsection.1.1.5.1}
+\contentsline {paragraph}{HBase Architektura}{10}{section*.10}
+\contentsline {subsubsection}{\numberline {1.1.5.2}Fyzick\IeC {\'e} ulo\IeC {\v z}en\IeC {\'\i } dat}{11}{subsubsection.1.1.5.2}
+\contentsline {chapter}{\chapternumberline {2}Existuj\IeC {\'\i }c\IeC {\'\i } \IeC {\v r}e\IeC {\v s}en\IeC {\'\i } optimalizace distribuce dat pro MapReduce}{13}{chapter.2}
+\contentsline {section}{\numberline {2.1}Definice probl\IeC {\'e}mu}{13}{section.2.1}
+\contentsline {section}{\numberline {2.2}MR-part}{14}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Prvn\IeC {\'\i } f\IeC {\'a}ze - Workload Characterization}{15}{subsection.2.2.1}
+\contentsline {paragraph}{Monitoring}{15}{section*.11}
+\contentsline {paragraph}{Combination}{15}{section*.12}
+\contentsline {subsection}{\numberline {2.2.2}Druh\IeC {\'a} f\IeC {\'a}ze - Repartitioning}{15}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}T\IeC {\v r}et\IeC {\'\i } f\IeC {\'a}ze - Execution and scheduling}{16}{subsection.2.2.3}
+\contentsline {chapter}{\chapternumberline {3}N\IeC {\'a}vrh \IeC {\v r}e\IeC {\v s}en\IeC {\'\i } pro HBase}{19}{chapter.3}
+\contentsline {chapter}{\chapternumberline {4}Implementace \IeC {\v r}e\IeC {\v s}en\IeC {\'\i }}{21}{chapter.4}
+\contentsline {chapter}{\chapternumberline {5}Testov\IeC {\'a}n\IeC {\'\i } a vyhodnocen\IeC {\'\i } m\IeC {\v e}\IeC {\v r}en\IeC {\'\i }}{23}{chapter.5}
+\contentsline {chapter}{Z{\' a}v{\v e}r}{25}{chapter*.13}
+\contentsline {chapter}{Literatura}{27}{section*.15}
+\contentsline {appendix}{\chapternumberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{29}{appendix.A}
+\contentsline {appendix}{\chapternumberline {B}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{31}{appendix.B}

@@ -1,0 +1,39 @@
+\begin{thebibliography}{1}
+\providecommand{\biburl}[1]{\url{#1}}
+\providecommand{\urlprefix}{Dostupn{\' e} z: }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\selectlanguage}[1]{\relax}
+\providecommand{\eprint}[2][]{\biburl{#2}}
+
+\bibitem{HadoopDum}
+deRoos, D.: \emph{Hadoop For Dummies}. O'Reilly Media, Inc., 2014, ISBN
+  978-1-118-60755-8.
+
+\bibitem{HadoopDG}
+White, T.: \emph{Hadoop: The Definitive Guide}. O'Reilly Media, Inc., t\v
+  ret\'\i{} vyd\'an\'\i{}, 2012, ISBN 0596521979, 9780596521974.
+
+\bibitem{CLOUDERA}
+{Cloudera} trainings. 2015.
+\urlprefix\biburl{http://cloudera.com/content/cloudera/en/training/library.html}
+
+\bibitem{HDFSWEB}
+{HDFS} User Guide. 2014.
+\urlprefix\biburl{http://hadoop.apache.org/docs/r2.3.0/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html}
+
+\bibitem{HbaseDG}
+George, L.: \emph{Hadoop: The Definitive Guide}. O'Reilly Media, Inc.,
+  prvn\'\i{} vyd\'an\'\i{}, 2011, ISBN 978-1-4493-9610-7.
+
+\bibitem{HBaseWEB}
+Team, A.~H.: \emph{{Apache HBase} Reference Guide}. 2015.
+\urlprefix\biburl{http://hbase.apache.org/book.html}
+
+\bibitem{gistau}
+et~al, M. L.-G.: \emph{Data Partitioning for Minimizing Transferred Data in
+  MapReduce}. INRIA \& LIRMM, Montpellier, France.
+
+\end{thebibliography}
