@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.13)  18 MAR 2015 22:40
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.13)  18 MAR 2015 23:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1340,13 +1340,23 @@ Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
 (hyperref)                removing `\textasciicaron' on input line 253.
 
+
+Package hyperref Warning: Composite letter `\textasciicaron+c'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textasciicaron' on input line 254.
+
+
+Package hyperref Warning: Composite letter `\textasciicaron+r'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textasciicaron' on input line 254.
+
 [19] [20
 
 ]
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 255.
+(hyperref)                removing `\textasciicaron' on input line 271.
 
 [21] [22
 
@@ -1354,12 +1364,12 @@ Package hyperref Warning: Composite letter `\textasciicaron+r'
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 257.
+(hyperref)                removing `\textasciicaron' on input line 273.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 257.
+(hyperref)                removing `\textasciicaron' on input line 273.
 
 [23] [24
 
@@ -1367,7 +1377,7 @@ Package hyperref Warning: Composite letter `\textasciicaron+r'
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 261.
+(hyperref)                removing `\textasciicaron' on input line 277.
 
 (./DP-Miroslav-Hrstka.bbl [25] [26
 
@@ -1381,7 +1391,7 @@ bibitemlist
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 286.
+(hyperref)                removing `\textasciicaron' on input line 302.
 
 
 Package glossaries Warning: No \printglossary or \printglossaries found.
@@ -1394,27 +1404,30 @@ This document will not have a glossary.
 \tf@lof=\write9
 \openout9 = `DP-Miroslav-Hrstka.lof'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 303.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 303.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 319.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 319.
  (./DP-Miroslav-Hrstka.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 303.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 303.
-Package rerunfilecheck Info: File `DP-Miroslav-Hrstka.out' has not changed.
-(rerunfilecheck)             Checksum: 14E31A1DD79152DD9A1C43EB19632C52;826.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 319.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 319.
 
+
+Package rerunfilecheck Warning: File `DP-Miroslav-Hrstka.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `DP-Miroslav-Hrstka.out':
+(rerunfilecheck)             Before: 14E31A1DD79152DD9A1C43EB19632C52;826
+(rerunfilecheck)             After:  C7F9FFE7EEE481FEACD949F3B9F6864C;994.
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 303.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 319.
  ) 
 Here is how much of TeX's memory you used:
- 14537 strings out of 493304
- 206267 string characters out of 6139871
- 397243 words of memory out of 5000000
- 17612 multiletter control sequences out of 15000+600000
+ 14549 strings out of 493304
+ 206485 string characters out of 6139871
+ 397245 words of memory out of 5000000
+ 17611 multiletter control sequences out of 15000+600000
  84337 words of font info for 64 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  51i,13n,35p,1789b,400s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1434,10 +1447,10 @@ xmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri
 onts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.p
 fb></usr/share/texmf/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb>
-Output written on DP-Miroslav-Hrstka.pdf (45 pages, 7148681 bytes).
+Output written on DP-Miroslav-Hrstka.pdf (45 pages, 7150745 bytes).
 PDF statistics:
- 559 PDF objects out of 1000 (max. 8388607)
- 443 compressed objects within 5 object streams
- 97 named destinations out of 1000 (max. 500000)
+ 575 PDF objects out of 1000 (max. 8388607)
+ 459 compressed objects within 5 object streams
+ 110 named destinations out of 1000 (max. 500000)
  150 words of extra memory for PDF output out of 10000 (max. 10000000)
 
