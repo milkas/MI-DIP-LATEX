@@ -36,4 +36,8 @@ Team, A.~H.: \emph{{Apache HBase} Reference Guide}. 2015.
 et~al, M. L.-G.: \emph{Data Partitioning for Minimizing Transferred Data in
   MapReduce}. INRIA \& LIRMM, Montpellier, France.
 
+\bibitem{cloudcom}
+Ibrahim, S.; Hai, J.; Lu, L.; aj.: Locality/fairness-aware key partitioning for
+  mapreduce in the cloud. \emph{CloudCom 2010}, 2010: s. 17--24.
+
 \end{thebibliography}

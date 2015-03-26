@@ -1,15 +1,18 @@
 \BOOKMARK [0][-]{chapter*.5}{\332vod}{}% 1
 \BOOKMARK [0][-]{chapter.1}{Soucasn\375 stav a pou\236it\351 technologie}{}% 2
-\BOOKMARK [1][-]{section.1.1}{Hadoop}{chapter.1}% 3
-\BOOKMARK [0][-]{chapter.2}{Existuj\355c\355 re\235en\355 optimalizace distribuce dat pro MapReduce}{}% 4
-\BOOKMARK [1][-]{section.2.1}{Definice probl\351mu}{chapter.2}% 5
-\BOOKMARK [1][-]{section.2.2}{MR-part}{chapter.2}% 6
-\BOOKMARK [0][-]{chapter.3}{N\341vrh re\235en\355 pro HBase}{}% 7
-\BOOKMARK [1][-]{section.3.1}{Kl\355cov\341 specifika HBase pro n\341vrh re\235en\355}{chapter.3}% 8
-\BOOKMARK [1][-]{section.3.2}{Proces optimalizase}{chapter.3}% 9
-\BOOKMARK [0][-]{chapter.4}{Implementace re\235en\355}{}% 10
-\BOOKMARK [0][-]{chapter.5}{Testov\341n\355 a vyhodnocen\355 meren\355}{}% 11
-\BOOKMARK [0][-]{chapter*.13}{Z\341ver}{}% 12
-\BOOKMARK [0][-]{section*.15}{Literatura}{}% 13
-\BOOKMARK [0][-]{appendix.A}{Seznam pou\236it\375ch zkratek}{}% 14
-\BOOKMARK [0][-]{appendix.B}{Obsah prilo\236en\351ho CD}{}% 15
+\BOOKMARK [1][-]{section.1.1}{Hadoop Ekosyst\351m}{chapter.1}% 3
+\BOOKMARK [1][-]{section.1.2}{HDFS}{chapter.1}% 4
+\BOOKMARK [1][-]{section.1.3}{HBase}{chapter.1}% 5
+\BOOKMARK [0][-]{chapter.2}{Existuj\355c\355 re\235en\355 optimalizace distribuce dat pro MapReduce}{}% 6
+\BOOKMARK [1][-]{section.2.1}{Definice probl\351mu}{chapter.2}% 7
+\BOOKMARK [1][-]{section.2.2}{MR-part}{chapter.2}% 8
+\BOOKMARK [1][-]{section.2.3}{Testov\341n\355 a v\375sledky}{chapter.2}% 9
+\BOOKMARK [0][-]{chapter.3}{N\341vrh re\235en\355 pro HBase}{}% 10
+\BOOKMARK [1][-]{section.3.1}{Kl\355cov\341 specifika HBase pro n\341vrh re\235en\355}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.2}{Proces optimalizase}{chapter.3}% 12
+\BOOKMARK [0][-]{chapter.4}{Implementace re\235en\355}{}% 13
+\BOOKMARK [0][-]{chapter.5}{Testov\341n\355 a vyhodnocen\355 meren\355}{}% 14
+\BOOKMARK [0][-]{chapter*.15}{Z\341ver}{}% 15
+\BOOKMARK [0][-]{section*.17}{Literatura}{}% 16
+\BOOKMARK [0][-]{appendix.A}{Seznam pou\236it\375ch zkratek}{}% 17
+\BOOKMARK [0][-]{appendix.B}{Obsah prilo\236en\351ho CD}{}% 18
