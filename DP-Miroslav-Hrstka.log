@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.13)  1 APR 2015 22:31
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.13)  3 APR 2015 11:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1250,7 +1250,7 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 61.
  (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [4]
-<files/MapReduce.png, id=212, 749.80125pt x 288.07625pt>
+<files/MapReduce.png, id=220, 749.80125pt x 288.07625pt>
 File: files/MapReduce.png Graphic file (type png)
 
 <use files/MapReduce.png>
@@ -1259,7 +1259,7 @@ Package pdftex.def Info: files/MapReduce.png used on input line 86.
 
 Underfull \vbox (badness 3579) has occurred while \output is active []
 
- [5 <./files/MapReduce.png>] <files/HadoopEco.png, id=225, 751.80875pt x 437.63
+ [5 <./files/MapReduce.png>] <files/HadoopEco.png, id=233, 751.80875pt x 437.63
 5pt>
 File: files/HadoopEco.png Graphic file (type png)
 
@@ -1278,7 +1278,7 @@ Overfull \hbox (3.54573pt too wide) in paragraph at lines 118--120
 -tuje prak-ticky pouze
  []
 
-[7] <files/hdfs.png, id=242, 541.02126pt x 418.56375pt>
+[7] <files/hdfs.png, id=250, 541.02126pt x 418.56375pt>
 File: files/hdfs.png Graphic file (type png)
  <use files/hdfs.png>
 Package pdftex.def Info: files/hdfs.png used on input line 144.
@@ -1287,153 +1287,183 @@ Package pdftex.def Info: files/hdfs.png used on input line 144.
 Underfull \vbox (badness 5274) has occurred while \output is active []
 
  [8]
-[9 <./files/hdfs.png>] <files/hbase.png, id=258, 447.92343pt x 129.48375pt>
+[9 <./files/hdfs.png>] <files/hbase.png, id=266, 447.92343pt x 129.48375pt>
 File: files/hbase.png Graphic file (type png)
 
 <use files/hbase.png>
 Package pdftex.def Info: files/hbase.png used on input line 163.
 (pdftex.def)             Requested size: 369.0pt x 106.67128pt.
 
-<files/hbase-architecture.png, id=261, 531.9875pt x 421.575pt>
+<files/hbase-architecture.png, id=269, 531.9875pt x 421.575pt>
 File: files/hbase-architecture.png Graphic file (type png)
 
 <use files/hbase-architecture.png>
 Package pdftex.def Info: files/hbase-architecture.png used on input line 170.
 (pdftex.def)             Requested size: 295.20113pt x 233.9383pt.
  [10 <./files/hbase.png>] [11 <./files/hbase-architecture.png>] <files/Bplustre
-e.png, id=278, 537.00626pt x 171.64125pt>
+e.png, id=286, 537.00626pt x 171.64125pt>
 File: files/Bplustree.png Graphic file (type png)
 
 <use files/Bplustree.png>
 Package pdftex.def Info: files/Bplustree.png used on input line 194.
 (pdftex.def)             Requested size: 369.0pt x 117.94281pt.
  [12 <./files/Bplustree.png>]
-<files/lms.png, id=286, 678.535pt x 199.74625pt>
+<files/lms.png, id=294, 678.535pt x 199.74625pt>
 File: files/lms.png Graphic file (type png)
  <use files/lms.png>
 Package pdftex.def Info: files/lms.png used on input line 212.
 (pdftex.def)             Requested size: 369.0pt x 108.62334pt.
- [13 <./files/lms.png>] [14
+
+<files/HBaseHDFS.png, id=297, 597.23125pt x 356.33125pt>
+File: files/HBaseHDFS.png Graphic file (type png)
+
+<use files/HBaseHDFS.png>
+Package pdftex.def Info: files/HBaseHDFS.png used on input line 221.
+(pdftex.def)             Requested size: 369.0pt x 220.16188pt.
+ <files/HFile.png, id=299, 508.90125pt x 151.56625pt>
+File: files/HFile.png Graphic file (type png)
+
+<use files/HFile.png>
+Package pdftex.def Info: files/HFile.png used on input line 228.
+(pdftex.def)             Requested size: 295.20113pt x 87.92235pt.
+ [13 <./files/lms.png>]
+<files/HFileToHDFS.png, id=308, 487.8225pt x 304.13625pt>
+File: files/HFileToHDFS.png Graphic file (type png)
+
+<use files/HFileToHDFS.png>
+Package pdftex.def Info: files/HFileToHDFS.png used on input line 237.
+(pdftex.def)             Requested size: 295.20113pt x 184.04707pt.
+ [14 <./files/HBaseHDFS.png> <./files/HFile.png>]
+<files/key-value.png, id=316, 616.3025pt x 105.39375pt>
+File: files/key-value.png Graphic file (type png)
+
+<use files/key-value.png>
+Package pdftex.def Info: files/key-value.png used on input line 244.
+(pdftex.def)             Requested size: 369.0pt x 63.10324pt.
+ [15 <./files/HFileToHDFS.png> <./files/key-value.png>] [16
 
 ]
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 222.
+(hyperref)                removing `\textasciicaron' on input line 256.
 
-[15] <files/MR-part.png, id=304, 679.53876pt x 233.87375pt>
+[17] <files/MR-part.png, id=334, 679.53876pt x 233.87375pt>
 File: files/MR-part.png Graphic file (type png)
 
 <use files/MR-part.png>
-Package pdftex.def Info: files/MR-part.png used on input line 242.
+Package pdftex.def Info: files/MR-part.png used on input line 276.
 (pdftex.def)             Requested size: 369.0pt x 126.9965pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 249.
+(Font)              <9> on input line 283.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 249.
- [16]
-<files/alg1.png, id=317, 745.78625pt x 367.3725pt>
+(Font)              <5> on input line 283.
+ [18]
+<files/alg1.png, id=347, 745.78625pt x 367.3725pt>
 File: files/alg1.png Graphic file (type png)
  <use files/alg1.png>
-Package pdftex.def Info: files/alg1.png used on input line 254.
+Package pdftex.def Info: files/alg1.png used on input line 288.
 (pdftex.def)             Requested size: 369.0pt x 181.76865pt.
 
-[17 <./files/MR-part.png>] <files/alg2.png, id=331, 853.1875pt x 452.69125pt>
+[19 <./files/MR-part.png>] <files/alg2.png, id=360, 853.1875pt x 452.69125pt>
 File: files/alg2.png Graphic file (type png)
 
 <use files/alg2.png>
-Package pdftex.def Info: files/alg2.png used on input line 263.
+Package pdftex.def Info: files/alg2.png used on input line 297.
 (pdftex.def)             Requested size: 369.0pt x 195.79318pt.
- [18 <./files/alg1.png>] [19 <./files/alg2.png>] [20]
+ [20 <./files/alg1.png>] [21 <./files/alg2.png>] [22]
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 295.
+(hyperref)                removing `\textasciicaron' on input line 330.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 297.
+(hyperref)                removing `\textasciicaron' on input line 332.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 297.
-
-[21
-
-] [22]
-
-Package hyperref Warning: Composite letter `\textasciicaron+r'
-(hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 324.
+(hyperref)                removing `\textasciicaron' on input line 332.
 
 [23
 
-] [24
+] [24]
+
+Package hyperref Warning: Composite letter `\textasciicaron+r'
+(hyperref)                not defined in PD1 encoding,
+(hyperref)                removing `\textasciicaron' on input line 359.
+
+[25
+
+] [26
 
 ]
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 326.
+(hyperref)                removing `\textasciicaron' on input line 361.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 326.
+(hyperref)                removing `\textasciicaron' on input line 361.
 
-[25] [26
+[27] [28
 
 ]
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 330.
+(hyperref)                removing `\textasciicaron' on input line 365.
 
-(./DP-Miroslav-Hrstka.bbl [27] [28
+(./DP-Miroslav-Hrstka.bbl [29] [30
 
 ]
 bibitemlist
-) [29] [30
+) [31] [32
 
-] [31] [32
+] [33] [34
 
 ]
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 355.
+(hyperref)                removing `\textasciicaron' on input line 390.
 
 
 Package glossaries Warning: No \printglossary or \printglossaries found.
 This document will not have a glossary.
 
-[33]
+[35]
 \tf@toc=\write8
 \openout8 = `DP-Miroslav-Hrstka.toc'.
 
 \tf@lof=\write9
 \openout9 = `DP-Miroslav-Hrstka.lof'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 372.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 372.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 407.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 407.
  (./DP-Miroslav-Hrstka.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 372.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 372.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 407.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 407.
 Package rerunfilecheck Info: File `DP-Miroslav-Hrstka.out' has not changed.
-(rerunfilecheck)             Checksum: 6A2904A2C4ABB9BADA64A93FB6FDF01A;1186.
+(rerunfilecheck)             Checksum: DEF009AE1915B6F80E97C63E510075B4;1186.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 372.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 407.
  ) 
 Here is how much of TeX's memory you used:
- 14593 strings out of 493304
- 207074 string characters out of 6139871
- 398523 words of memory out of 5000000
- 17636 multiletter control sequences out of 15000+600000
+ 14629 strings out of 493304
+ 207695 string characters out of 6139871
+ 398957 words of memory out of 5000000
+ 17658 multiletter control sequences out of 15000+600000
  84337 words of font info for 64 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
  51i,13n,35p,1789b,402s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1453,10 +1483,10 @@ xmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri
 onts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.p
 fb></usr/share/texmf/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb>
-Output written on DP-Miroslav-Hrstka.pdf (47 pages, 884533 bytes).
+Output written on DP-Miroslav-Hrstka.pdf (49 pages, 1106520 bytes).
 PDF statistics:
- 535 PDF objects out of 1000 (max. 8388607)
- 449 compressed objects within 5 object streams
- 127 named destinations out of 1000 (max. 500000)
- 200 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 567 PDF objects out of 1000 (max. 8388607)
+ 475 compressed objects within 5 object streams
+ 137 named destinations out of 1000 (max. 500000)
+ 220 words of extra memory for PDF output out of 10000 (max. 10000000)
 

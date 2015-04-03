@@ -9,10 +9,14 @@
 \contentsline {figure}{\numberline {1.5}{\ignorespaces Architektura datab\IeC {\'a}ze HBase}}{11}{figure.1.5}
 \contentsline {figure}{\numberline {1.6}{\ignorespaces P\IeC {\v r}\IeC {\'\i }klad B+ stromu.}}{12}{figure.1.6}
 \contentsline {figure}{\numberline {1.7}{\ignorespaces Iterativn\IeC {\'\i } Merge Multi-Page blok\IeC {\r u} v LMS stromu }}{13}{figure.1.7}
+\contentsline {figure}{\numberline {1.8}{\ignorespaces Sch\IeC {\'e}ma ukl\IeC {\'a}d\IeC {\'a}n\IeC {\'\i } dat z HBase v HDFS}}{14}{figure.1.8}
+\contentsline {figure}{\numberline {1.9}{\ignorespaces Form\IeC {\'a}t souboru HFile}}{14}{figure.1.9}
+\contentsline {figure}{\numberline {1.10}{\ignorespaces Rozlo\IeC {\v z}en\IeC {\'\i } Hfile do blok\IeC {\r u} dat v HDFS}}{15}{figure.1.10}
+\contentsline {figure}{\numberline {1.11}{\ignorespaces Form\IeC {\'a}t KeyValue struktury}}{15}{figure.1.11}
 \addvspace {10pt}
-\contentsline {figure}{\numberline {2.1}{\ignorespaces MR-part sch\IeC {\'e}ma}}{17}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Pseudok\IeC {\'o}d algoritmu pro Metadata Combination}}{18}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Pseudok\IeC {\'o}d algoritmu pro Repartitioning}}{19}{figure.2.3}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces MR-part sch\IeC {\'e}ma}}{19}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Pseudok\IeC {\'o}d algoritmu pro Metadata Combination}}{20}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Pseudok\IeC {\'o}d algoritmu pro Repartitioning}}{21}{figure.2.3}
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}

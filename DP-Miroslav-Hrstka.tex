@@ -214,7 +214,41 @@ Z těchto rozdílných přístupů k uložení dat vyplývá, že B+ stromy jsou
 \end{figure}
 
 \subsection{Fyzické uložení dat}	
-K uložení dat se typicky využívá souborový systém HDFS. Data jsou pak v souboru uložena v souborech nazývaných HFile. HFile má strukturu key-value mapy, kdy klíče jsou uloženy lexikograficky. 
+Pro většinu uživatelů je forma fyzického uložení dat v HBase zcela zkrytá a k plnohodnotnému využívání databáze prakticky nevýznamná. Avšak pro potřeby této práce, je nezbytné tuto část osvítit více, než je zapotřebí v běžném využití. Na obrázku \ref{fig:hbasehdfs} je znázorněno schéma uložení dat, které zobrazu
+je uložení dat v souborovém systému HDFS. Hbase pracuje především s dvěma hlavními typy souborů. se soubory HLog reprezentující write-ahead log (WAL) a HFile pro uložení dat.\cite{hbasecon}
+
+\begin{figure}\centering
+	\includegraphics[width=1\textwidth, angle=0]{files/HBaseHDFS}
+	\caption[Schéma ukládání dat z HBase v HDFS]{Schéma ukládání dat z HBase v HDFS}\label{fig:hbasehdfs}
+\end{figure}
+
+\subsubsection{formát HFile}
+Formát souboru HFile je navržen tak, aby ukládal data co nejefektivněji. Je založen na formátu souboru TFile z Hadoopu. Soubor obsahuje několik bloků,jak je vidět n obrázku \ref{fig:hfile}, z nichž jsou fixní pouze info a trailer bloky. Tyto bloky jsou uloženy na konci souboru a ukončují tak daný soubor, který se stává neměnným. V index blocích jsou uloženy offsety data a metadata bloků. Jak metadata bloky tak i data bloky jsou nepovinné, nicméně už z podstaty věci jsou data bloky téměř vždy součástí Hfile souboru. Velikost jednotlivých bloků je defaulrtně definována na 64 KB. Je možné tuto velikost změnit v závislosti na očekávané struktuře dotazů na databázi. Čím větší bloky, tím efektivnější bude sekvenční prohledávání databáze, naopak náhodný přístup bude efektivní méně. V jednotlivých blocích se sekvenčně ukládají KeyValue instance v KeyValue formátu. Velikost bloků není fixní, odvíjí se od velikosti poslední vložené key value instance, která se do bloku uloží celá a pak teprve dojde k uzavření bloku. V praxi tedy boky bývají o něco větší než je definovaná hodnota. Je možné také použít libovolný komprimační algoritmus na ukládané data, což ale neovlivní celý proces, protože checksum je dopočítáván až po přidání poslední key value instance.
+\begin{figure}\centering
+	\includegraphics[width=0.8\textwidth, angle=0]{files/HFile}
+	\caption[Formát souboru HFile]{Formát souboru HFile}\label{fig:hfile}
+\end{figure}
+
+
+Ačkoli se nabízí myšlenka, že velikost bloků v HFile nastavená na 64KB souvisí z velikostí souborů v HDFS, který je nastaven na 64 MB, není mezi těmito hodnotami žádná spojitost. HFile jsou v HBase ukládány jako běžné soubory a HDFS je vnímá pouze jako binární data. Na obrázku \ref{fig:hfiletohdfs} je zobrazeno schéma ukládání HFile souborů do HDFS.
+
+
+\begin{figure}\centering
+	\includegraphics[width=0.8\textwidth, angle=0]{files/HFileToHDFS}
+	\caption[Rozložení Hfile do bloků dat v HDFS]{Rozložení Hfile do bloků dat v HDFS}\label{fig:hfiletohdfs}
+\end{figure}
+\paragraph{Formát KeyValue}
+KeyValue je struktura, která reprezentuje fyzické uložení jedné buňky z tabulky. Z obrázku\ref{fig:keyvalue} vyplývá, že jako část klíče se používá mimo jiné  název tabulky, family a sloupce. Tento klíč se vyskytuje u každé buňky a proto se doporučuje, mít vše pojménováno co nejkratšími identifikátory.	
+
+\begin{figure}\centering
+	\includegraphics[width=1\textwidth, angle=0]{files/key-value}
+	\caption[Formát KeyValue struktury]{Formát KeyValue struktury}\label{fig:keyvalue}
+\end{figure}
+
+\subsubsection{Write-Ahead Log}
+Region servery ukládají příchozí data do paměti, do doby něž se jich nahromadí dostatečné množství a poté je najednou zapíše na disk. Ve fázi, kdy se data hromadí v paměti, jsou ale zranitelná a v případě výpadku dojde k jejich ztrátě. Právě pro zamezení tohoto problému se používá WAL. Jeho funkce tedy je omezit dopady výpadku. Do logu se proto zapisují všechny změny dat, a až v případě, že jsou úspěšně uloženy na disk, je klient informován o úspěšném uložení dat. 
+
+
 
 
 
@@ -280,12 +314,13 @@ V MapReduce frameworku je tedy nutné provést následující modifikace:
 MR-Part byl implementován v Hodoop-1.0.4 a otestován na \texttt{Grid5000} \footnote{https://www.grid5000.fr/mediawiki/index.php/Grid5000:Home}. Jedná se o  rozsáhlou infrastrukturu složenou s rozdílných sítí s několika clustery výpočetních uzlů. Nutno podotknout, že tato infrastruktura není typická pro nasazení Hadoopu a vykonávání MapReduce úloh, především právě  kvůli nesourodosti clusterů v síti, jejich fyzické vzdálenosti a tím i kapacitně omezeném propojení. Částečně i proto bylo zrychlení zprácování tak znatelné. K testování byly využity datasety z \texttt{TPC-H} \footnote{http://www.tpc.org/tpch/www.grid5000.fr/mediawiki/index.php/Grid5000:Home}. 
 \subsection{Výsledky}
 
-\paragraph{Množství přenesených dat pro různé typy dotazů}. Při spustění několika různých úloh\texttt{TPC-H} \footnote{Implementace použitých dotazů: http://www.cs.duke.edu/starfish/mr-apps.html}.  na původních datasetech bylo v shuffle vázi přeneseno cca. 80\% dat. Po provedení dotazů na již upravených datech pak docházelo k přenosu dat  nižším než 10\% pro všechny provedené dotazy.
+\paragraph{Množství přenesených dat pro různé typy dotazů} \hfill \\
+ Při spustění několika různých úloh \texttt{TPC-H} \footnote{Implementace použitých dotazů: http://www.cs.duke.edu/starfish/mr-apps.html}.  na původních datasetech bylo v shuffle vázi přeneseno cca. 80\% dat. Po provedení dotazů na již upravených datech pak docházelo k přenosu dat  nižším než 10\% pro všechny provedené dotazy.
 
-\paragraph{Množství přenesených dat v závislosti na velikosti clusteru}
+\paragraph{Množství přenesených dat v závislosti na velikosti clusteru} \hfill \\
 Při provedení vybraného dotazu nad konfiguracemi systému s různým počtem clusterů nedocházelo k žádné výrazné změně v podílu přenesených dat. Jednalo se o konfigurace o 5 až 25 uzly v clusteru.
 
-\paragraph{Časová náročnost dotazů}
+\paragraph{Časová náročnost dotazů} \hfill \\
 Jak již bylo řečeno, časová náročnost je velmi vázaná na propustnost sítě. Bylo provedeno vykonání dotazů na různých šířkách pásma a výsledek byl očekávaný. Tedy čím pomalejší síť mezi výpočetními uzly, tím výraznější zrychlení při vykonávání dotazů.
 
 

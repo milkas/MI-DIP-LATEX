@@ -1,4 +1,4 @@
-\begin{thebibliography}{1}
+\begin{thebibliography}{10}
 \providecommand{\biburl}[1]{\url{#1}}
 \providecommand{\urlprefix}{Dostupn{\' e} z: }
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -35,6 +35,10 @@ Team, A.~H.: \emph{{Apache HBase} Reference Guide}. 2015.
 \bibitem{hbase2011}
 George, L.: \emph{HBase: The Definitive Guide}. O'Reilly Media, prvn\'\i{}
   vyd\'an\'\i{}, 2011, ISBN 1449396100.
+
+\bibitem{hbasecon}
+HBaseCon. 2015.
+\urlprefix\biburl{http://hbasecon.com/archive.html}
 
 \bibitem{gistau}
 et~al, M. L.-G.: \emph{Data Partitioning for Minimizing Transferred Data in

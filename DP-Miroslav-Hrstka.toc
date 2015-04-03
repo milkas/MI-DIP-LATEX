@@ -19,36 +19,39 @@
 \contentsline {subsubsection}{\numberline {1.3.3.1}B+ Trees}{11}{subsubsection.1.3.3.1}
 \contentsline {subsubsection}{\numberline {1.3.3.2}Log-Structured Merge Trees}{12}{subsubsection.1.3.3.2}
 \contentsline {subsection}{\numberline {1.3.4}Fyzick\IeC {\'e} ulo\IeC {\v z}en\IeC {\'\i } dat}{13}{subsection.1.3.4}
-\contentsline {chapter}{\chapternumberline {2}Existuj\IeC {\'\i }c\IeC {\'\i } \IeC {\v r}e\IeC {\v s}en\IeC {\'\i } optimalizace distribuce dat pro MapReduce}{15}{chapter.2}
-\contentsline {section}{\numberline {2.1}Definice probl\IeC {\'e}mu}{15}{section.2.1}
-\contentsline {section}{\numberline {2.2}MR-part}{16}{section.2.2}
-\contentsline {subsection}{\numberline {2.2.1}Prvn\IeC {\'\i } f\IeC {\'a}ze - Workload Characterization}{16}{subsection.2.2.1}
-\contentsline {paragraph}{Monitoring}{16}{section*.10}
-\contentsline {paragraph}{Combination}{17}{section*.11}
-\contentsline {subsection}{\numberline {2.2.2}Druh\IeC {\'a} f\IeC {\'a}ze - Repartitioning}{17}{subsection.2.2.2}
-\contentsline {subsection}{\numberline {2.2.3}T\IeC {\v r}et\IeC {\'\i } f\IeC {\'a}ze - Execution and scheduling}{18}{subsection.2.2.3}
-\contentsline {section}{\numberline {2.3}Testov\IeC {\'a}n\IeC {\'\i } a v\IeC {\'y}sledky}{19}{section.2.3}
-\contentsline {subsection}{\numberline {2.3.1}V\IeC {\'y}sledky}{20}{subsection.2.3.1}
-\contentsline {paragraph}{Mno\IeC {\v z}stv\IeC {\'\i } p\IeC {\v r}enesen\IeC {\'y}ch dat pro r\IeC {\r u}zn\IeC {\'e} typy dotaz\IeC {\r u}}{20}{section*.12}
-\contentsline {paragraph}{Mno\IeC {\v z}stv\IeC {\'\i } p\IeC {\v r}enesen\IeC {\'y}ch dat v z\IeC {\'a}vislosti na velikosti clusteru}{20}{section*.13}
-\contentsline {paragraph}{\IeC {\v C}asov\IeC {\'a} n\IeC {\'a}ro\IeC {\v c}nost dotaz\IeC {\r u}}{20}{section*.14}
-\contentsline {chapter}{\chapternumberline {3}N\IeC {\'a}vrh \IeC {\v r}e\IeC {\v s}en\IeC {\'\i } pro HBase}{21}{chapter.3}
-\contentsline {section}{\numberline {3.1}Kl\IeC {\'\i }\IeC {\v c}ov\IeC {\'a} specifika HBase pro n\IeC {\'a}vrh \IeC {\v r}e\IeC {\v s}en\IeC {\'\i }}{21}{section.3.1}
-\contentsline {subsection}{\numberline {3.1.1}\IeC {\v R}azen\IeC {\'\i } z\IeC {\'a}znam\IeC {\r u} v datab\IeC {\'a}zi}{21}{subsection.3.1.1}
-\contentsline {subsection}{\numberline {3.1.2}Automatick\IeC {\'y} split a merge Hregion\IeC {\r u}}{22}{subsection.3.1.2}
-\contentsline {subsection}{\numberline {3.1.3}Fyzick\IeC {\'e} ulo\IeC {\v z}en\IeC {\'\i } family column}{22}{subsection.3.1.3}
-\contentsline {section}{\numberline {3.2}Proces optimalizase}{22}{section.3.2}
-\contentsline {subsection}{\numberline {3.2.1}Monitoring}{22}{subsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.1.1}RecordReader Class}{22}{subsubsection.3.2.1.1}
-\contentsline {subsubsection}{\numberline {3.2.1.2}TableImputClass Class}{22}{subsubsection.3.2.1.2}
-\contentsline {subsubsection}{\numberline {3.2.1.3}Metadata file}{22}{subsubsection.3.2.1.3}
-\contentsline {subsection}{\numberline {3.2.2}Repartitioning}{22}{subsection.3.2.2}
-\contentsline {subsubsection}{\numberline {3.2.2.1}HyperGraph Class}{22}{subsubsection.3.2.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2.2}PATOH Algoritmus}{22}{subsubsection.3.2.2.2}
-\contentsline {subsubsection}{\numberline {3.2.2.3}Repartioning Class}{22}{subsubsection.3.2.2.3}
-\contentsline {chapter}{\chapternumberline {4}Implementace \IeC {\v r}e\IeC {\v s}en\IeC {\'\i }}{23}{chapter.4}
-\contentsline {chapter}{\chapternumberline {5}Testov\IeC {\'a}n\IeC {\'\i } a vyhodnocen\IeC {\'\i } m\IeC {\v e}\IeC {\v r}en\IeC {\'\i }}{25}{chapter.5}
-\contentsline {chapter}{Z{\' a}v{\v e}r}{27}{chapter*.15}
-\contentsline {chapter}{Literatura}{29}{section*.17}
-\contentsline {appendix}{\chapternumberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{31}{appendix.A}
-\contentsline {appendix}{\chapternumberline {B}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{33}{appendix.B}
+\contentsline {subsubsection}{\numberline {1.3.4.1}form\IeC {\'a}t HFile}{13}{subsubsection.1.3.4.1}
+\contentsline {paragraph}{Form\IeC {\'a}t KeyValue}{14}{section*.10}
+\contentsline {subsubsection}{\numberline {1.3.4.2}Write-Ahead Log}{15}{subsubsection.1.3.4.2}
+\contentsline {chapter}{\chapternumberline {2}Existuj\IeC {\'\i }c\IeC {\'\i } \IeC {\v r}e\IeC {\v s}en\IeC {\'\i } optimalizace distribuce dat pro MapReduce}{17}{chapter.2}
+\contentsline {section}{\numberline {2.1}Definice probl\IeC {\'e}mu}{17}{section.2.1}
+\contentsline {section}{\numberline {2.2}MR-part}{18}{section.2.2}
+\contentsline {subsection}{\numberline {2.2.1}Prvn\IeC {\'\i } f\IeC {\'a}ze - Workload Characterization}{18}{subsection.2.2.1}
+\contentsline {paragraph}{Monitoring}{18}{section*.11}
+\contentsline {paragraph}{Combination}{19}{section*.12}
+\contentsline {subsection}{\numberline {2.2.2}Druh\IeC {\'a} f\IeC {\'a}ze - Repartitioning}{19}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2.2.3}T\IeC {\v r}et\IeC {\'\i } f\IeC {\'a}ze - Execution and scheduling}{20}{subsection.2.2.3}
+\contentsline {section}{\numberline {2.3}Testov\IeC {\'a}n\IeC {\'\i } a v\IeC {\'y}sledky}{21}{section.2.3}
+\contentsline {subsection}{\numberline {2.3.1}V\IeC {\'y}sledky}{22}{subsection.2.3.1}
+\contentsline {paragraph}{Mno\IeC {\v z}stv\IeC {\'\i } p\IeC {\v r}enesen\IeC {\'y}ch dat pro r\IeC {\r u}zn\IeC {\'e} typy dotaz\IeC {\r u}}{22}{section*.13}
+\contentsline {paragraph}{Mno\IeC {\v z}stv\IeC {\'\i } p\IeC {\v r}enesen\IeC {\'y}ch dat v z\IeC {\'a}vislosti na velikosti clusteru}{22}{section*.14}
+\contentsline {paragraph}{\IeC {\v C}asov\IeC {\'a} n\IeC {\'a}ro\IeC {\v c}nost dotaz\IeC {\r u}}{22}{section*.15}
+\contentsline {chapter}{\chapternumberline {3}N\IeC {\'a}vrh \IeC {\v r}e\IeC {\v s}en\IeC {\'\i } pro HBase}{23}{chapter.3}
+\contentsline {section}{\numberline {3.1}Kl\IeC {\'\i }\IeC {\v c}ov\IeC {\'a} specifika HBase pro n\IeC {\'a}vrh \IeC {\v r}e\IeC {\v s}en\IeC {\'\i }}{23}{section.3.1}
+\contentsline {subsection}{\numberline {3.1.1}\IeC {\v R}azen\IeC {\'\i } z\IeC {\'a}znam\IeC {\r u} v datab\IeC {\'a}zi}{23}{subsection.3.1.1}
+\contentsline {subsection}{\numberline {3.1.2}Automatick\IeC {\'y} split a merge Hregion\IeC {\r u}}{24}{subsection.3.1.2}
+\contentsline {subsection}{\numberline {3.1.3}Fyzick\IeC {\'e} ulo\IeC {\v z}en\IeC {\'\i } family column}{24}{subsection.3.1.3}
+\contentsline {section}{\numberline {3.2}Proces optimalizase}{24}{section.3.2}
+\contentsline {subsection}{\numberline {3.2.1}Monitoring}{24}{subsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.1.1}RecordReader Class}{24}{subsubsection.3.2.1.1}
+\contentsline {subsubsection}{\numberline {3.2.1.2}TableImputClass Class}{24}{subsubsection.3.2.1.2}
+\contentsline {subsubsection}{\numberline {3.2.1.3}Metadata file}{24}{subsubsection.3.2.1.3}
+\contentsline {subsection}{\numberline {3.2.2}Repartitioning}{24}{subsection.3.2.2}
+\contentsline {subsubsection}{\numberline {3.2.2.1}HyperGraph Class}{24}{subsubsection.3.2.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2.2}PATOH Algoritmus}{24}{subsubsection.3.2.2.2}
+\contentsline {subsubsection}{\numberline {3.2.2.3}Repartioning Class}{24}{subsubsection.3.2.2.3}
+\contentsline {chapter}{\chapternumberline {4}Implementace \IeC {\v r}e\IeC {\v s}en\IeC {\'\i }}{25}{chapter.4}
+\contentsline {chapter}{\chapternumberline {5}Testov\IeC {\'a}n\IeC {\'\i } a vyhodnocen\IeC {\'\i } m\IeC {\v e}\IeC {\v r}en\IeC {\'\i }}{27}{chapter.5}
+\contentsline {chapter}{Z{\' a}v{\v e}r}{29}{chapter*.16}
+\contentsline {chapter}{Literatura}{31}{section*.18}
+\contentsline {appendix}{\chapternumberline {A}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{33}{appendix.A}
+\contentsline {appendix}{\chapternumberline {B}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{35}{appendix.B}
