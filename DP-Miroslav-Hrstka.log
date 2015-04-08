@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.13)  3 APR 2015 11:32
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.13)  8 APR 2015 15:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -872,6 +872,31 @@ Package: dirtree 2012/12/11 v0.32 package wrapper for dirtree
 )
 File: dirtree.tex 2012/12/11 v0.32 `dirtree' (jcc)
 )
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count170
+\lst@gtempboxa=\box31
+\lst@token=\toks30
+\lst@length=\count171
+\lst@currlwidth=\dimen173
+\lst@column=\count172
+\lst@pos=\count173
+\lst@lostspace=\dimen174
+\lst@width=\dimen175
+\lst@newlines=\count174
+\lst@lineno=\count175
+\lst@maxwidth=\dimen176
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2013/08/26 1.5b (Carsten Heinz)
+\c@lstnumber=\count176
+\lst@skipnumbers=\count177
+\lst@framebox=\box32
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2013/08/26 1.5b listings configuration
+))
+Package: listings 2013/08/26 1.5b (Carsten Heinz)
+
 (/usr/share/texlive/texmf-dist/tex/latex/glossaries/base/glossaries.sty
 Package: glossaries 2014/01/20 v4.03 (NLCT)
 
@@ -882,15 +907,15 @@ Package: ifthen 2001/05/26 v1.1c Standard LaTeX ifthen package (DPC)
 Package: xkeyval 2012/10/14 v2.6b package option processing (HA)
 
 (/usr/share/texlive/texmf-dist/tex/generic/xkeyval/xkeyval.tex
-\XKV@toks=\toks30
-\XKV@tempa@toks=\toks31
-\XKV@depth=\count170
+\XKV@toks=\toks31
+\XKV@tempa@toks=\toks32
+\XKV@depth=\count178
 File: xkeyval.tex 2012/10/14 v2.6b key=value parser (HA)
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/glossaries/base/mfirstuc.sty
 Package: mfirstuc 2013/11/04 v1.08 (NLCT)
-\@glsmfirst=\toks32
-\@glsmrest=\toks33
+\@glsmfirst=\toks33
+\@glsmrest=\toks34
 )
 (/usr/share/texlive/texmf-dist/tex/latex/textcase/textcase.sty
 Package: textcase 2004/10/07 v0.07 Text only upper/lower case changing (DPC)
@@ -905,7 +930,7 @@ Package: datatool-base 2013/09/06 v2.18 (NLCT)
 
 (/usr/share/texlive/texmf-dist/tex/latex/substr/substr.sty
 Package: substr 2009/10/20 v1.2 Handle substrings
-\c@su@anzahl=\count171
+\c@su@anzahl=\count179
 )
 (/usr/share/texlive/texmf-dist/tex/latex/datatool/datatool-fp.sty
 Package: datatool-fp 2013/08/29 v2.17 (NLCT)
@@ -916,19 +941,19 @@ Package: fp 1995/04/02
 `Fixed Point Package', Version 0.8, April 2, 1995 (C) Michael Mehlich
 (/usr/share/texlive/texmf-dist/tex/latex/fp/defpattern.sty
 Package: defpattern 1994/10/12
-\actioncount=\count172
+\actioncount=\count180
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-basic.sty
 Package: fp-basic 1996/05/13
-\FP@xs=\count173
-\FP@xia=\count174
-\FP@xib=\count175
-\FP@xfa=\count176
-\FP@xfb=\count177
-\FP@rega=\count178
-\FP@regb=\count179
-\FP@regs=\count180
-\FP@times=\count181
+\FP@xs=\count181
+\FP@xia=\count182
+\FP@xib=\count183
+\FP@xfa=\count184
+\FP@xfb=\count185
+\FP@rega=\count186
+\FP@regb=\count187
+\FP@regs=\count188
+\FP@times=\count189
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-addons.sty
 Package: fp-addons 1995/03/15
@@ -947,7 +972,7 @@ Package: fp-pas 1994/08/29
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-random.sty
 Package: fp-random 1995/02/23
-\FPseed=\count182
+\FPseed=\count190
 )
 (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-eqn.sty
 Package: fp-eqn 1995/04/03
@@ -958,15 +983,15 @@ Package: fp-upn 1996/10/21
 (/usr/share/texlive/texmf-dist/tex/latex/fp/fp-eval.sty
 Package: fp-eval 1995/04/03
 )))
-\@dtl@toks=\toks34
-\@dtl@tmpcount=\count183
+\@dtl@toks=\toks35
+\@dtl@tmpcount=\count191
 \dtl@tmplength=\skip189
-\dtl@sortresult=\count184
-\@dtl@numgrpsepcount=\count185
-\@dtl@datatype=\count186
-\dtl@codeA=\count187
-\dtl@codeB=\count188
-\@dtl@foreach@level=\count189
+\dtl@sortresult=\count192
+\@dtl@numgrpsepcount=\count193
+\@dtl@datatype=\count194
+\dtl@codeA=\count195
+\dtl@codeB=\count196
+\@dtl@foreach@level=\count197
 )
 (/usr/share/texlive/texmf-dist/tex/latex/glossaries/base/glossaries-compatible-
 307.sty
@@ -976,8 +1001,8 @@ Package: translator 2010/06/12 ver 1.10
 
 (/usr/share/texmf/tex/latex/beamer/base/translator/translator-language-mappings
 .tex))
-\gls@level=\count190
-\@gls@tmpb=\toks35
+\gls@level=\count198
+\@gls@tmpb=\toks36
 \gls@tmplen=\skip190
 \glswrite=\write4
 
@@ -988,10 +1013,10 @@ Package glossaries Warning: Overriding \printglossary on input line 4536.
 Package glossaries Warning: overriding `theglossary' environment on input line 
 4761.
 
-\glskeylisttok=\toks36
-\glslabeltok=\toks37
-\glsshorttok=\toks38
-\glslongtok=\toks39
+\glskeylisttok=\toks37
+\glslabeltok=\toks38
+\glsshorttok=\toks39
+\glslongtok=\toks40
 
 (/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-hypernav.st
 y
@@ -1008,17 +1033,17 @@ Package: longtable 2004/02/01 v4.11 Multi-page Table package (DPC)
 \LTright=\skip193
 \LTpre=\skip194
 \LTpost=\skip195
-\LTchunksize=\count191
-\LTcapwidth=\dimen173
-\LT@head=\box31
-\LT@firsthead=\box32
-\LT@foot=\box33
-\LT@lastfoot=\box34
-\LT@cols=\count192
-\LT@rows=\count193
-\c@LT@tables=\count194
-\c@LT@chunks=\count195
-\LT@p@ftn=\toks40
+\LTchunksize=\count199
+\LTcapwidth=\dimen177
+\LT@head=\box33
+\LT@firsthead=\box34
+\LT@foot=\box35
+\LT@lastfoot=\box36
+\LT@cols=\count200
+\LT@rows=\count201
+\c@LT@tables=\count202
+\c@LT@chunks=\count203
+\LT@p@ftn=\toks41
 )
 \glsdescwidth=\skip196
 \glspagelistwidth=\skip197
@@ -1028,22 +1053,22 @@ Package: glossary-super 2013/11/14 v4.0 (NLCT)
 
 (/usr/share/texlive/texmf-dist/tex/latex/supertabular/supertabular.sty
 Package: supertabular 2004/02/20 v4.1e the supertabular environment
-\c@tracingst=\count196
-\ST@wd=\dimen174
+\c@tracingst=\count204
+\ST@wd=\dimen178
 \ST@rightskip=\skip198
 \ST@leftskip=\skip199
 \ST@parfillskip=\skip200
-\ST@pageleft=\dimen175
-\ST@headht=\dimen176
-\ST@tailht=\dimen177
-\ST@pagesofar=\dimen178
-\ST@pboxht=\dimen179
-\ST@lineht=\dimen180
-\ST@stretchht=\dimen181
-\ST@prevht=\dimen182
-\ST@toadd=\dimen183
-\ST@dimen=\dimen184
-\ST@pbox=\box35
+\ST@pageleft=\dimen179
+\ST@headht=\dimen180
+\ST@tailht=\dimen181
+\ST@pagesofar=\dimen182
+\ST@pboxht=\dimen183
+\ST@lineht=\dimen184
+\ST@stretchht=\dimen185
+\ST@prevht=\dimen186
+\ST@toadd=\dimen187
+\ST@dimen=\dimen188
+\ST@pbox=\box37
 ))
 (/usr/share/texlive/texmf-dist/tex/latex/glossaries/styles/glossary-tree.sty
 Package: glossary-tree 2013/11/14 v4.0 (NLCT)
@@ -1053,36 +1078,36 @@ Package: glossary-tree 2013/11/14 v4.0 (NLCT)
 \openout5 = `DP-Miroslav-Hrstka.glo'.
 
 Package glossaries Info: Writing glossary file DP-Miroslav-Hrstka.glo on input 
-line 14.
+line 17.
 \glo@acronym@file=\write6
 \openout6 = `DP-Miroslav-Hrstka.acn'.
 
 Package glossaries Info: Writing glossary file DP-Miroslav-Hrstka.acn on input 
-line 14.
+line 17.
 
 (./DP-Miroslav-Hrstka.aux)
 \openout1 = `DP-Miroslav-Hrstka.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 37.
-LaTeX Font Info:    ... okay on input line 37.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 37.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 40.
+LaTeX Font Info:    ... okay on input line 40.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 40.
  (/usr/share/texmf/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-\AtBeginShipoutBox=\box36
-Package hyperref Info: Link coloring OFF on input line 37.
+\AtBeginShipoutBox=\box38
+Package hyperref Info: Link coloring OFF on input line 40.
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -1090,14 +1115,14 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count197
+\c@section@level=\count205
 )
 Redoing nameref's sectioning
 Redoing nameref's label
-LaTeX Info: Redefining \nameref on input line 37.
-LaTeX Info: Redefining \ref on input line 37.
-LaTeX Info: Redefining \pageref on input line 37.
-LaTeX Info: Redefining \nameref on input line 37.
+LaTeX Info: Redefining \nameref on input line 40.
+LaTeX Info: Redefining \ref on input line 40.
+LaTeX Info: Redefining \pageref on input line 40.
+LaTeX Info: Redefining \nameref on input line 40.
 (./DP-Miroslav-Hrstka.out) (./DP-Miroslav-Hrstka.out)
 \@outlinefile=\write7
 \openout7 = `DP-Miroslav-Hrstka.out'.
@@ -1105,17 +1130,17 @@ LaTeX Info: Redefining \nameref on input line 37.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count198
-\scratchdimen=\dimen185
-\scratchbox=\box37
-\nofMPsegments=\count199
-\nofMParguments=\count200
-\everyMPshowfont=\toks41
-\MPscratchCnt=\count201
-\MPscratchDim=\dimen186
-\MPnumerator=\count202
-\makeMPintoPDFobject=\count203
-\everyMPtoPDFconversion=\toks42
+\scratchcounter=\count206
+\scratchdimen=\dimen189
+\scratchbox=\box39
+\nofMPsegments=\count207
+\nofMParguments=\count208
+\everyMPshowfont=\toks42
+\MPscratchCnt=\count209
+\MPscratchDim=\dimen190
+\MPnumerator=\count210
+\makeMPintoPDFobject=\count211
+\everyMPtoPDFconversion=\toks43
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -1131,6 +1156,8 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+\c@lstlisting=\count212
+
 (/usr/share/texlive/texmf-dist/tex/latex/glossaries/dict/glossaries-dictionary-
 English.dict
 Dictionary: glossaries-dictionary, Language: English 
@@ -1142,86 +1169,86 @@ Dictionary: glossaries-dictionary, Language: English
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 ]
-LaTeX Font Info:    Try loading font information for OT1+lmr on input line 37.
+LaTeX Font Info:    Try loading font information for OT1+lmr on input line 40.
 
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OML+lmm on input line 37.
+LaTeX Font Info:    Try loading font information for OML+lmm on input line 40.
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 37.
+LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 40.
 
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Font Info:    Try loading font information for OMX+lmex on input line 37.
+LaTeX Font Info:    Try loading font information for OMX+lmex on input line 40.
 
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 37.
+(Font)              <10.95> on input line 40.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 37.
+(Font)              <8> on input line 40.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 37.
-LaTeX Font Info:    Try loading font information for U+msa on input line 37.
+(Font)              <6> on input line 40.
+LaTeX Font Info:    Try loading font information for U+msa on input line 40.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 37.
+LaTeX Font Info:    Try loading font information for U+msb on input line 40.
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-<cvut-logo-bw.pdf, id=86, 91.34125pt x 69.25874pt>
+<cvut-logo-bw.pdf, id=94, 91.34125pt x 69.25874pt>
 File: cvut-logo-bw.pdf Graphic file (type pdf)
  <use cvut-logo-bw.pdf>
-Package pdftex.def Info: cvut-logo-bw.pdf used on input line 37.
+Package pdftex.def Info: cvut-logo-bw.pdf used on input line 40.
 (pdftex.def)             Requested size: 59.04135pt x 44.76717pt.
 pdfTeX warning (ext4): destination with the same identifier (name{page.i}) has 
 been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.37 \begin{document}
+l.40 \begin{document}
                       [1 <./cvut-logo-bw.pdf>]pdfTeX warning (ext4): destinatio
 n with the same identifier (name{page.ii}) has been already used, duplicate ign
 ored
 <to be read again> 
                    \relax 
-l.37 \begin{document}
+l.40 \begin{document}
                       [2
 
 ]
 
 LaTeX Font Warning: Font shape `T1/lmr/bx/sc' undefined
-(Font)              using `T1/lmr/bx/n' instead on input line 37.
+(Font)              using `T1/lmr/bx/n' instead on input line 40.
 
-LaTeX Font Info:    Try loading font information for T1+lmss on input line 37.
+LaTeX Font Info:    Try loading font information for T1+lmss on input line 40.
 (/usr/share/texmf/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
 LaTeX Font Warning: Font shape `T1/lmss/bx/sc' undefined
-(Font)              using `T1/lmss/bx/n' instead on input line 37.
+(Font)              using `T1/lmss/bx/n' instead on input line 40.
 
 [5
 
 ] [6
 
 ] [7]
-LaTeX Font Info:    Try loading font information for OMS+lmr on input line 37.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 40.
  (/usr/share/texmf/tex/latex/lm/omslmr.fd
 File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10.95> not available
-(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 37.
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 40.
  [8
 
 ] [9
@@ -1234,7 +1261,9 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10.95> not available
 ] (./DP-Miroslav-Hrstka.lof) [13] [14
 
 ]
-[1
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2013/08/26 1.5b listings language file
+) [1
 
 
 ] [2
@@ -1243,102 +1272,105 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10.95> not available
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 46.
+(hyperref)                removing `\textasciicaron' on input line 49.
 
 [3]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 61.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 64.
  (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 ) [4]
-<files/MapReduce.png, id=220, 749.80125pt x 288.07625pt>
+<files/MapReduce.png, id=236, 1431.3475pt x 556.0775pt>
 File: files/MapReduce.png Graphic file (type png)
 
 <use files/MapReduce.png>
-Package pdftex.def Info: files/MapReduce.png used on input line 86.
-(pdftex.def)             Requested size: 369.0pt x 141.77399pt.
+Package pdftex.def Info: files/MapReduce.png used on input line 89.
+(pdftex.def)             Requested size: 369.0pt x 143.35489pt.
 
-Underfull \vbox (badness 3579) has occurred while \output is active []
+Underfull \vbox (badness 3158) has occurred while \output is active []
 
- [5 <./files/MapReduce.png>] <files/HadoopEco.png, id=233, 751.80875pt x 437.63
+ [5 <./files/MapReduce.png>] <files/HadoopEco.png, id=249, 751.80875pt x 437.63
 5pt>
 File: files/HadoopEco.png Graphic file (type png)
 
 <use files/HadoopEco.png>
-Package pdftex.def Info: files/HadoopEco.png used on input line 95.
+Package pdftex.def Info: files/HadoopEco.png used on input line 98.
 (pdftex.def)             Requested size: 369.0pt x 214.80362pt.
  [6 <./files/HadoopEco.png>]
-Overfull \hbox (2.99896pt too wide) in paragraph at lines 118--120
+Overfull \hbox (2.99896pt too wide) in paragraph at lines 121--123
 \T1/lmr/m/n/10.95 Hbase je sloup-cov¥ ori-en-to-vaný da-ta-bá-zový sys-tém, kte
 rý b¥ºí nad HDFS.
  []
 
 
-Overfull \hbox (3.54573pt too wide) in paragraph at lines 118--120
+Overfull \hbox (3.54573pt too wide) in paragraph at lines 121--123
 \T1/lmr/m/n/10.95 Ne-pod-po-ruje struk-tu-ro-vaný do-ta-zo-vací ja-zyk a po-sky
 -tuje prak-ticky pouze
  []
 
-[7] <files/hdfs.png, id=250, 541.02126pt x 418.56375pt>
+[7] <files/hdfs.png, id=266, 541.02126pt x 418.56375pt>
 File: files/hdfs.png Graphic file (type png)
  <use files/hdfs.png>
-Package pdftex.def Info: files/hdfs.png used on input line 144.
+Package pdftex.def Info: files/hdfs.png used on input line 147.
 (pdftex.def)             Requested size: 295.20113pt x 228.39053pt.
 
 Underfull \vbox (badness 5274) has occurred while \output is active []
 
  [8]
-[9 <./files/hdfs.png>] <files/hbase.png, id=266, 447.92343pt x 129.48375pt>
+[9 <./files/hdfs.png>] <files/hbase.png, id=282, 447.92343pt x 129.48375pt>
 File: files/hbase.png Graphic file (type png)
 
 <use files/hbase.png>
-Package pdftex.def Info: files/hbase.png used on input line 163.
+Package pdftex.def Info: files/hbase.png used on input line 166.
 (pdftex.def)             Requested size: 369.0pt x 106.67128pt.
 
-<files/hbase-architecture.png, id=269, 531.9875pt x 421.575pt>
+<files/hbase-architecture.png, id=285, 531.9875pt x 421.575pt>
 File: files/hbase-architecture.png Graphic file (type png)
 
 <use files/hbase-architecture.png>
-Package pdftex.def Info: files/hbase-architecture.png used on input line 170.
+Package pdftex.def Info: files/hbase-architecture.png used on input line 173.
 (pdftex.def)             Requested size: 295.20113pt x 233.9383pt.
  [10 <./files/hbase.png>] [11 <./files/hbase-architecture.png>] <files/Bplustre
-e.png, id=286, 537.00626pt x 171.64125pt>
+e.png, id=302, 1253.68375pt x 406.51875pt>
 File: files/Bplustree.png Graphic file (type png)
 
 <use files/Bplustree.png>
-Package pdftex.def Info: files/Bplustree.png used on input line 194.
-(pdftex.def)             Requested size: 369.0pt x 117.94281pt.
+Package pdftex.def Info: files/Bplustree.png used on input line 197.
+(pdftex.def)             Requested size: 369.0pt x 119.64905pt.
  [12 <./files/Bplustree.png>]
-<files/lms.png, id=294, 678.535pt x 199.74625pt>
+<files/lms.png, id=310, 839.135pt x 294.09875pt>
 File: files/lms.png Graphic file (type png)
  <use files/lms.png>
-Package pdftex.def Info: files/lms.png used on input line 212.
-(pdftex.def)             Requested size: 369.0pt x 108.62334pt.
+Package pdftex.def Info: files/lms.png used on input line 215.
+(pdftex.def)             Requested size: 369.0pt x 129.32755pt.
 
-<files/HBaseHDFS.png, id=297, 597.23125pt x 356.33125pt>
+<files/HBaseHDFS.png, id=313, 597.23125pt x 356.33125pt>
 File: files/HBaseHDFS.png Graphic file (type png)
 
 <use files/HBaseHDFS.png>
-Package pdftex.def Info: files/HBaseHDFS.png used on input line 221.
+Package pdftex.def Info: files/HBaseHDFS.png used on input line 224.
 (pdftex.def)             Requested size: 369.0pt x 220.16188pt.
- <files/HFile.png, id=299, 508.90125pt x 151.56625pt>
+ <files/HFile.png, id=315, 508.90125pt x 151.56625pt>
 File: files/HFile.png Graphic file (type png)
 
 <use files/HFile.png>
-Package pdftex.def Info: files/HFile.png used on input line 228.
+Package pdftex.def Info: files/HFile.png used on input line 231.
 (pdftex.def)             Requested size: 295.20113pt x 87.92235pt.
  [13 <./files/lms.png>]
-<files/HFileToHDFS.png, id=308, 487.8225pt x 304.13625pt>
+<files/HFileToHDFS.png, id=325, 487.8225pt x 304.13625pt>
 File: files/HFileToHDFS.png Graphic file (type png)
 
 <use files/HFileToHDFS.png>
-Package pdftex.def Info: files/HFileToHDFS.png used on input line 237.
+Package pdftex.def Info: files/HFileToHDFS.png used on input line 240.
 (pdftex.def)             Requested size: 295.20113pt x 184.04707pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
  [14 <./files/HBaseHDFS.png> <./files/HFile.png>]
-<files/key-value.png, id=316, 616.3025pt x 105.39375pt>
+<files/key-value.png, id=331, 616.3025pt x 105.39375pt>
 File: files/key-value.png Graphic file (type png)
 
 <use files/key-value.png>
-Package pdftex.def Info: files/key-value.png used on input line 244.
+Package pdftex.def Info: files/key-value.png used on input line 247.
 (pdftex.def)             Requested size: 369.0pt x 63.10324pt.
  [15 <./files/HFileToHDFS.png> <./files/key-value.png>] [16
 
@@ -1346,127 +1378,190 @@ Package pdftex.def Info: files/key-value.png used on input line 244.
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 256.
+(hyperref)                removing `\textasciicaron' on input line 259.
 
-[17] <files/MR-part.png, id=334, 679.53876pt x 233.87375pt>
+[17] <files/MR-part.png, id=350, 679.53876pt x 233.87375pt>
 File: files/MR-part.png Graphic file (type png)
 
 <use files/MR-part.png>
-Package pdftex.def Info: files/MR-part.png used on input line 276.
+Package pdftex.def Info: files/MR-part.png used on input line 279.
 (pdftex.def)             Requested size: 369.0pt x 126.9965pt.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <9> on input line 283.
+(Font)              <9> on input line 286.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <5> on input line 283.
+(Font)              <5> on input line 286.
  [18]
-<files/alg1.png, id=347, 745.78625pt x 367.3725pt>
+<files/alg1.png, id=363, 745.78625pt x 367.3725pt>
 File: files/alg1.png Graphic file (type png)
  <use files/alg1.png>
-Package pdftex.def Info: files/alg1.png used on input line 288.
+Package pdftex.def Info: files/alg1.png used on input line 291.
 (pdftex.def)             Requested size: 369.0pt x 181.76865pt.
 
-[19 <./files/MR-part.png>] <files/alg2.png, id=360, 853.1875pt x 452.69125pt>
+[19 <./files/MR-part.png>] <files/alg2.png, id=376, 853.1875pt x 452.69125pt>
 File: files/alg2.png Graphic file (type png)
 
 <use files/alg2.png>
-Package pdftex.def Info: files/alg2.png used on input line 297.
+Package pdftex.def Info: files/alg2.png used on input line 300.
 (pdftex.def)             Requested size: 369.0pt x 195.79318pt.
  [20 <./files/alg1.png>] [21 <./files/alg2.png>] [22]
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 330.
+(hyperref)                removing `\textasciicaron' on input line 333.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+c'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 332.
+(hyperref)                removing `\textasciicaron' on input line 335.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 332.
+(hyperref)                removing `\textasciicaron' on input line 335.
+
+<files/rows.png, id=405, 366.36874pt x 185.69376pt>
+File: files/rows.png Graphic file (type png)
+ <use files/rows.png>
+Package pdftex.def Info: files/rows.png used on input line 340.
+(pdftex.def)             Requested size: 295.20113pt x 149.63191pt.
 
 [23
 
-] [24]
+] [24 <./files/rows.png>]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 366.
+
+
+Package Listings Warning: Text dropped after begin of listing on input line 366
+.
+
+[25]
+Overfull \hbox (2.41954pt too wide) in paragraph at lines 402--403
+[]\T1/lmr/bx/n/10.95 ConstantSizeRegionSplitPolicy[] \T1/lmr/m/n/10.95 Jedná se
+ o jed-no-du-chou me-todu (ve star-
+ []
+
+[26]
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 359.
+(hyperref)                removing `\textasciicaron' on input line 414.
 
-[25
+<files/input.png, id=453, 751.80875pt x 284.06125pt>
+File: files/input.png Graphic file (type png)
+ <use files/input.png>
+Package pdftex.def Info: files/input.png used on input line 421.
+(pdftex.def)             Requested size: 369.0pt x 139.42528pt.
 
-] [26
+<files/record.png, id=454, 629.35126pt x 230.8625pt>
+File: files/record.png Graphic file (type png)
+ <use files/record.png>
+Package pdftex.def Info: files/record.png used on input line 427.
+(pdftex.def)             Requested size: 369.0pt x 135.35872pt.
+
+[27
+
+ <./files/input.png>]
+
+LaTeX Warning: Command \v invalid in math mode on input line 445.
+
+
+LaTeX Warning: Command \v invalid in math mode on input line 445.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 445.
+
+
+LaTeX Warning: Command \r invalid in math mode on input line 445.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 445.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 445.
+
+
+LaTeX Warning: Command \' invalid in math mode on input line 445.
+
+
+LaTeX Warning: Command \v invalid in math mode on input line 445.
+
+
+LaTeX Warning: Command \v invalid in math mode on input line 445.
+
+
+LaTeX Warning: Command \v invalid in math mode on input line 445.
+
+
+Underfull \vbox (badness 4859) has occurred while \output is active []
+
+ [28 <./files/record.png>] [29] [30
 
 ]
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 361.
+(hyperref)                removing `\textasciicaron' on input line 453.
 
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 361.
+(hyperref)                removing `\textasciicaron' on input line 453.
 
-[27] [28
+[31] [32
 
 ]
 
 Package hyperref Warning: Composite letter `\textasciicaron+e'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 365.
+(hyperref)                removing `\textasciicaron' on input line 460.
 
-(./DP-Miroslav-Hrstka.bbl [29] [30
+(./DP-Miroslav-Hrstka.bbl [33] [34
 
 ]
 bibitemlist
-) [31] [32
+) [35] [36
 
-] [33] [34
+] [37] [38
 
 ]
 
 Package hyperref Warning: Composite letter `\textasciicaron+r'
 (hyperref)                not defined in PD1 encoding,
-(hyperref)                removing `\textasciicaron' on input line 390.
+(hyperref)                removing `\textasciicaron' on input line 486.
 
 
 Package glossaries Warning: No \printglossary or \printglossaries found.
 This document will not have a glossary.
 
-[35]
+[39]
 \tf@toc=\write8
 \openout8 = `DP-Miroslav-Hrstka.toc'.
 
 \tf@lof=\write9
 \openout9 = `DP-Miroslav-Hrstka.lof'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 407.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 407.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 503.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 503.
  (./DP-Miroslav-Hrstka.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 407.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 407.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 503.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 503.
 Package rerunfilecheck Info: File `DP-Miroslav-Hrstka.out' has not changed.
-(rerunfilecheck)             Checksum: DEF009AE1915B6F80E97C63E510075B4;1186.
+(rerunfilecheck)             Checksum: 8DEBC6B099B7BE56C33EFD7ED0A704E7;1304.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 407.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 503.
  ) 
 Here is how much of TeX's memory you used:
- 14629 strings out of 493304
- 207695 string characters out of 6139871
- 398957 words of memory out of 5000000
- 17658 multiletter control sequences out of 15000+600000
+ 16395 strings out of 493304
+ 230820 string characters out of 6139871
+ 448310 words of memory out of 5000000
+ 19374 multiletter control sequences out of 15000+600000
  84337 words of font info for 64 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 51i,13n,35p,1789b,402s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 51i,13n,72p,1789b,1154s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/share/texmf/fonts/en
 c/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/usr/s
 hare/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/l
@@ -1483,10 +1578,10 @@ xmf/fonts/type1/public/lm/lmr9.pfb></usr/share/texmf/fonts/type1/public/lm/lmri
 onts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.p
 fb></usr/share/texmf/fonts/type1/public/lm/lmsy9.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt9.pfb>
-Output written on DP-Miroslav-Hrstka.pdf (49 pages, 1106520 bytes).
+Output written on DP-Miroslav-Hrstka.pdf (53 pages, 1222866 bytes).
 PDF statistics:
- 567 PDF objects out of 1000 (max. 8388607)
- 475 compressed objects within 5 object streams
- 137 named destinations out of 1000 (max. 500000)
- 220 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 639 PDF objects out of 1000 (max. 8388607)
+ 539 compressed objects within 6 object streams
+ 169 named destinations out of 1000 (max. 500000)
+ 251 words of extra memory for PDF output out of 10000 (max. 10000000)
 

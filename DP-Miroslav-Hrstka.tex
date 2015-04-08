@@ -8,6 +8,9 @@
 
 \usepackage{dirtree} %directory tree visualisation
 
+\usepackage{listings}             % Include the listings-package
+
+
 % % list of acronyms
 \usepackage[acronym,nonumberlist,toc,numberedsection=autolabel]{glossaries}
 \iflanguage{czech}{\renewcommand*{\acronymname}{Seznam pou{\v z}it{\' y}ch zkratek}}{}
@@ -35,7 +38,7 @@
 \keywordsEN{Nahraďte seznamem klíčových slov v angličtině oddělených čárkou.}
 
 \begin{document}
-
+\lstset{language=sh}  
 % \newacronym{CVUT}{{\v C}VUT}{{\v C}esk{\' e} vysok{\' e} u{\v c}en{\' i} technick{\' e} v Praze}
 % \newacronym{FIT}{FIT}{Fakulta informa{\v c}n{\' i}ch technologi{\' i}}
 
@@ -331,34 +334,126 @@ Jak již bylo řečeno, časová náročnost je velmi vázaná na propustnost s�
 Při návrhu řešení pro optimalizaci umístění dat na výpočetní uzly minimalizující datové přenosy V databázi HBase jsem vycházel z řešení pro souborový systém HDFS, které jsem popsal v předchozí kapitole. Nebudu proto uvádět znovu celý návrh řešení, ale pojmu tuto kapitolu jako výčet změn, oproti návrhu pro implementaci v HDFS. 
 \section{Klíčová specifika HBase pro návrh řešení}
 \subsection{Řazení záznamů v databázi}
-Jeden z největších změn při návrhu optimalizace pro databázi HBase bylo fyzické uložení jednotlivých řádků databáze. Nativní funkcí HBase je ukládání záznamů v lexikografickém pořadí. Tato funkce je pro HBase klíčová a je charakteristickým prvkem, kterým se odlišuje od jiných databází. Právě tato vlastnost dává HBase velkou sílu při sekvenčním prohledávání ať už celého datasetu nebo určité "výseče" z dat. Tento fakt se ale přímo rozchází se základní myšlenkou optimalizace pro HDFS, kdy je nezbytné změnit fyzické pořadí a tím i uložení záznamů. Bylo tedy nutné navrhnout možná řešení, jak docílit toho, aby bylo možné změnit pořadí záznamů v závislosti na požadavcích optimalizačního algoritmu. V úvahu přicházely dva možné varianty jak se s tímto omezením vyrovnat. Návrhy byly následující:
+Jeden z největších změn při návrhu optimalizace pro databázi HBase bylo fyzické uložení jednotlivých řádků databáze. Nativní funkcí HBase je ukládání záznamů v lexikografickém pořadí. Tato funkce je pro HBase klíčová a je charakteristickým prvkem, kterým se odlišuje od jiných databází. Právě tato vlastnost dává HBase velkou sílu při sekvenčním prohledávání ať už celého datasetu nebo určité "výseče" z dat. Tento fakt se ale přímo rozchází se základní myšlenkou optimalizace pro HDFS, kdy je nezbytné změnit fyzické pořadí a tím i uložení záznamů. Bylo tedy nutné navrhnout možná řešení, jak docílit toho, aby bylo možné změnit pořadí záznamů v závislosti na požadavcích optimalizačního algoritmu. V úvahu přicházely dva možné varianty jak se s tímto omezením vyrovnat. V úvahu přicázela změna klíče dle potřeb optimalizačního algoritmu nebo přidání prefixu k již existujícímu klíči\ref{fig:keys}.
+
+\begin{figure}\centering
+	\includegraphics[width=0.8\textwidth, angle=0]{files/rows}
+	\caption[Řazení řádků za pomoci přidání prefixu]
+	{Řazení řádků za pomoci přidání prefixu}\label{fig:keys}
+\end{figure} 
+
 \begin{description}
 \item[Změna klíče řádku podle potřeb optimalizačního algoritmu] \hfill \\
  Toto řešení se nabízí jako nejjednoduší. Naráží však na výrazný problém. Při návrhu logického modelu pro databáze v HBase se typicky jako klíč pro jednotlivé záznamy používá klíč nesoucí určitou informační hodnotu (například část klíče odpovídá času pořízení daného záznamu). Změnu klíčů by jsme si tedy v tomto případě nemohli dovolit, pro aplikování tohoto přístupu by se nabízely tabulky, kde je klíč automaticky generován a nemá žadnou spojitost s daty které se nachází v řádku, který reprezentuje.
  
  \item[Přidání prefixu k již existujícímu klíči] \hfill \\
- Druhým možným řešením je přidání prefixu k již existujícímu 
+ Druhým možným řešením je přidání prefixu k již existujícímu klíči. Tento návrh již řeší problém s automatickým řazením, zároveň přidání krátkého prefixu, neznehodnotí informaci uloženou v klíči, jen je nutné při dalších dotazech toto zohlednit a před zpracováním dat prefix s klíče odstranit. Nabízí se více možností, na jakém základě prefixy přiřazovat. Nejefektivnější je přidání určité hodnoty v bitech, na základě požadovaného počtu částí výsledného rozdělení grafu.
  
 \end{description} 
 
-\subsection{Automatický split a merge Hregionů}
+\subsection{Splitting HBase regionů}
+V návrhu pro implementaci v HBase je apotřebí zohlednit, jak pracovat s distribucí HBase regionů do souborového systému. Jak již bylo řečeno, v HBase se data v řádcích ukládají do HBase regionů, kde je vždy uložen určitý rozsah lexikograficky seřazených řádků. Řádek je vždy uložen jako celek jen na jednom HRegionu. Není tedy potřeba zohledňovat případné dělení řádku. 
+
+Tabulky se typicky skládají z mnoha regionů, které jsou umístěny na mnoha region serverech. Regiony tedy slouží jako mechanizmus k rozložení zátěže napříč clusterem. Vždy když se vytváří nová tabulka, vytvoří se pouze jeden region, který se postupně při nabírání objemu štěpí na více regionů, které se distribuují v clusteru. Proto ve fázi nahrávání dat do DB není využita plná kapacita clusteru. Toto chování je zapříčiněno především tím, že dopředu není zřejmé, kde se budou ve výsledné tabulce nalézat split points, tedy místa, kde dojde k rozdělení tabulky na více regionů. Tyto body jsou totiž špatně predikovatelné, protože rozdložení klíčů v tabulce nemusí být vždy rovnoměrné. V našem případě však již víme, s jakým rozložením dat budeme pracovat při vytváření tabulky a zároveň budeme vědět, na kolik částí budeme chtít data rozdělit. Ideální stav by tedy byl, že výsledná data určená dělícím algoritmem jako homogenní část by byla uložena na určitém počtu regionů aniž by v těchto regionech byla uložena data z ostatních částí tabulky. K tomuto rozdělení, můžeme využít pre-splitting \cite{split}.
+
+\subsubsection{Pre-Splitting}
+Pre-splitting je nástroj, který nám umožňuje vytvořit novou tabulku s již vytvořenými split pointy. Použití tohoto nástroje nám umožní vytvořit si tabulku podle našich potřeb. První z možných řešení je předpočítání splitting pointů podle zadaných kritérií. K tomu slouží \texttt{regionSplitter} utility. RegionSplitter vytvoří splitting points pomocí \texttt{SplitAlgorithm}. Předdefinováné algoritmy jsou \texttt{HexStringSplit} a \texttt{UniformSplit}. První algoritmus je možné použít, pokud klíče obsahují prefixy ve formě hexadecimálního řetězce. Druhý algoritmus určuje splitting point pomocí uniformního rozdělení klíčů. Pro potřeby naší aplikace se nabízí využití prvního algoritmu, kdy dojde k rozdělení podle prefixů, které byli ke klíčům přidány na základě výsledku dělícího algoritmu. Je možné implementovat implementovat i vlastní \texttt{SplitAlgorithm}, nicméně pro naše potřeby je plně dostačující již implementovaný algoritmus.
+
+Následující příkaz vytvoří tabulku testTable, kde -c 10 definuje počet regionů a -f f1 definuje požadované families v tabulce.
+
+\medskip
+\begin{lstlisting}[frame=single]  % Start your code-block
+ds
+$ hbase org.apache.hadoop.hbase.util.RegionSplitter \
+> testTable HexStringSplit -c 10 -f f1
+
+\end{lstlisting}
+\medskip
+Následně dojde k vygenerování taulky o deseti regionech.
+\medskip
+\begin{lstlisting}[frame=single]  % Start your code-block
+ 
+15/04/08 18:49:32 DEBUG hbase.HRegionInfo:
+> Current INFO from scan results = 
+> {NAME =&gt;> 'test_table,,
+> 135856377.acc1ad1b7962564fc3a43e5907e8db33.', 
+> STARTKEY =&gt; '', ENDKEY =&gt; '19999999', 
+> ENCODED =&gt; acc1ad1b7962564fc3a43e5907e8db33,}
+15/04/08 18:49:32 DEBUG hbase.HRegionInfo: 
+> Current INFO from scan results = 
+> {NAME =&gt; 'test_table,
+> 19999999,135856377.37ec12df6bd0078f5573565af415c91b.', 
+> STARTKEY =&gt; '19999999', ENDKEY =&gt; '33333332', 
+> ENCODED =&gt; 37ec12df6bd0078f5573565af415c91b,}
+...
+
+\end{lstlisting}
+\medskip
+\subsubsection{Auto Splitting}
+Jak již bylo řečeno, pre-splitting je nástroj, který má na starosti rozdělení tabulky při jejím vytvoření v případě, že nechceme začít vkládat do defaultní tabulky s jedním regionem. Nehlědě na to, zda pre-splitting použijeme nebo ne, je potřeba nadále spravovat regiony, v závisloti na nově přidávaných datech. K tomu slouží Auto splitting, který automaticky rozděluje regiony, které dosáhly své maximální velikosti. Nastavení automatického dělení regionů je možné provést pomocí \texttt{RegionSplitPolicy} API. K dispozici jsou tři předdefinované varianty:
+
+\begin{itemize}
+	\item ConstantSizeRegionSplitPolicy
+	\item IncreasingToUpperBoundRegionSplitPolicy
+	\item KeyPrefixRegionSplitPolicy
+\end{itemize} 
+
+\paragraph{ConstantSizeRegionSplitPolicy}
+Jedná se o jednoduchou metodu (ve starších verzích to byla jedinná předdefinovaná) k určení, kdy má dojít k rozdělení regionu. Rozdělení nastane v případě, kdy dojde k překročení maximální velikosti alespoň jednoho file store v regionu (uložiště jedné family v rámci regionu). Tato hodnota je konfigurována v \texttt{hbase.hregion.max.filesize} a její defaultní hodnota je 10 GB. 
+
+\paragraph{IncreasingToUpperBoundRegionSplitPolicy}
+
+\paragraph{KeyPrefixRegionSplitPolicy}
+
 \subsection{Fyzické uložení family column}
+Ačkoli jsou řádky ukládány lexikograficky, v každem stores jsou takto uloženy pouze hodnoty v rámci jedné family. Každá family sloupců se tedy ukládá do oddělených stores. Platí však omezení, že ačkoli jsou jednotlivé části řádku uloženy rozděleně, vždy jsou tyto části uložené v rámci jednoho regionu. Dojde-li tedy k přejmenování identifikátoru řádku, repsektive vytvoření nové tabulky s prefixem, budou řádky o určitém rozsahu klíčů vždy uloženy logicky v jednom HRegionu.
 
 \section{Proces optimalizase}
-\subsection{Monitoring}
 
-\subsubsection{RecordReader Class}
-\subsubsection{TableImputClass Class}
-\subsubsection{Metadata file}
-
-\subsection{Repartitioning}
-\subsubsection{HyperGraph Class}
-\subsubsection{PATOH Algoritmus}
-\subsubsection{Repartioning Class}
 
 \chapter{Implementace řešení}
+V této kapitole bude představena implementace navrženého řešení. Při popisu implementace budu postupně probírat všechny klíčové partie. Implementace byla provedená v jazyku Java. V javě je napsán celý balík Hadoop a tak se toto řešení nabízí jako nejvhodnější. Pouze pro provedení dělícího algoritmu byl využit již existující program naimplementovaný v jazyku C. 
+
+\section{Monitoring}
+V prvním kroce je nutné získat potřebná data, podle kterých se následná optimalizace bude provádět. Je zapotřebí shromáždit informace o tom, který řádek tabulky generuje výstupy do reduceru a i informaci do kterého. Sběr těchto dat se realizuje v průběhu vykonávání sady MapReduce úloh, pro které se bude následně celý dataset optimalizovat. K tomu abychom mohli nasbírat potřebná data je nutné rozšířit HBase třídy \texttt{RecordReader} třídou \texttt{MyRecordReader} a \texttt{TableInputFormatBase}\ref{fig:record} třídou \texttt{MyTableInputFormatBase}\ref{fig:input}. Funkcionalita těchto tříd je následující:
+
+\begin{figure}\centering
+	\includegraphics[width=1\textwidth, angle=0]{files/input}
+	\caption[Rozšíření třídy TableInputFormatBase]
+	{Rozšíření třídy TableInputFormatBase}\label{fig:input}
+\end{figure} 
+
+\begin{figure}\centering
+	\includegraphics[width=1\textwidth, angle=0]{files/record}
+	\caption[Rozšíření třídy RecorReader]
+	{Rozšíření třídy RecorReader}\label{fig:record}
+\end{figure} 
+
+\begin{description}
+\item[TableInputFormatBase] \hfill \\
+Nejdříve ověří vstupní konfiguraci pro MapReduce úlohu. Následně vytvoří instanci třídy \texttt{RecordReader}, která bude použita k vytvoření key/value párů z načtených dat. Tyto páry jsou pak po jednom zaslány k mapování.
+
+\item[TableRecordReader] \hfill \\
+TableRecorReader generuje z dat získaných od \texttt{TableInputFormatBase} key/value páry. Podle zadaného rozsahu rozsahu projde požadovanou část datasetu, nebo celou tabulku. 
+\end{description}
+
+\subsection{MyTableImputClassBase Class}
+V této třídě je pouze nutné nutné změnit metodu \texttt{CreateRecordReader} tak, aby namísto defaultní TableRecordReader instance nastavila pro prováděnou úlohu instanci record readeru ze třídy \texttt{MyTableRecorReader}.
+
+
+\subsection{MyTableRecordReader Class}
+V této třídě je nutné vytvořit soubor, který uchová vygenerované páry key/value, během zpracovávání MapReduce. Při zpracovávání každého záznamu se vyhodnotí, zda byl vygenerován klíč. v případě že ano, uloží e do dočasté struktury daný klíč a identifikátor řádku, který ho vygeneroval. Při ukončování úlohy se poté zapíšou získané hodnoty do nově vytvořeného souboru ve formátu: $Key;počet\_řádků\_generujících\_klíč;id\_řadku_1 ... id\_řadku_n$. výsledkem je tedy seznam vygenerovaných klíčů s řádky které tento klíč generují.
+
+
+\section{Repartitioning}
+\subsection{HyperGraph Class}
+\subsection{PATOH Algoritmus}
+\subsection{Repartioning Class}
 
 \chapter{Testování a vyhodnocení měření}
+\subsection{Vyhodnocení}
+\subsection{Testování}
+\subsubsection{jUnit testy}
 
 
 
@@ -381,6 +476,7 @@ Jeden z největších změn při návrhu optimalizace pro databázi HBase bylo f
 	\item[SQL] Structured Query Language
 	\item[NoSQL] Not only SQL
 	\item[RDBMS] Relational DataBase Management System
+	\item[WAL] Write-Ahead Log
 	
 
 \end{description}

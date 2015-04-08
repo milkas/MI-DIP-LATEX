@@ -48,4 +48,8 @@ et~al, M. L.-G.: \emph{Data Partitioning for Minimizing Transferred Data in
 Ibrahim, S.; Hai, J.; Lu, L.; aj.: Locality/fairness-aware key partitioning for
   mapreduce in the cloud. \emph{CloudCom 2010}, 2010: s. 17--24.
 
+\bibitem{split}
+Enis, S.: Apache HBase Region Splitting and Merging. 2013.
+\urlprefix\biburl{http://hortonworks.com/blog/apache-hbase-region-splitting-and-merging/}
+
 \end{thebibliography}
