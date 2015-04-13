@@ -13,15 +13,21 @@
 \contentsline {figure}{\numberline {1.9}{\ignorespaces Form\IeC {\'a}t souboru HFile}}{14}{figure.1.9}
 \contentsline {figure}{\numberline {1.10}{\ignorespaces Rozlo\IeC {\v z}en\IeC {\'\i } Hfile do blok\IeC {\r u} dat v HDFS}}{15}{figure.1.10}
 \contentsline {figure}{\numberline {1.11}{\ignorespaces Form\IeC {\'a}t KeyValue struktury}}{15}{figure.1.11}
+\contentsline {figure}{\numberline {1.12}{\ignorespaces Reprezentace hypergrafu}}{17}{figure.1.12}
+\contentsline {figure}{\numberline {1.13}{\ignorespaces bisekce hypergrafu}}{17}{figure.1.13}
 \addvspace {10pt}
-\contentsline {figure}{\numberline {2.1}{\ignorespaces MR-part sch\IeC {\'e}ma}}{19}{figure.2.1}
-\contentsline {figure}{\numberline {2.2}{\ignorespaces Pseudok\IeC {\'o}d algoritmu pro Metadata Combination}}{20}{figure.2.2}
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Pseudok\IeC {\'o}d algoritmu pro Repartitioning}}{21}{figure.2.3}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces MR-part sch\IeC {\'e}ma}}{21}{figure.2.1}
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Pseudok\IeC {\'o}d algoritmu pro Metadata Combination}}{22}{figure.2.2}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Pseudok\IeC {\'o}d algoritmu pro Repartitioning}}{23}{figure.2.3}
 \addvspace {10pt}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces \IeC {\v R}azen\IeC {\'\i } \IeC {\v r}\IeC {\'a}dk\IeC {\r u} za pomoci p\IeC {\v r}id\IeC {\'a}n\IeC {\'\i } prefixu}}{24}{figure.3.1}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces \IeC {\v R}azen\IeC {\'\i } \IeC {\v r}\IeC {\'a}dk\IeC {\r u} za pomoci p\IeC {\v r}id\IeC {\'a}n\IeC {\'\i } prefixu}}{26}{figure.3.1}
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Vstupn\IeC {\'\i } form\IeC {\'a}t hypergrafu}}{30}{figure.3.2}
 \addvspace {10pt}
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Roz\IeC {\v s}\IeC {\'\i }\IeC {\v r}en\IeC {\'\i } t\IeC {\v r}\IeC {\'\i }dy TableInputFormatBase}}{27}{figure.4.1}
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Roz\IeC {\v s}\IeC {\'\i }\IeC {\v r}en\IeC {\'\i } t\IeC {\v r}\IeC {\'\i }dy RecorReader}}{28}{figure.4.2}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Roz\IeC {\v s}\IeC {\'\i }\IeC {\v r}en\IeC {\'\i } t\IeC {\v r}\IeC {\'\i }dy TableInputFormatBase}}{33}{figure.4.1}
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Roz\IeC {\v s}\IeC {\'\i }\IeC {\v r}en\IeC {\'\i } t\IeC {\v r}\IeC {\'\i }dy RecorReader}}{34}{figure.4.2}
+\addvspace {10pt}
+\addvspace {10pt}
+\addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}

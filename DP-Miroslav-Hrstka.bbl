@@ -40,6 +40,20 @@ George, L.: \emph{HBase: The Definitive Guide}. O'Reilly Media, prvn\'\i{}
 HBaseCon. 2015.
 \urlprefix\biburl{http://hbasecon.com/archive.html}
 
+\bibitem{graph1}
+Schweikert, D.~G.; Kernighan, B.~W.: A Proper Model for the Partitioning of
+  Electrical Circuits. In \emph{Proceedings of the 9th Design Automation
+  Workshop}, DAC '72, New York, NY, USA: ACM, 1972, s. 57--62,
+  \doi{10.1145/800153.804930}.
+\urlprefix\biburl{http://doi.acm.org/10.1145/800153.804930}
+
+\bibitem{graph2}
+Fiduccia, C.~M.; Mattheyses, R.~M.: A Linear-time Heuristic for Improving
+  Network Partitions. In \emph{Proceedings of the 19th Design Automation
+  Conference}, DAC '82, Piscataway, NJ, USA: IEEE Press, 1982, ISBN
+  0-89791-020-6, s. 175--181.
+\urlprefix\biburl{http://dl.acm.org/citation.cfm?id=800263.809204}
+
 \bibitem{gistau}
 et~al, M. L.-G.: \emph{Data Partitioning for Minimizing Transferred Data in
   MapReduce}. INRIA \& LIRMM, Montpellier, France.

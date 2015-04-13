@@ -29,13 +29,13 @@
 \authorFN{Hrstka} %příjmení autora
 \authorWithDegrees{Bc. Miroslav Hrstka} %jméno autora včetně současných akademických titulů
 \supervisor{Ing. Adam Šenk}
-\acknowledgements{Doplňte, máte-li komu a za co děkovat. V~opačném případě úplně odstraňte tento příkaz.}
-\abstractCS{V~několika větách shrňte obsah a přínos této práce v~češtině. Po přečtení abstraktu by se čtenář měl mít čtenář dost informací pro rozhodnutí, zda chce Vaši práci číst.}
-\abstractEN{Sem doplňte ekvivalent abstraktu Vaší práce v~angličtině.}
+\acknowledgements{Děkuji Ing. Adamovi Šenkovi za vedení diplomové práce, cenné připomínky a rady, které příspěli k úspěšnému vypracování této práce. Poděkování patří také Pavle Přibylové za nemalou pomoc s formální stránkou práce. }
+\abstractCS{	Tato práce si dává za cíl zmapovat možnosti optimalizace datových přenosů v databázi HBase. Je analyzováno stávající řešení navržené pro souborový systém HDFS. Na základě zjištěných skutečností je zvážena možnost použít principiálně podobné schéma optimalizace pro HBase a následně je toto řešení navrhnuto a naimplementováno. Výsledek optimalizace je nutné následně otestovat a vyhodnotit.}
+\abstractEN{This work is aimed to map out the options for optimizing data transfers in the database HBAse. It analyzed existing solutions designed for HDFS file system. Based on the findings is considered for use principally similar pattern optimization HBAse and then this solution is designed and is deployed. The result of optimization is necessary then test and evaluate.}
 \placeForDeclarationOfAuthenticity{V~Praze}
 \declarationOfAuthenticityOption{4} %volba Prohlášení (číslo 1-6)
-\keywordsCS{Nahraďte seznamem klíčových slov v češtině oddělených čárkou.}
-\keywordsEN{Nahraďte seznamem klíčových slov v angličtině oddělených čárkou.}
+\keywordsCS{HBase, Hadoop, distribuované databáze, optimalizace}
+\keywordsEN{Hbase, Hadoop, distributed database, optimization}
 
 \begin{document}
 \lstset{language=sh}  
@@ -43,7 +43,7 @@
 % \newacronym{FIT}{FIT}{Fakulta informa{\v c}n{\' i}ch technologi{\' i}}
 
 \begin{introduction}
-	uvod moji prace :P
+
 \end{introduction}
 
 \chapter{Současný stav a použité technologie}
@@ -251,9 +251,26 @@ KeyValue je struktura, která reprezentuje fyzické uložení jedné buňky z ta
 \subsubsection{Write-Ahead Log}
 Region servery ukládají příchozí data do paměti, do doby něž se jich nahromadí dostatečné množství a poté je najednou zapíše na disk. Ve fázi, kdy se data hromadí v paměti, jsou ale zranitelná a v případě výpadku dojde k jejich ztrátě. Právě pro zamezení tohoto problému se používá WAL. Jeho funkce tedy je omezit dopady výpadku. Do logu se proto zapisují všechny změny dat, a až v případě, že jsou úspěšně uloženy na disk, je klient informován o úspěšném uložení dat. 
 
+\section{HyperGraph Partitioning}
+Hypergraph partitioning je známý problém, řešený hlavně při návrhu rozložení VLSI (Very-large-scale integration). Obecně lze říci že se jedná o operaci, která ma za cíl rozdělit hypergraf do dvou nebo zhruba stejně velkých částí tak, aby při oddělování bylo přerušeno co nejméně hran spojující jednotlivé uzly v grafu.
+
+Pro řešení problému dělení grafů a hypergrafů se používají především heuristiky založené na algoritmu Kernighan-Lin (KL). Především diky rychlosti běhu a poměrně dobrým výsledkům. KL algoritmus je navržen průvodně pro bipartioning grafů. Na jeho základech však vznikla většina pokročilejších algoritmu pro dělení grafů. KL algoritmus začíná počátečním rozdělení na dvě části, následně provede určitý počet kroků, dokud se nenajde lokální minimum bipartitity. Každý krok obsahuje sekvenci prohození vrcholů. Stejnou strategii prohazování vrcholů při řešení problému dělení hypergrafů použili Schweikert-Kernighan\cite{graph1}. Fiduccia-Mattheyses\cite{graph2} uvedli rychlejší implementaci KL algoritmu pro dělení hypergrafů. Byla založená na nahrazení vyměňování uzlů za jejich přesouvání.  V kombinaci s použitím správných datových struktur výrazně klesla časová náročnost algoritmu. Na těchto základech a mnoha dalších poznatcích je pak vyvinut nástroj PaToH (PaToH:Partitioning Tools for Hypergraphs), který bude využit právě pro řešení dělení hypergrafu v implementační části této práce.
+
+\subsection{Definice problému}
+Hypergraf $H=(V,N)$ je definován jako množina vrcholů $V$ a množina	sítí (multihran) $N$ propojujících tyto vrcholy. Každá síť $n \in N$ je podmnožina $n \subseteq V$. Vrcholy v síti $n$ jsou nazývýny $piny$. Velikost sítě se rovná počtu pinů, které obsahuje. Stupeň vrcholu je počet sítí, kterými je spojen. Hypergraph může být i vážený a v tom případě se mohou ohodnotit jak hrany, tak uzly.
+
+....
 
 
+\begin{figure}\centering
+	\includegraphics[width=0.6\textwidth, angle=0]{files/Hypergraph.png}
+	\caption[Reprezentace hypergrafu]{Reprezentace hypergrafu}\label{fig:hypergraph}
+\end{figure}
 
+\begin{figure}\centering
+	\includegraphics[width=0.6\textwidth, angle=0]{files/bisection.png}
+	\caption[bisekce hypergrafu]{bisekce hypergrafu}\label{figbisection}
+\end{figure}
 
 
 \chapter{Existující řešení optimalizace distribuce dat pro MapReduce}
@@ -314,7 +331,7 @@ V MapReduce frameworku je tedy nutné provést následující modifikace:
 \end{itemize} 
 
 \section{Testování a výsledky}
-MR-Part byl implementován v Hodoop-1.0.4 a otestován na \texttt{Grid5000} \footnote{https://www.grid5000.fr/mediawiki/index.php/Grid5000:Home}. Jedná se o  rozsáhlou infrastrukturu složenou s rozdílných sítí s několika clustery výpočetních uzlů. Nutno podotknout, že tato infrastruktura není typická pro nasazení Hadoopu a vykonávání MapReduce úloh, především právě  kvůli nesourodosti clusterů v síti, jejich fyzické vzdálenosti a tím i kapacitně omezeném propojení. Částečně i proto bylo zrychlení zprácování tak znatelné. K testování byly využity datasety z \texttt{TPC-H} \footnote{http://www.tpc.org/tpch/www.grid5000.fr/mediawiki/index.php/Grid5000:Home}. 
+MR-Part byl implementován v Hodoop-1.0.4 a otestován na \texttt{Grid5000} \footnote{https://www.grid5000.fr/mediawiki/index.php/Grid5000:Home}. Jedná se o  rozsáhlou infrastrukturu složenou s rozdílných sítí s několika clustery výpočetních uzlů. Nutno podotknout, že tato infrastruktura není typická pro nasazení Hadoopu a vykonávání MapReduce úloh, především právě  kvůli nesourodosti clusterů v síti, jejich fyzické vzdálenosti a tím i kapacitně omezeném propojení. Částečně i proto bylo zrychlení zprácování tak znatelné. K testování byly využity datasety z \texttt{TPC-H} \footnote{http://www.tpc.org/tpch/}. 
 \subsection{Výsledky}
 
 \paragraph{Množství přenesených dat pro různé typy dotazů} \hfill \\
@@ -325,6 +342,7 @@ Při provedení vybraného dotazu nad konfiguracemi systému s různým počtem 
 
 \paragraph{Časová náročnost dotazů} \hfill \\
 Jak již bylo řečeno, časová náročnost je velmi vázaná na propustnost sítě. Bylo provedeno vykonání dotazů na různých šířkách pásma a výsledek byl očekávaný. Tedy čím pomalejší síť mezi výpočetními uzly, tím výraznější zrychlení při vykonávání dotazů.
+
 
 
 
@@ -352,7 +370,7 @@ Jeden z největších změn při návrhu optimalizace pro databázi HBase bylo f
 \end{description} 
 
 \subsection{Splitting HBase regionů}
-V návrhu pro implementaci v HBase je apotřebí zohlednit, jak pracovat s distribucí HBase regionů do souborového systému. Jak již bylo řečeno, v HBase se data v řádcích ukládají do HBase regionů, kde je vždy uložen určitý rozsah lexikograficky seřazených řádků. Řádek je vždy uložen jako celek jen na jednom HRegionu. Není tedy potřeba zohledňovat případné dělení řádku. 
+V návrhu pro implementaci v HBase je zapotřebí zohlednit, jak pracovat s distribucí HBase regionů do souborového systému. Jak již bylo řečeno, v HBase se data v řádcích ukládají do HBase regionů, kde je vždy uložen určitý rozsah lexikograficky seřazených řádků. Řádek je vždy uložen jako celek jen na jednom HRegionu. Není tedy potřeba zohledňovat případné dělení řádku. 
 
 Tabulky se typicky skládají z mnoha regionů, které jsou umístěny na mnoha region serverech. Regiony tedy slouží jako mechanizmus k rozložení zátěže napříč clusterem. Vždy když se vytváří nová tabulka, vytvoří se pouze jeden region, který se postupně při nabírání objemu štěpí na více regionů, které se distribuují v clusteru. Proto ve fázi nahrávání dat do DB není využita plná kapacita clusteru. Toto chování je zapříčiněno především tím, že dopředu není zřejmé, kde se budou ve výsledné tabulce nalézat split points, tedy místa, kde dojde k rozdělení tabulky na více regionů. Tyto body jsou totiž špatně predikovatelné, protože rozdložení klíčů v tabulce nemusí být vždy rovnoměrné. V našem případě však již víme, s jakým rozložením dat budeme pracovat při vytváření tabulky a zároveň budeme vědět, na kolik částí budeme chtít data rozdělit. Ideální stav by tedy byl, že výsledná data určená dělícím algoritmem jako homogenní část by byla uložena na určitém počtu regionů aniž by v těchto regionech byla uložena data z ostatních částí tabulky. K tomuto rozdělení, můžeme využít pre-splitting \cite{split}.
 
@@ -369,7 +387,7 @@ $ hbase org.apache.hadoop.hbase.util.RegionSplitter \
 
 \end{lstlisting}
 \medskip
-Následně dojde k vygenerování taulky o deseti regionech.
+Následně dojde k vygenerování tabulky o deseti regionech.
 \medskip
 \begin{lstlisting}[frame=single]  % Start your code-block
  
@@ -399,17 +417,76 @@ Jak již bylo řečeno, pre-splitting je nástroj, který má na starosti rozdě
 \end{itemize} 
 
 \paragraph{ConstantSizeRegionSplitPolicy}
-Jedná se o jednoduchou metodu (ve starších verzích to byla jedinná předdefinovaná) k určení, kdy má dojít k rozdělení regionu. Rozdělení nastane v případě, kdy dojde k překročení maximální velikosti alespoň jednoho file store v regionu (uložiště jedné family v rámci regionu). Tato hodnota je konfigurována v \texttt{hbase.hregion.max.filesize} a její defaultní hodnota je 10 GB. 
+Jedná se o jednoduchou politiku (ve starších verzích před verzí 0.94 to byla defaultní a jediná předdefinovaná) k určení, kdy má dojít k rozdělení regionu. Rozdělení nastane v případě, kdy dojde k překročení maximální velikosti alespoň jednoho file store v regionu (uložiště jedné family v rámci regionu). Tato hodnota je konfigurována v \texttt{hbase.hregion.max.filesize} a její defaultní hodnota je 10 GB. 
 
 \paragraph{IncreasingToUpperBoundRegionSplitPolicy}
+Pro novější verze je defaultní \texttt{IncreasingToUpperBoundRegionSplitPolicy}. Tato politika provádí více agresivní splitting  založený na počtu regionů uložených v region serverech. K určení velikosti při které dojde k rozdělení regionu se používá vzorec $MIN(R^2 * hbase.hregion.memstore.flush.size,hbase.hregion.max.filesize)$.  kde $R$ je počet regionů stejné tabulky na stejném regionu. Například uvažujme situaci, kdy máme nastavenou default memstore flush size na defaultní hodnotu 128MB a hodnotu max store size na defaultních 10GB. K prvnímu splitu dojde po provedení první operace flush, při velikosti 128MB. Postupně, jak bude docházet ke zvyšování počtu regionů v region serveru, bude zároveň docházet i ke zvětšování velikosti jednotlivých regionů a to konkrétně na 512MB, 1152MB, 2GB, 3.2GB, 4.6GB, 6.2GB, etc. Po dosažení 9 regionů se zvětšování zastaví díky \texttt{hbase.hregion.max.filesize} nastavené na 10 GB. U obou předchozích metod dochází při dělení vždy k rozdělení v místě, kde je prostřední bod největšího store file.
+
 
 \paragraph{KeyPrefixRegionSplitPolicy}
+Poslední z předdefinovaných politik pro automatický splitting je \texttt{KeyPrefixRegionSplitPolicy}. V tomto případě se rozdělení provádí za pomocí prefixu. Na základě určení velikosti prefixu, dojde k jejich rozdělení do skupin. Tato funkce pak zajistí, že při dělení regionů nedojde k rozdělení uprostřed takto definované skupiny. Dojde tedy k situaci, kdy jsou klíče se stejným prefixem uloženy v rámci jednoho regionu (nebo více regionů v případě, že velikost těchto dat překročí maximální velikost region serveru).
+
+Při porovnání těchto předem definovaných politik jsem došel k závěru, že politika \texttt{KeyPrefixRegionSplitPolicy} přesně splňuje požadavky plynoucí z potřeby ukládat předem definované rozsahy řádku pomocí prefixu v rámci jednoho regionu. Je zde také možnost naimplemetovat vlastní politiky, nicméně v tomto případě plně vyhovuje již definovaná politika.
+
+\subsection{optional kapitola, jak jsou splity implementovany}
+http://hortonworks.com/blog/apache-hbase-region-splitting-and-merging/
 
 \subsection{Fyzické uložení family column}
 Ačkoli jsou řádky ukládány lexikograficky, v každem stores jsou takto uloženy pouze hodnoty v rámci jedné family. Každá family sloupců se tedy ukládá do oddělených stores. Platí však omezení, že ačkoli jsou jednotlivé části řádku uloženy rozděleně, vždy jsou tyto části uložené v rámci jednoho regionu. Dojde-li tedy k přejmenování identifikátoru řádku, repsektive vytvoření nové tabulky s prefixem, budou řádky o určitém rozsahu klíčů vždy uloženy logicky v jednom HRegionu.
 
-\section{Proces optimalizase}
+\section{PATOH algoritmus}
+Při kombinační části je zapotřebí rozdělit co nejoptimálněji vzniklý hypergraf. Tato fáze je klíčová a právě správné rozdělení grafu je klíčem k následnému optimálnímu rozložení dat. K vyřešení této úlohy použiji již naimplementovaný nástroj pro dělení hypergrafů PaToH\footnote{http://bmi.osu.edu/ \textasciitilde umit/software.html}. Program nabízí 2 možnosti použití. Buď jako stand-alone program spustitelný z příkazové řádky nebo jako knihovna v jazyku C. Vzhledem k tomu, že pro naše potřeby plně dostačuje rozhraní spustitelného programu, yyužiji této možnosti a v implementaci provedu výpočet spuštěním příkazu z kódu. 
 
+\subsection{Použití programu}
+\subsubsection{Vstupní formát dat}
+Vstupní hypergraf je reprezentován textovým souborem. První řádek souboru obsahuje informace o celém grafu. Následující řádky pak obsahují informace o každé hyperhraně v grafu. První řádek obsahuje 4 až 6 hodnot. Hodnoty postupně udávají:
+\begin{itemize}
+\item index base (O nebo 1) značíci od jakého čísla indexujeme elementy v grafu
+\item počet uzlů v grafu
+\item počet hyperhran v grafu
+\item počet pinů (propojení hrany a vrcholu)
+\item schéma vážení grafu (volitelné)
+\item počet vah pro uzel (volitelné)
+\end{itemize}
+
+Následující řádky reprezentují vždy po jedné hyperhraně a udávají indexy uzlů, které hyperhrana propojuje. Možné podoby vstupních souborů jsou ukázány na obrázku \ref{fig:input}
+
+\begin{figure}\centering
+	\includegraphics[width=0.4\textwidth, angle=0]{files/inputformat}
+	\caption[Vstupní formát hypergrafu]
+	{Vstupní formát hypergrafu}\label{fig:input}
+\end{figure} 
+\subsubsection{Výstupní formát dat}
+Po vykonání výpočtu na hypergrafu reprezentovaném souborem input.hygr pomocí PaToH programu, je výsledek uložen v souboru input.hygr.part.K. Kde K značí počet vygenerovaných podgrafů. Tento soubor obsahuje |V| čísel v rozsahu [0, K - 1]. Každé i-té číslo ukazuje do jakého hypergrafu patří i-tý vrchol z původního grafu.
+
+\medskip
+\begin{lstlisting}[frame=single]  % Start your code-block
+ 
+> patoh ken-11.u 4 RA=6 UM=U 
+ 
+ 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++++ PaToH v3.2 (c) Nov 1999-, by Umit V. Catalyurek
++++ Build Date: Sun Mar 13 17:41:19 2011 -0400
++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+*******************************************************
+Hypergraph:ken-11.u #Cells:14694 #Nets:14694 #Pins:82454
+*******************************************************
+4-way partitioning results of PaToH:
+Cut Cost: 4775
+Part Weights : Min= 20408 (0.010) Max= 20947 (0.016)
+-------------------------------------------------------
+I/O : 0.007 sec
+I.Perm/Cons.H: 0.002 sec ( 0.7%)
+Coarsening : 0.087 sec (37.9%)
+Partitioning : 0.011 sec ( 4.8%)
+Uncoarsening : 0.128 sec (55.8%)
+Total : 0.229 sec
+Total (w I/O): 0.236 sec
+-------------------------------------------------------
+
+\end{lstlisting}
+\medskip
 
 \chapter{Implementace řešení}
 V této kapitole bude představena implementace navrženého řešení. Při popisu implementace budu postupně probírat všechny klíčové partie. Implementace byla provedená v jazyku Java. V javě je napsán celý balík Hadoop a tak se toto řešení nabízí jako nejvhodnější. Pouze pro provedení dělícího algoritmu byl využit již existující program naimplementovaný v jazyku C. 
@@ -442,18 +519,31 @@ V této třídě je pouze nutné nutné změnit metodu \texttt{CreateRecordReade
 
 
 \subsection{MyTableRecordReader Class}
-V této třídě je nutné vytvořit soubor, který uchová vygenerované páry key/value, během zpracovávání MapReduce. Při zpracovávání každého záznamu se vyhodnotí, zda byl vygenerován klíč. v případě že ano, uloží e do dočasté struktury daný klíč a identifikátor řádku, který ho vygeneroval. Při ukončování úlohy se poté zapíšou získané hodnoty do nově vytvořeného souboru ve formátu: $Key;počet\_řádků\_generujících\_klíč;id\_řadku_1 ... id\_řadku_n$. výsledkem je tedy seznam vygenerovaných klíčů s řádky které tento klíč generují.
+V této třídě je nutné vytvořit soubor, který uchová vygenerované páry key/value, během zpracovávání MapReduce. Při zpracovávání každého záznamu se vyhodnotí, zda byl vygenerován klíč. v případě že ano, uloží se do dočasné struktury daný klíč a identifikátor řádku, který ho vygeneroval. Při ukončování úlohy se poté zapíšou získané hodnoty do nově vytvořeného souboru ve formátu: $Key;počet\_řádků\_generujících\_klíč;id\_řadku_1 ... id\_řadku_n$. výsledkem je tedy seznam vygenerovaných klíčů s řádky které tento klíč generují.
 
 
 \section{Repartitioning}
-\subsection{HyperGraph Class}
-\subsection{PATOH Algoritmus}
-\subsection{Repartioning Class}
+Poté co jsme shromáždili potřebná metadata shromažděná při vykonávání MapReduce úloh, je čas přejít k fázi optimalizace rozložení dat. Nyní máme k dispozici soubor nebo několik souborů, kde jsou definovány jednoltivé řádky databáze a k nim seznam klíčů, které generují. Za pomoci dat z těchto souborů je zapotřebí vytvořit strukturu hypergrafu, na který pak následně použijeme partitioning algoritmus.
+
+\subsection{Vytvoření a reprezentace hypergrafu}
+Pro reprezentaci hypergrafu jsem použil knihovnu \texttt{Jung}\footnote{\texttt{http://jung.sourceforge.net/}} poskytující implementace různých typů grafů mezi nimiž je i námi požadovaný hypargraf. Při parsování vstupních souborů se postupně vytváří hypergraf.  Každý řádek reprezentuje hyperhranu a vrcholy které jsou touto hranou propojeny. Vždy se tedy vytvoří nová hyperhrana, nesoucí jako svůj identifikátor jméno generovaného klíče, který reprezentuje a postupně ověřuje existenci uzlů, které by měla propojovat. V případě že uzel neexistuje, vytvoří ho a přidá jako jeden ze svých vrcholů. V opačném případě si pouze přidá již existující uzel. Po dokončení parsování souborů s metadaty tedy máme k dispozici strukturu $setHypergraph$ reprezentující kompletní rozložení zátěže datasetu při vykonávání zadaných dotazů.
+
+\subsection{příprava dat pro Min-cut algoritmus}
+Samotné rozdělení grafu pomocí min-cut algoritmus je prováděno za pomoci externího programu PaToH, nicméně, tento program požaduje specifický formát vstupního souboru. Tento soubor je tedy zapotřebí vygenerovat ze stávající reprezentace grafu. Jak již bylo popsáno v dřívější kapitole. PaToH očekává jako vstupní soubor graf v podobě od 0 nebo 1 indexovaný seznam hran a vrcholů jež propojuje.  Vytvořil jsem tedy dvě pole $nodesArray$ a $edgesArray$, do kterých se postupně uloží všechny vrcholy a hrany. Indexy těchto polí pak slouží k vygenerování požadovaného formátu pro PaToH program. Do vytvářeného souboru nejprve uložím hlavičku souboru ve tvaru 0 znamenající výchozí hodnotu indexování a následně počet vrcholů, hran a pinů v grafu. Tyto hodnoty lze jednoduše získat z reprezentace hypergrafu pomocí metod $getVertices()$, $getEdges()$ a počet pinů pomocí metody pro každý uzel $degree(node)$ a sečtené přes všechny uzly v grafu.
+
+
+\subsection{Spuštění PaToH a zpracování výsledků}
+
+\subsection{Vytvoření a konfigurace nové tabulky}
+\subsubsection{Nastavení prozdělení tabulky na regiony}
+\subsection{přesun upravených dat}
+
 
 \chapter{Testování a vyhodnocení měření}
 \subsection{Vyhodnocení}
 \subsection{Testování}
-\subsubsection{jUnit testy}
+\subsubsection{JUnit testy}
+\subsubsection{MRUnit testy}
 
 
 
@@ -465,6 +555,10 @@ V této třídě je nutné vytvořit soubor, který uchová vygenerované páry 
 \bibliography{mybibliographyfile}
 
 \appendix
+
+\chapter{Generátor zkušebních dat}
+\chapter{Testovací MapReduce úlohy}
+\chapter{Instalace Hadoop prostředí}
 
 \chapter{Seznam použitých zkratek}
 % \printglossaries
@@ -480,6 +574,7 @@ V této třídě je nutné vytvořit soubor, který uchová vygenerované páry 
 	
 
 \end{description}
+
 
 
 

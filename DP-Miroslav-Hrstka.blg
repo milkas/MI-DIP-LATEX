@@ -16,45 +16,45 @@ Warning--to sort, need author or key in CLOUDERA
 Warning--to sort, need author or key in HDFSWEB
 Warning--to sort, need author or key in hbasecon
 Warning--empty year in gistau
-You've used 11 entries,
+You've used 13 entries,
             3151 wiz_defined-function locations,
-            705 strings with 6522 characters,
-and the built_in function-call counts, 3838 in all, are:
-= -- 236
-> -- 85
-< -- 6
-+ -- 39
-- -- 22
-* -- 181
-:= -- 430
-add.period$ -- 22
-call.type$ -- 11
-change.case$ -- 38
+            727 strings with 7030 characters,
+and the built_in function-call counts, 5121 in all, are:
+= -- 335
+> -- 113
+< -- 8
++ -- 55
+- -- 30
+* -- 258
+:= -- 563
+add.period$ -- 26
+call.type$ -- 13
+change.case$ -- 50
 chr.to.int$ -- 15
-cite$ -- 15
-duplicate$ -- 399
-empty$ -- 435
-format.name$ -- 23
-if$ -- 844
+cite$ -- 17
+duplicate$ -- 527
+empty$ -- 564
+format.name$ -- 33
+if$ -- 1134
 int.to.chr$ -- 0
-int.to.str$ -- 11
-missing$ -- 99
-newline$ -- 48
-num.names$ -- 16
-pop$ -- 244
+int.to.str$ -- 13
+missing$ -- 127
+newline$ -- 56
+num.names$ -- 20
+pop$ -- 302
 preamble$ -- 1
-purify$ -- 32
+purify$ -- 40
 quote$ -- 0
-skip$ -- 149
+skip$ -- 198
 stack$ -- 0
-substring$ -- 89
-swap$ -- 174
-text.length$ -- 1
+substring$ -- 157
+swap$ -- 244
+text.length$ -- 3
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 34
+type$ -- 42
 warning$ -- 4
-while$ -- 22
-width$ -- 13
-write$ -- 100
+while$ -- 32
+width$ -- 15
+write$ -- 126
 (There were 8 warnings)
