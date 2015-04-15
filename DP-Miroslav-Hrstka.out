@@ -9,16 +9,20 @@
 \BOOKMARK [1][-]{section.2.2}{MR-part}{chapter.2}% 9
 \BOOKMARK [1][-]{section.2.3}{Testov\341n\355 a v\375sledky}{chapter.2}% 10
 \BOOKMARK [0][-]{chapter.3}{N\341vrh re\235en\355 pro HBase}{}% 11
-\BOOKMARK [1][-]{section.3.1}{Kl\355cov\341 specifika HBase pro n\341vrh re\235en\355}{chapter.3}% 12
-\BOOKMARK [1][-]{section.3.2}{PATOH algoritmus}{chapter.3}% 13
-\BOOKMARK [0][-]{chapter.4}{Implementace re\235en\355}{}% 14
-\BOOKMARK [1][-]{section.4.1}{Monitoring}{chapter.4}% 15
-\BOOKMARK [1][-]{section.4.2}{Repartitioning}{chapter.4}% 16
-\BOOKMARK [0][-]{chapter.5}{Testov\341n\355 a vyhodnocen\355 meren\355}{}% 17
-\BOOKMARK [0][-]{chapter*.19}{Z\341ver}{}% 18
-\BOOKMARK [0][-]{section*.21}{Literatura}{}% 19
-\BOOKMARK [0][-]{appendix.A}{Gener\341tor zku\235ebn\355ch dat}{}% 20
-\BOOKMARK [0][-]{appendix.B}{Testovac\355 MapReduce \372lohy}{}% 21
-\BOOKMARK [0][-]{appendix.C}{Instalace Hadoop prostred\355}{}% 22
-\BOOKMARK [0][-]{appendix.D}{Seznam pou\236it\375ch zkratek}{}% 23
-\BOOKMARK [0][-]{appendix.E}{Obsah prilo\236en\351ho CD}{}% 24
+\BOOKMARK [1][-]{section.3.1}{Razen\355 z\341znamu v datab\341zi}{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.2}{Splitting HBase regionu}{chapter.3}% 13
+\BOOKMARK [1][-]{section.3.3}{Ulo\236en\355 DB v upraven\351 podobe}{chapter.3}% 14
+\BOOKMARK [1][-]{section.3.4}{Urcen\355 optim\341ln\355ho poctu segmentu pro del\355c\355 algoritmus}{chapter.3}% 15
+\BOOKMARK [1][-]{section.3.5}{program PaToH}{chapter.3}% 16
+\BOOKMARK [0][-]{chapter.4}{Implementace re\235en\355}{}% 17
+\BOOKMARK [1][-]{section.4.1}{Monitoring}{chapter.4}% 18
+\BOOKMARK [1][-]{section.4.2}{Repartitioning}{chapter.4}% 19
+\BOOKMARK [0][-]{chapter.5}{Testov\341n\355 a vyhodnocen\355 meren\355}{}% 20
+\BOOKMARK [0][-]{chapter*.16}{Z\341ver}{}% 21
+\BOOKMARK [0][-]{section*.18}{Literatura}{}% 22
+\BOOKMARK [0][-]{appendix.A}{Gener\341tor zku\235ebn\355ch dat}{}% 23
+\BOOKMARK [0][-]{appendix.B}{Testovac\355 MapReduce \372lohy}{}% 24
+\BOOKMARK [0][-]{appendix.C}{Instalace Hadoop prostred\355}{}% 25
+\BOOKMARK [0][-]{appendix.D}{Seznam pou\236it\375ch zkratek}{}% 26
+\BOOKMARK [0][-]{appendix.E}{Voliteln\351 parametry programu PaToH}{}% 27
+\BOOKMARK [0][-]{appendix.F}{Obsah prilo\236en\351ho CD}{}% 28

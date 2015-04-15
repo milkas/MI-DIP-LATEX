@@ -43,6 +43,14 @@
 % \newacronym{FIT}{FIT}{Fakulta informa{\v c}n{\' i}ch technologi{\' i}}
 
 \begin{introduction}
+V dnešní době je čím dál větší tlak na maximální využití všech dostupných dat. To vede k potřebě skladovat velké množství dat, které však nebývají vždy strukturované a mohou být semistrukturované nebo nestrukturizované. Mezi tyto data lze zahrnout různé logy, textové soubory nebo i částečně strukturované data, která nemají zcela pevnou strukturu. Zároveň je zde ale i požadavek na co nejnižší náklady na  systémy sloužící k uložení těchto dat. Právě tato poptávka dala za příčinu rozvoji systému Hadoop a databáze HBase. Tyto produkty jsou navrženy právě tak, aby mohl být použitý pro realizaci běžný hardware a bylo tak možné pořídit uložiště co nejlevněji. 
+
+
+Hadoop a zároveň i databáze HBase se řídí principem přenosu instrukcí za daty a tím se výrazně minimalizuje přenos dat mezi uzly výpočteního clusteru. Tento princip je znám v rámci paradigmatu MapReduce. MapReduce není nová myšlenka, ale teprve Hadoop umožnil používat tento systém v širší praxi a na větším spektru úloh.
+
+
+Ikdyž se Hadoop a HBase vyznačují řádově menšími přenosy dat při provádění dotazů než se vyznačují standartní databáze, je zde stále prostor pro zlepšení. Taková úspora přenosové kapacity mezi clustery by mohla nastat při optimálním rozložení dat na discích tak, aby byli co nejideálněji seskupeny data, která jsou společně zpracovávána stejným redukčním uzlem v rámci MapReduce. A právě najít a provést takovéto rozdělení pro data uložená v databázi HBase je cíl stanovený pro tuto práci, protože i malá procentuální úspora přenosů dat mezi výpočetními uzly v kombinaci s nižší propustností používaných běžných síťových prvků, vyššími přístupovými dobami pevných disků a velkými objemy zpracovávaných dat muže výrazně snížit časovou náročnost. 
+
 
 \end{introduction}
 
@@ -311,7 +319,7 @@ Následující fáze již neběží zároveň s jinými úlohami, ale pustí je 
 \end{figure} 
 
 \subsection{Druhá fáze - Repartitioning}
-Nyní, když je vygenerován hypergraf modelující rozložení dat v jednotlivých souborech, je na každý hypergraf aplikován min-cut k-way dělící algoritmus. Tento algoritmus má jako vstup hodnotu $k$ a hypergraf, ze kterého následně vygeneruje $k$ disjunktních podmožin vrcholů tak, aby byla minimalizována suma hran mezi uzly rozdílných podmnožin. Parametr $k$ je nastaven podle počtu bloků ve vstupním souboru. Po provedení tohoto algoritmu by měli být v jednotlivých vygenerovaných podmnožinách  seskupeny uzly generující stejný klíč. Následně se použijí tyto podmnožiny k vygenerování nových vstupních souborů, kde už jsou data seřazena tak, aby řádky generující stejný klíč byly maximálně seskupeny. Tímto nově vzniklým souborem je následně nahrazen starý vstupní soubor, který je smazán. Pseudokód algoritmu je uveden na obrázku. \ref{fig:alg2} V algoritmu je uvedená funkce $RR$, která reprezentuje funkci třídy $RecordReader$  použitou pro parsování vstupních souborů. Dále se v kódu oběvuje funkce $RW$ znamenající $RecordWriter$. Její funkce je inverzní k funkci $RecordReader$. V této části je výpočetně nejsložitější vykonání min-cut algoritmu. Min-cut algoritmus spadá do skupiny NP-Complete problémů. Existuje však několik aproximačních algoritmů, které byly navrženy k řešení tohoto problému. V tomto případě byl použit algoritmus \texttt{PATOH} \footnote{\texttt{http://bmi.osu.edu/$\sim$:umit/software.html}}
+Nyní, když je vygenerován hypergraf modelující rozložení dat v jednotlivých souborech, je na každý hypergraf aplikován min-cut k-way dělící algoritmus. Tento algoritmus má jako vstup hodnotu $k$ a hypergraf, ze kterého následně vygeneruje $k$ disjunktních podmožin vrcholů tak, aby byla minimalizována suma hran mezi uzly rozdílných podmnožin. Parametr $k$ je nastaven podle počtu bloků ve vstupním souboru. Po provedení tohoto algoritmu by měli být v jednotlivých vygenerovaných podmnožinách seskupeny uzly generující stejný klíč. Následně se použijí tyto podmnožiny k vygenerování nových vstupních souborů, kde už jsou data seřazena tak, aby řádky generující stejný klíč byly maximálně seskupeny. Tímto nově vzniklým souborem je následně nahrazen starý vstupní soubor, který je smazán. Pseudokód algoritmu je uveden na obrázku. \ref{fig:alg2} V algoritmu je uvedená funkce $RR$, která reprezentuje funkci třídy $RecordReader$  použitou pro parsování vstupních souborů. Dále se v kódu oběvuje funkce $RW$ znamenající $RecordWriter$. Její funkce je inverzní k funkci $RecordReader$. V této části je výpočetně nejsložitější vykonání min-cut algoritmu. Min-cut algoritmus spadá do skupiny NP-Complete problémů. Existuje však několik aproximačních algoritmů, které byly navrženy k řešení tohoto problému. V tomto případě byl použit algoritmus \texttt{PATOH} \footnote{\texttt{http://bmi.osu.edu/$\sim$:umit/software.html}}
 
 \begin{figure}\centering
 	\includegraphics[width=1\textwidth, angle=0]{files/alg2}
@@ -349,10 +357,11 @@ Jak již bylo řečeno, časová náročnost je velmi vázaná na propustnost s�
 
 
 \chapter{Návrh řešení pro HBase}
-Při návrhu řešení pro optimalizaci umístění dat na výpočetní uzly minimalizující datové přenosy V databázi HBase jsem vycházel z řešení pro souborový systém HDFS, které jsem popsal v předchozí kapitole. Nebudu proto uvádět znovu celý návrh řešení, ale pojmu tuto kapitolu jako výčet změn, oproti návrhu pro implementaci v HDFS. 
-\section{Klíčová specifika HBase pro návrh řešení}
-\subsection{Řazení záznamů v databázi}
-Jeden z největších změn při návrhu optimalizace pro databázi HBase bylo fyzické uložení jednotlivých řádků databáze. Nativní funkcí HBase je ukládání záznamů v lexikografickém pořadí. Tato funkce je pro HBase klíčová a je charakteristickým prvkem, kterým se odlišuje od jiných databází. Právě tato vlastnost dává HBase velkou sílu při sekvenčním prohledávání ať už celého datasetu nebo určité "výseče" z dat. Tento fakt se ale přímo rozchází se základní myšlenkou optimalizace pro HDFS, kdy je nezbytné změnit fyzické pořadí a tím i uložení záznamů. Bylo tedy nutné navrhnout možná řešení, jak docílit toho, aby bylo možné změnit pořadí záznamů v závislosti na požadavcích optimalizačního algoritmu. V úvahu přicházely dva možné varianty jak se s tímto omezením vyrovnat. V úvahu přicázela změna klíče dle potřeb optimalizačního algoritmu nebo přidání prefixu k již existujícímu klíči\ref{fig:keys}.
+Při návrhu řešení pro optimalizaci umístění dat na výpočetní uzly minimalizující datové přenosy v databázi HBase jsem vycházel z již navrhnutého a implementovaného řešení pro souborový systém HDFS, které jsem popsal v předchozí kapitole. Nebudu proto uvádět znovu celý návrh řešení, ale začátek této kapitoly pojmu jako výčet nutných změn, oproti návrhu pro implementaci v HDFS. V druhé části se budu věnovat především návrhu cílového rozložení dat na jednotlivé region servery.
+
+\section{Řazení záznamů v databázi}
+Jedna ze základních změn při návrhu optimalizace pro databázi HBase oproti návrhu pro HDFS je fyzické uložení jednotlivých řádků, tedy záznamů, v databázi. Nativní funkcí HBase je ukládání záznamů v lexikografickém pořadí. Tato funkce je pro HBase klíčová a je charakteristickým prvkem, kterým se odlišuje od jiných databází. Právě tato vlastnost dává HBase velkou sílu při sekvenčním prohledávání ať už celého datasetu nebo určité "výseče" z dat. Tento fakt se ale přímo rozchází se základní myšlenkou optimalizace pro HDFS, kdy je nezbytné změnit fyzické pořadí a tím i uložení záznamů. 
+Je tedy nutné navrhnout optimální řešení, jak docílit toho, aby bylo možné změnit pořadí záznamů v závislosti na požadavcích optimalizačního algoritmu. V úvahu přicházejí dvě možné varianty, jak se s tímto omezením vyrovnat. Prvním z možných řešení je změna klíče dle potřeb optimalizačního algoritmu, druhým řešením je přidání prefixu k již existujícímu klíči\ref{fig:keys}. Pro výběr optimálního přístupu můžeme tyto dvě varianty porovnat:
 
 \begin{figure}\centering
 	\includegraphics[width=0.8\textwidth, angle=0]{files/rows}
@@ -362,20 +371,34 @@ Jeden z největších změn při návrhu optimalizace pro databázi HBase bylo f
 
 \begin{description}
 \item[Změna klíče řádku podle potřeb optimalizačního algoritmu] \hfill \\
- Toto řešení se nabízí jako nejjednoduší. Naráží však na výrazný problém. Při návrhu logického modelu pro databáze v HBase se typicky jako klíč pro jednotlivé záznamy používá klíč nesoucí určitou informační hodnotu (například část klíče odpovídá času pořízení daného záznamu). Změnu klíčů by jsme si tedy v tomto případě nemohli dovolit, pro aplikování tohoto přístupu by se nabízely tabulky, kde je klíč automaticky generován a nemá žadnou spojitost s daty které se nachází v řádku, který reprezentuje.
+ Toto řešení se nabízí jako nejjednoduší. Naráží však na výrazný problém. Při návrhu logického modelu pro databáze v HBase se typicky jako klíč pro jednotlivé záznamy používá klíč nesoucí určitou informační hodnotu (například část klíče odpovídá času pořízení daného záznamu). Změnu klíčů by jsme si tedy v tomto případě nemohli dovolit, pro aplikování tohoto přístupu by se nabízely tabulky, kde je klíč automaticky generován a nenese žádnou další informaci mající spojitost s daty které se nachází v řádku, který reprezentuje.
  
  \item[Přidání prefixu k již existujícímu klíči] \hfill \\
- Druhým možným řešením je přidání prefixu k již existujícímu klíči. Tento návrh již řeší problém s automatickým řazením, zároveň přidání krátkého prefixu, neznehodnotí informaci uloženou v klíči, jen je nutné při dalších dotazech toto zohlednit a před zpracováním dat prefix s klíče odstranit. Nabízí se více možností, na jakém základě prefixy přiřazovat. Nejefektivnější je přidání určité hodnoty v bitech, na základě požadovaného počtu částí výsledného rozdělení grafu.
+ Druhým možným řešením je přidání prefixu k již existujícímu klíči. Tento návrh již řeší problém s automatickým řazením, zároveň přidání krátkého prefixu, neznehodnotí informaci uloženou v klíči, jen je nutné při dalších dotazech toto zohlednit a před zpracováním dat prefix s klíče odstranit nebo zohlednit. Nabízí se více možností, na jakém základě prefixy přiřazovat. Nejefektivnější je přidání určité hodnoty v bitech, na základě požadovaného počtu částí výsledného rozdělení grafu.
  
 \end{description} 
 
-\subsection{Splitting HBase regionů}
-V návrhu pro implementaci v HBase je zapotřebí zohlednit, jak pracovat s distribucí HBase regionů do souborového systému. Jak již bylo řečeno, v HBase se data v řádcích ukládají do HBase regionů, kde je vždy uložen určitý rozsah lexikograficky seřazených řádků. Řádek je vždy uložen jako celek jen na jednom HRegionu. Není tedy potřeba zohledňovat případné dělení řádku. 
+Využijeme tedy pro nás vhodnější přidávání prefixu. Je však nutné při výmýšlení v jakém tvaru prefix ke klíči přidáme, zohlednit i fakt, že se do databáze i nadále budou přidávat nová data. Prefix tedy musí být zvolen tak, aby nově přidávaná data měla originální klíč takové hodnoty, aby se mohl řádek přidat až za skupinu klíčů s prefixy. Toto je zapotřebí zajistit především ze dvou důvodů:
 
-Tabulky se typicky skládají z mnoha regionů, které jsou umístěny na mnoha region serverech. Regiony tedy slouží jako mechanizmus k rozložení zátěže napříč clusterem. Vždy když se vytváří nová tabulka, vytvoří se pouze jeden region, který se postupně při nabírání objemu štěpí na více regionů, které se distribuují v clusteru. Proto ve fázi nahrávání dat do DB není využita plná kapacita clusteru. Toto chování je zapříčiněno především tím, že dopředu není zřejmé, kde se budou ve výsledné tabulce nalézat split points, tedy místa, kde dojde k rozdělení tabulky na více regionů. Tyto body jsou totiž špatně predikovatelné, protože rozdložení klíčů v tabulce nemusí být vždy rovnoměrné. V našem případě však již víme, s jakým rozložením dat budeme pracovat při vytváření tabulky a zároveň budeme vědět, na kolik částí budeme chtít data rozdělit. Ideální stav by tedy byl, že výsledná data určená dělícím algoritmem jako homogenní část by byla uložena na určitém počtu regionů aniž by v těchto regionech byla uložena data z ostatních částí tabulky. K tomuto rozdělení, můžeme využít pre-splitting \cite{split}.
+\begin{itemize}
+\item Databáze HBase není navržena a ani určena pro častý náhodný přístup k datům, tím spíše pro vkládání dat na náhodná místa. Tím, že by se nově vzniklé řádky ukládali díky lexokografickému pořadí napříč celou tabulkou, by docházelo k velké zátěži serveru plynoucí z nutnosti přesouvat velké množství dat tak, aby se řádky mohli vložit na svoje místo.
+ 
+\item Při vkládání řádků na náhodná místa v databázi by se postupně rozbila vzniklá struktura, kdy řádky generující stejný klíč jsou seřazeny a byly by postupně ředěny nově uloženými řádky a tím by klesala následně účinnost datové optimalizace. 
+\end{itemize}
 
-\subsubsection{Pre-Splitting}
-Pre-splitting je nástroj, který nám umožňuje vytvořit novou tabulku s již vytvořenými split pointy. Použití tohoto nástroje nám umožní vytvořit si tabulku podle našich potřeb. První z možných řešení je předpočítání splitting pointů podle zadaných kritérií. K tomu slouží \texttt{regionSplitter} utility. RegionSplitter vytvoří splitting points pomocí \texttt{SplitAlgorithm}. Předdefinováné algoritmy jsou \texttt{HexStringSplit} a \texttt{UniformSplit}. První algoritmus je možné použít, pokud klíče obsahují prefixy ve formě hexadecimálního řetězce. Druhý algoritmus určuje splitting point pomocí uniformního rozdělení klíčů. Pro potřeby naší aplikace se nabízí využití prvního algoritmu, kdy dojde k rozdělení podle prefixů, které byli ke klíčům přidány na základě výsledku dělícího algoritmu. Je možné implementovat implementovat i vlastní \texttt{SplitAlgorithm}, nicméně pro naše potřeby je plně dostačující již implementovaný algoritmus.
+Tímto však nastává problém jak řazení na konec tabulky optimálně dosáhnout. V případě, že by nové klíče měli díky svojí struktuře vždy klíč lexikograficky zařaditelný až za klíče s prefixem, by se nic řešit nemuselo. V obecném případě se ale nelze na toto spolehnout a je žádoucí nově vzniklé klíče taktéž opatřit prefixem symbolizujícím, že řádky s těmito klíči nebyly zatím zpracovány a zajistit tím tak i to, že se tyto řádky budou ukládat na konec tabulky. 
+
+\subsection{Fyzické uložení family column}
+Ačkoli jsou řádky ukládány lexikograficky, v každem stores jsou takto uloženy pouze hodnoty v rámci jedné family. Každá family sloupců se tedy ukládá do oddělených stores. Platí však omezení, že ačkoli jsou jednotlivé části řádku uloženy rozděleně, vždy jsou tyto části uložené v rámci jednoho regionu. Dojde-li tedy k přejmenování identifikátoru řádku, repsektive vytvoření nové tabulky s prefixem, budou řádky o určitém rozsahu klíčů vždy uloženy logicky v jednom HRegionu. Není tedy nutné zohledňovat při určování regionů a rozdělování dat do skupin počet a mohutnost families v tabulkách a je možné a řádek nahlížet jako na celek.
+
+
+\section{Splitting HBase regionů}
+V návrhu pro implementaci v HBase je zapotřebí zohlednit, jak pracovat s distribucí HBase regionů do souborového systému. Jak již bylo řečeno, v HBase se data v řádcích ukládají do HBase regionů, kde je vždy uložen určitý rozsah lexikograficky seřazených řádků. Řádek je vždy uložen jako celek jen na jednom HRegionu. Není tedy potřeba speciálně ošetřovat případné dělení řádku. 
+
+Tabulky se typicky skládají z mnoha regionů, které jsou umístěny na menším počtu region serverů. Regiony tedy slouží jako mechanizmus k rozložení zátěže napříč clusterem. Vždy když se vytváří nová tabulka, vytvoří se pouze jeden region, který se postupně při nabírání objemu štěpí na více regionů, které se distribuují v clusteru. Proto ve fázi nahrávání dat do DB není využita plná kapacita clusteru. Toto chování je zapříčiněno především tím, že dopředu není zřejmé, kde se budou ve výsledné tabulce nalézat split points, tedy místa, kde dojde k rozdělení tabulky na více regionů. Tyto body jsou totiž špatně predikovatelné, protože rozdložení klíčů v tabulce nemusí být vždy rovnoměrné. V našem případě však již víme, s jakým rozložením dat budeme pracovat při vytváření tabulky a zároveň budeme vědět, na kolik částí budeme chtít data rozdělit. Ideální stav by tedy byl, že výsledná data určená dělícím algoritmem jako homogenní část by byla uložena na určitém počtu regionů aniž by v těchto regionech byla uložena data z ostatních částí tabulky. K tomuto rozdělení, můžeme využít pre-splitting \cite{split}.
+
+\subsection{Pre-Splitting}
+Pre-splitting je nástroj, který nám umožňuje vytvořit novou tabulku s již vytvořenými split pointy. Použití tohoto nástroje nám umožní vytvořit si tabulku podle našich potřeb. První z možných řešení je předpočítání splitting pointů podle zadaných kritérií. K tomu slouží \texttt{regionSplitter} utility. RegionSplitter vytvoří splitting points pomocí \texttt{SplitAlgorithm}. Předdefinováné algoritmy jsou \texttt{HexStringSplit} a \texttt{UniformSplit}. První algoritmus je možné použít, pokud klíče obsahují prefixy ve formě hexadecimálního řetězce. Druhý algoritmus určuje splitting point pomocí uniformního rozdělení klíčů. Pro potřeby naší aplikace se nabízí využití prvního algoritmu, kdy dojde k rozdělení podle prefixů, které byli ke klíčům přidány na základě výsledku dělícího algoritmu. Je možné implementovat i vlastní \texttt{SplitAlgorithm}, nicméně pro naše potřeby je plně dostačující již implementovaný algoritmus.
 
 Následující příkaz vytvoří tabulku testTable, kde -c 10 definuje počet regionů a -f f1 definuje požadované families v tabulce.
 
@@ -407,8 +430,8 @@ Následně dojde k vygenerování tabulky o deseti regionech.
 
 \end{lstlisting}
 \medskip
-\subsubsection{Auto Splitting}
-Jak již bylo řečeno, pre-splitting je nástroj, který má na starosti rozdělení tabulky při jejím vytvoření v případě, že nechceme začít vkládat do defaultní tabulky s jedním regionem. Nehlědě na to, zda pre-splitting použijeme nebo ne, je potřeba nadále spravovat regiony, v závisloti na nově přidávaných datech. K tomu slouží Auto splitting, který automaticky rozděluje regiony, které dosáhly své maximální velikosti. Nastavení automatického dělení regionů je možné provést pomocí \texttt{RegionSplitPolicy} API. K dispozici jsou tři předdefinované varianty:
+\subsection{Auto Splitting}
+Jak již bylo řečeno, pre-splitting je nástroj, který má na starosti rozdělení tabulky při jejím vytvoření v případě, že nechceme začít vkládat do defaultní tabulky s jedním regionem. Nehledě na to, zda pre-splitting použijeme nebo ne, je potřeba nadále spravovat regiony, v závisloti na nově přidávaných datech. K tomu slouží Auto splitting, který automaticky rozděluje regiony, které dosáhly své maximální velikosti. Nastavení automatického dělení regionů je možné provést pomocí \texttt{RegionSplitPolicy} API. K dispozici jsou tři předdefinované varianty:
 
 \begin{itemize}
 	\item ConstantSizeRegionSplitPolicy
@@ -416,49 +439,47 @@ Jak již bylo řečeno, pre-splitting je nástroj, který má na starosti rozdě
 	\item KeyPrefixRegionSplitPolicy
 \end{itemize} 
 
-\paragraph{ConstantSizeRegionSplitPolicy}
+\subsubsection{ConstantSizeRegionSplitPolicy}
 Jedná se o jednoduchou politiku (ve starších verzích před verzí 0.94 to byla defaultní a jediná předdefinovaná) k určení, kdy má dojít k rozdělení regionu. Rozdělení nastane v případě, kdy dojde k překročení maximální velikosti alespoň jednoho file store v regionu (uložiště jedné family v rámci regionu). Tato hodnota je konfigurována v \texttt{hbase.hregion.max.filesize} a její defaultní hodnota je 10 GB. 
 
-\paragraph{IncreasingToUpperBoundRegionSplitPolicy}
-Pro novější verze je defaultní \texttt{IncreasingToUpperBoundRegionSplitPolicy}. Tato politika provádí více agresivní splitting  založený na počtu regionů uložených v region serverech. K určení velikosti při které dojde k rozdělení regionu se používá vzorec $MIN(R^2 * hbase.hregion.memstore.flush.size,hbase.hregion.max.filesize)$.  kde $R$ je počet regionů stejné tabulky na stejném regionu. Například uvažujme situaci, kdy máme nastavenou default memstore flush size na defaultní hodnotu 128MB a hodnotu max store size na defaultních 10GB. K prvnímu splitu dojde po provedení první operace flush, při velikosti 128MB. Postupně, jak bude docházet ke zvyšování počtu regionů v region serveru, bude zároveň docházet i ke zvětšování velikosti jednotlivých regionů a to konkrétně na 512MB, 1152MB, 2GB, 3.2GB, 4.6GB, 6.2GB, etc. Po dosažení 9 regionů se zvětšování zastaví díky \texttt{hbase.hregion.max.filesize} nastavené na 10 GB. U obou předchozích metod dochází při dělení vždy k rozdělení v místě, kde je prostřední bod největšího store file.
+\subsubsection{IncreasingToUpperBoundRegionSplitPolicy}
+Pro novější verze je defaultní \texttt{IncreasingToUpperBoundRegionSplitPolicy}. Tato politika provádí více agresivní splitting  založený na počtu regionů uložených v region serverech. K určení velikosti při které dojde k rozdělení regionu se používá vzorec \\  $MIN(R^2 * hbase.hregion.memstore.flush.size,hbase.hregion.max.filesize)$. \\ kde $R$ je počet regionů stejné tabulky na stejném regionu. Například uvažujme situaci, kdy máme nastavenou default memstore flush size na defaultní hodnotu 128MB a hodnotu max store size na defaultních 10GB. K prvnímu splitu dojde po provedení první operace flush, při velikosti 128MB. Postupně, jak bude docházet ke zvyšování počtu regionů v region serveru, bude zároveň docházet i ke zvětšování velikosti jednotlivých regionů a to konkrétně na 512MB, 1152MB, 2GB, 3.2GB, 4.6GB, 6.2GB, etc. Po dosažení 9 regionů se zvětšování zastaví díky \texttt{hbase.hregion.max.filesize} nastavené na 10 GB. U obou předchozích metod dochází při dělení vždy k rozdělení v místě, kde je prostřední bod největšího store file.
 
 
-\paragraph{KeyPrefixRegionSplitPolicy}
-Poslední z předdefinovaných politik pro automatický splitting je \texttt{KeyPrefixRegionSplitPolicy}. V tomto případě se rozdělení provádí za pomocí prefixu. Na základě určení velikosti prefixu, dojde k jejich rozdělení do skupin. Tato funkce pak zajistí, že při dělení regionů nedojde k rozdělení uprostřed takto definované skupiny. Dojde tedy k situaci, kdy jsou klíče se stejným prefixem uloženy v rámci jednoho regionu (nebo více regionů v případě, že velikost těchto dat překročí maximální velikost region serveru).
+\subsubsection{KeyPrefixRegionSplitPolicy}
+Poslední z předdefinovaných politik pro automatický splitting je politika \\ \texttt{KeyPrefixRegionSplitPolicy}. V tomto případě se rozdělení provádí za pomocí prefixu. Na základě určení velikosti prefixu, dojde k jejich rozdělení do skupin. Tato funkce pak zajistí, že při dělení regionů nedojde k rozdělení uprostřed takto definované skupiny. Dojde tedy k situaci, kdy jsou klíče se stejným prefixem uloženy v rámci jednoho regionu (nebo více regionů v případě, že velikost těchto dat překročí maximální velikost region serveru).
 
+\subsection{Určení optimální politiky}
 Při porovnání těchto předem definovaných politik jsem došel k závěru, že politika \texttt{KeyPrefixRegionSplitPolicy} přesně splňuje požadavky plynoucí z potřeby ukládat předem definované rozsahy řádku pomocí prefixu v rámci jednoho regionu. Je zde také možnost naimplemetovat vlastní politiky, nicméně v tomto případě plně vyhovuje již definovaná politika.
 
-\subsection{optional kapitola, jak jsou splity implementovany}
-http://hortonworks.com/blog/apache-hbase-region-splitting-and-merging/
+\section{Uložení DB v upravené podobě}
+Po provedení  partitioningu je zapotřebí nově vzniklá data zapsat do databáze. Jsou možné dvě řešení. Buď data s nově vzniklými klíči přidat do již existující databáze nebo je vložit do databáze nové. Obě možnosti by byli přípustné, ale první návrh by vyžadoval složitější výpočty při mazání starých řádků a následném přepočítávání a přerozdělování nových řádků, které v tabulce zůstali, do patřičných regionů. 
 
-\subsection{Fyzické uložení family column}
-Ačkoli jsou řádky ukládány lexikograficky, v každem stores jsou takto uloženy pouze hodnoty v rámci jedné family. Každá family sloupců se tedy ukládá do oddělených stores. Platí však omezení, že ačkoli jsou jednotlivé části řádku uloženy rozděleně, vždy jsou tyto části uložené v rámci jednoho regionu. Dojde-li tedy k přejmenování identifikátoru řádku, repsektive vytvoření nové tabulky s prefixem, budou řádky o určitém rozsahu klíčů vždy uloženy logicky v jednom HRegionu.
+Proto při ukládání dat dojde k vytvoření "duplicitní" databáze do které se nahrají data s novými klíči. Po nahrání dat dojde ke smazání staré databáze a přejmenování nové databáze podle jména původní. Tím se docílí toho, že nově vzniklá databáze bude identická s původní, tedy až na rozdíl v klíčích řádků obohacených o prefix a především tedy vnitřním uložením dat, které však pro běžné využívání dat zůstává skryté. 
 
-\section{PATOH algoritmus}
-Při kombinační části je zapotřebí rozdělit co nejoptimálněji vzniklý hypergraf. Tato fáze je klíčová a právě správné rozdělení grafu je klíčem k následnému optimálnímu rozložení dat. K vyřešení této úlohy použiji již naimplementovaný nástroj pro dělení hypergrafů PaToH\footnote{http://bmi.osu.edu/ \textasciitilde umit/software.html}. Program nabízí 2 možnosti použití. Buď jako stand-alone program spustitelný z příkazové řádky nebo jako knihovna v jazyku C. Vzhledem k tomu, že pro naše potřeby plně dostačuje rozhraní spustitelného programu, yyužiji této možnosti a v implementaci provedu výpočet spuštěním příkazu z kódu. 
+\section{Určení optimálního počtu segmentů pro dělící algoritmus}
+Počet regionů, do kterých se budou nově vytvořená data ukládat je také úkol, u kterého se nabízí odvodit od původního řešení pro HDFS. V původním řešení se určuje počet segmentů, na které se data rozdělí podle počtu vstupních bloků dat. V případě HBase se nabízí využít jako hodnotu pro zvolení počtu segmentů počet HFile souborů, ve kterých je databáze uložena. Nicméně právě zde se tato analogie využít nedá a to především, kvůli tomu, že HBase nenabízí žádné nástroje pro práci s jednotlivými HFile a ty se tak vytváří automaticky v rámci regionu. I v případě, že by bylo možné zapisovat do konkrétních s HFile souborů, nebylo by možné tyto soubory nijak efektivně namapovat na vznikající data bloky v HDFS. To není možné z jednoduchého důvodu a to, že HBase pracuje s HDFS jen jako klient a nemá žádné nástroje k upravování struktury databloků. Vníma ho pouze jako souvislý úložný prostor. Stejně tak HDFS vnímá soubory, které přicházejí z HBase pouze jako binární soubory bez jakékoli struktury.
+
+Možné řešení je odvodit počet segmentů od počtu regionů. Při tomto řešení bude sice daleko menší granuralita vzniklých datových segmentů, nicméně to nemusí nutně znamenat horší výsledky. Typicky se tabulky rozkládají na desítkách až stovkách regionů, což by mohlo být pro rozdělení dat na smysluplné skupiny postačovat. Samozřejmě se efektivita tohoto řešeni bude odvíjet jak od samotného počtu regionů tak od složitosti prováděných dotazů a počtu reducerů při jejich vyhodnocování. Rozdělením dat podle počtu regionů se navíc docílí toho, že nakonec v jednotlivých HFilech budou i tak shromážděny záznamy generující podobné klíče, ikdyž s menší přesností, vzhledem k tomu, že takto shromážděné záznamy se nachází ve všech Hfilech v rámci jenoho regionu.
+
+
+
+
+
+\section{program PaToH}
+Při kombinační části je zapotřebí rozdělit co nejoptimálněji vzniklý hypergraf. Tato fáze je klíčová a právě správné rozdělení grafu je klíčem k následnému optimálnímu rozložení dat. K vyřešení této úlohy použiji již naimplementovaný nástroj pro dělení hypergrafů PaToH\footnote{http://bmi.osu.edu/ \textasciitilde umit/software.html}. Program nabízí 2 možnosti použití. Buď jako stand-alone program spustitelný z příkazové řádky nebo jako knihovna v jazyku C. Vzhledem k tomu, že pro naše potřeby plně dostačuje rozhraní spustitelného programu, využiji této možnosti a v implementaci provedu výpočet spuštěním příkazu z kódu. 
 
 \subsection{Použití programu}
-\subsubsection{Vstupní formát dat}
-Vstupní hypergraf je reprezentován textovým souborem. První řádek souboru obsahuje informace o celém grafu. Následující řádky pak obsahují informace o každé hyperhraně v grafu. První řádek obsahuje 4 až 6 hodnot. Hodnoty postupně udávají:
-\begin{itemize}
-\item index base (O nebo 1) značíci od jakého čísla indexujeme elementy v grafu
-\item počet uzlů v grafu
-\item počet hyperhran v grafu
-\item počet pinů (propojení hrany a vrcholu)
-\item schéma vážení grafu (volitelné)
-\item počet vah pro uzel (volitelné)
-\end{itemize}
+Program je možné spustit z příkazové řádky pomocí příkazu ve tvaru:
+\medskip
+\begin{lstlisting}[frame=single]  % Start your code-block
+ 
+> patoh <hgraph-file> <num-of-parts> [[par1] [par2] ....]
 
-Následující řádky reprezentují vždy po jedné hyperhraně a udávají indexy uzlů, které hyperhrana propojuje. Možné podoby vstupních souborů jsou ukázány na obrázku \ref{fig:input}
+\end{lstlisting}
+\medskip
 
-\begin{figure}\centering
-	\includegraphics[width=0.4\textwidth, angle=0]{files/inputformat}
-	\caption[Vstupní formát hypergrafu]
-	{Vstupní formát hypergrafu}\label{fig:input}
-\end{figure} 
-\subsubsection{Výstupní formát dat}
-Po vykonání výpočtu na hypergrafu reprezentovaném souborem input.hygr pomocí PaToH programu, je výsledek uložen v souboru input.hygr.part.K. Kde K značí počet vygenerovaných podgrafů. Tento soubor obsahuje |V| čísel v rozsahu [0, K - 1]. Každé i-té číslo ukazuje do jakého hypergrafu patří i-tý vrchol z původního grafu.
-
+První dva argumenty jsou povinné a určují vstupní soubor obsahující reprezentaci hypergrafu a počet části požadovaného rozdělení. Následující paramery jsou volitelné a určují nepovinné nastavení výpočetního algoritmu.  Tyto parametry se zadávají pomocí dvoupísmenné zkratky následované rovnítkem a zadanou hodnotou. V našem případě použijeme defaultní nastavení. Pokud by bylo za potřebí výpočet rozdělení grafu optimalizovat, je možné toho doílit právě přidáním patřičních parametrů pro výpočet. Přehled volitelnýc parametru je přiložen v příloze \ref{ch:patoh}. Po spuštění a proběhnutí programu se vytvoří výstupní soubor a v konzoli se zobrazí takto formátovaná statistika výpočtu:
 \medskip
 \begin{lstlisting}[frame=single]  % Start your code-block
  
@@ -487,6 +508,29 @@ Total (w I/O): 0.236 sec
 
 \end{lstlisting}
 \medskip
+\subsubsection{Vstupní formát dat}
+Vstupní hypergraf je reprezentován textovým souborem. První řádek souboru obsahuje informace o celém grafu. Následující řádky pak obsahují informace o každé hyperhraně v grafu. První řádek obsahuje 4 až 6 hodnot. Hodnoty postupně udávají:
+\begin{itemize}
+\item index base (O nebo 1) značíci od jakého čísla indexujeme elementy v grafu
+\item počet uzlů v grafu
+\item počet hyperhran v grafu
+\item počet pinů (propojení hrany a vrcholu)
+\item schéma vážení grafu (volitelné)
+\item počet vah pro uzel (volitelné)
+\end{itemize}
+
+Následující řádky reprezentují vždy po jedné hyperhraně a udávají indexy uzlů, které hyperhrana propojuje. Možné podoby vstupních souborů jsou ukázány na obrázku \ref{fig:input}
+
+\begin{figure}\centering
+	\includegraphics[width=0.4\textwidth, angle=0]{files/inputformat}
+	\caption[Vstupní formát hypergrafu]
+	{Vstupní formát hypergrafu}\label{fig:input}
+\end{figure} 
+\subsubsection{Výstupní formát dat}
+Po vykonání výpočtu na hypergrafu reprezentovaném souborem input.hygr pomocí PaToH programu, je výsledek uložen v souboru input.hygr.part.K. Kde K značí počet vygenerovaných podgrafů. Tento soubor obsahuje |V| čísel v rozsahu [0, K - 1]. Každé i-té číslo ukazuje do jakého hypergrafu patří i-tý vrchol z původního grafu.
+
+
+
 
 \chapter{Implementace řešení}
 V této kapitole bude představena implementace navrženého řešení. Při popisu implementace budu postupně probírat všechny klíčové partie. Implementace byla provedená v jazyku Java. V javě je napsán celý balík Hadoop a tak se toto řešení nabízí jako nejvhodnější. Pouze pro provedení dělícího algoritmu byl využit již existující program naimplementovaný v jazyku C. 
@@ -533,6 +577,12 @@ Samotné rozdělení grafu pomocí min-cut algoritmus je prováděno za pomoci e
 
 
 \subsection{Spuštění PaToH a zpracování výsledků}
+Nyní již může dojít k zavolání PaToH programu
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+String command = "/patoh ./patohGraph.txt 4 RA=6 UM=U";
+Process p = Runtime.getRuntime().exec(command);
+\end{lstlisting}
 
 \subsection{Vytvoření a konfigurace nové tabulky}
 \subsubsection{Nastavení prozdělení tabulky na regiony}
@@ -575,6 +625,7 @@ Samotné rozdělení grafu pomocí min-cut algoritmus je prováděno za pomoci e
 
 \end{description}
 
+\chapter{Volitelné parametry programu PaToH}\label{ch:patoh}
 
 
 
