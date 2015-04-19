@@ -8,13 +8,23 @@
 \providecommand{\selectlanguage}[1]{\relax}
 \providecommand{\eprint}[2][]{\biburl{#2}}
 
-\bibitem{HadoopDum}
-deRoos, D.: \emph{Hadoop For Dummies}. O'Reilly Media, Inc., 2014, ISBN
-  978-1-118-60755-8.
+\bibitem{data}
+Sklenák, V.: \emph{Data, informace, znalosti a Internet}. Praha : C. H. Beck,
+  prvn\'\i{} vyd\'an\'\i{}, 2001, ISBN 80-7179-409-0.
 
 \bibitem{HadoopDG}
 White, T.: \emph{Hadoop: The Definitive Guide}. O'Reilly Media, Inc., t\v
   ret\'\i{} vyd\'an\'\i{}, 2012, ISBN 0596521979, 9780596521974.
+
+\bibitem{GFS}
+Ghemawat, S.; Gobioff, H.; Leung, S.-T.: The Google File System. \emph{SIGOPS
+  Oper. Syst. Rev.}, ro\v cn\'\i{}k~37, \v c.~5, \v R\'\i{}jen 2003: s. 29--43,
+  ISSN 0163-5980, \doi{10.1145/1165389.945450}.
+\urlprefix\biburl{http://doi.acm.org/10.1145/1165389.945450}
+
+\bibitem{HadoopDum}
+deRoos, D.: \emph{Hadoop For Dummies}. O'Reilly Media, Inc., 2014, ISBN
+  978-1-118-60755-8.
 
 \bibitem{CLOUDERA}
 {Cloudera} trainings. 2015.
@@ -23,6 +33,13 @@ White, T.: \emph{Hadoop: The Definitive Guide}. O'Reilly Media, Inc., t\v
 \bibitem{HDFSWEB}
 {HDFS} User Guide. 2014.
 \urlprefix\biburl{http://hadoop.apache.org/docs/r2.3.0/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html}
+
+\bibitem{BigTable}
+Chang, F.; Dean, J.; Ghemawat, S.; aj.: Bigtable: A Distributed Storage System
+  for Structured Data. \emph{ACM Trans. Comput. Syst.}, ro\v cn\'\i{}k~26, \v
+  c.~2, \v Cerven 2008: s. 4:1--4:26, ISSN 0734-2071,
+  \doi{10.1145/1365815.1365816}.
+\urlprefix\biburl{http://doi.acm.org/10.1145/1365815.1365816}
 
 \bibitem{HbaseDG}
 George, L.: \emph{Hadoop: The Definitive Guide}. O'Reilly Media, Inc.,

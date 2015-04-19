@@ -9,7 +9,28 @@
 \usepackage{dirtree} %directory tree visualisation
 
 \usepackage{listings}             % Include the listings-package
+\usepackage{color}
 
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+  language=Java,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
 
 % % list of acronyms
 \usepackage[acronym,nonumberlist,toc,numberedsection=autolabel]{glossaries}
@@ -43,23 +64,102 @@
 % \newacronym{FIT}{FIT}{Fakulta informa{\v c}n{\' i}ch technologi{\' i}}
 
 \begin{introduction}
-V dnešní době je čím dál větší tlak na maximální využití všech dostupných dat. To vede k potřebě skladovat velké množství dat, které však nebývají vždy strukturované a mohou být semistrukturované nebo nestrukturizované. Mezi tyto data lze zahrnout různé logy, textové soubory nebo i částečně strukturované data, která nemají zcela pevnou strukturu. Zároveň je zde ale i požadavek na co nejnižší náklady na  systémy sloužící k uložení těchto dat. Právě tato poptávka dala za příčinu rozvoji systému Hadoop a databáze HBase. Tyto produkty jsou navrženy právě tak, aby mohl být použitý pro realizaci běžný hardware a bylo tak možné pořídit uložiště co nejlevněji. 
+Pojem databáze se pojí s informačními technologiemi prakticky od vzniku tohoto oboru. Samotná touha a potřeba ukládat data v nějaké strukturované podobě zde byla tisíce let před vynalezením počítače a nasazení počítačů bylo jen logickým pokračováním vývoje správy dat. Dlouhou dobu se uložení dat řešilo pomocí relačních databází, kde princip uložení dat zůstával víceméně stejný, jen docházelo k zvyšování výkonu a zvětšování kapacity uložišť.
+
+ V posledních letech ale stoupá tlak na maximální využití všech dostupných datových zdrojů, jejichž množství stále roste. To vede k potřebě skladovat obrovského množství dat, která však nebývají vždy strukturovaná a mohou být semistrukturovaná nebo nestrukturovaná. Mezi tyto data lze zahrnout různé logy, textové soubory nebo i částečně strukturovaná data, která nemají zcela pevnou strukturu. Zároveň je zde ale i požadavek na co nejnižší náklady na systémy sloužící k uložení těchto dat. Pro tento typ dat a pro takové množství už přestaly být relační databáze vhodným řešením a právě tato poptávka dala za příčinu rozvoji takzvaných NoSQL databází. NoSQL je pojem, který zastřešuje databáze, které pracující na jiném principu než relační databáze, především sloupcově orientované databáze, key/value databáze a další. 
+ 
+ 
+Mezi nejvýznamější reprezentanty této skupiny patří právě platforma Hadoop a databáze HBase. Hadoop je distribuovaná platforma určená pro zpracování dat v řádech petabytu až exabytů a pro zpracování takového množství dat využívá v praxi desítky až stovky výpočetních uzlů. Proto je navržena právě tak, aby mohl být pro realizaci použitý běžný komodití hardware a bylo tak možné pořídit uložiště co nejlevněji. Z tohoto řešení vyplývají i jistá omezení, především v rychlosti zpracování, ale pro zpracování analytických dat, pro která tyto databáze typicky slouží není rychlost zpracování klíčovým měřítkem.
 
 
-Hadoop a zároveň i databáze HBase se řídí principem přenosu instrukcí za daty a tím se výrazně minimalizuje přenos dat mezi uzly výpočteního clusteru. Tento princip je znám v rámci paradigmatu MapReduce. MapReduce není nová myšlenka, ale teprve Hadoop umožnil používat tento systém v širší praxi a na větším spektru úloh.
+Hadoop a zároveň i databáze HBase stojí na zpracování dat pomocí frameworku MapReduce, ten se řídí principem přenosu instrukcí za daty a tím se výrazně minimalizuje přenos dat mezi uzly výpočteního clusteru. MapReduce není nová myšlenka, ale teprve Hadoop umožnil používat tento systém v širší praxi a na větším spektru úloh.
 
 
-Ikdyž se Hadoop a HBase vyznačují řádově menšími přenosy dat při provádění dotazů než se vyznačují standartní databáze, je zde stále prostor pro zlepšení. Taková úspora přenosové kapacity mezi clustery by mohla nastat při optimálním rozložení dat na discích tak, aby byli co nejideálněji seskupeny data, která jsou společně zpracovávána stejným redukčním uzlem v rámci MapReduce. A právě najít a provést takovéto rozdělení pro data uložená v databázi HBase je cíl stanovený pro tuto práci, protože i malá procentuální úspora přenosů dat mezi výpočetními uzly v kombinaci s nižší propustností používaných běžných síťových prvků, vyššími přístupovými dobami pevných disků a velkými objemy zpracovávaných dat muže výrazně snížit časovou náročnost. 
+Ikdyž se Hadoop a HBase vyznačují nízkými přenosy dat během provádění dotazů, zejména díky lokalizaci dat, je zde stále prostor pro zlepšení. Taková úspora přenosové kapacity mezi clustery by mohla nastat při optimálním rozložení dat na discích tak, aby byli co nejideálněji seskupeny data, která jsou společně zpracovávána stejným redukčním uzlem v rámci MapReduce. A právě najít a provést takovéto rozdělení pro data uložená v databázi HBase je cíl stanovený pro tuto práci, protože i malá procentuální úspora přenosů dat mezi výpočetními uzly v kombinaci s nižší propustností používaných běžných síťových prvků, vyššími přístupovými dobami pevných disků a velkými objemy zpracovávaných dat muže výrazně snížit časovou náročnost často vykonávaných dotazů. 
 
 
 \end{introduction}
+\chapter{Data a Databáze}
+Na začátku, dříve než budou představeny detailní nástroje se kterými se bude pracovat, je na místě provést stručné vysvětlení základních pojmů a uvést trochu teorie. 
+\section{Data}
+Jedná se o pojem prolínající se celou prací. Pod tímto pojmem se schovává poměrně abstraktní veličina. Jako nejvhodnější definice v kontextu této práce se mi jeví následující popis:
+
+\medskip
+\textit{"Pojem data vychází z latinského slova datum, které lze vyložit jako něco daného a které
+bylo původně odvozeno z příčestí minulého slova dare, tedy dát. V kontextu počítačové
+vědy se pojem data vždy používal jako označení pro čísla, text, zvuk, obraz, popř. jiné
+smyslové vjemy reprezentované v podobě vhodné pro zpracování počítačem."} \cite{data}
+\medskip
+
+Dále se tedy zde bude nahlížet na data pouze v rámci informačních technologií. To co je z pohledu nahlížení na data v této práci důležité pak je jejich vlastnost, jak jsou tato data zpracovatelná. Podle zpracovatelnosti lze data rozdělit do třech skupin:
+\begin{itemize}
+\item Strukturovaná data jsou uspořádáná podle pevně daného formátu. Typicky se jedná o data uložená v tabulkách.
+
+\item Nestrukturovaná data naopak nemají žádný pevný formát. Příkladem nestrukturovaných dat mohou být knihy, dokumenty, audio, video, obrázky nebo analogová data.
+
+\item Semistrukturovaná data sice nepodléhají pevně danému schématu, i přesto se u nich v určité podobě projevuje uspořádání, nebo ne striktně pravidelná struktura, která se může měnit nepredikovatelným způsobem. Jedná se například o XML nebo JSON soubory nebo logy z webových serverů.
+\end{itemize}
+ 
+
+\section{Databáze}
+Obecně se pod slovem databáze myslí uspořádaná množina dat, uložená na nějakém paměťovém médiu. V širším smyslu se jako databáze označují i softwarové prostředky, které s těmito daty umožňují manipulovat. Tento celek se pak nazývá DBMS (Database management systems). Existuje mnoho druhů databází, v zásadě je ale můžeme rozdělit na dvě hlavní skupiny:
+
+\begin{itemize}
+\item SQL Databáze
+\item NoSQL Databáze
+\end{itemize}
+
+Dlouhou dobu zaujímaly výsadní postavení na trhu relační databáze spadající do SQL databází. Nicméně právě nové trendy dávají poslední dobou prostor k většímu využívání NoSQL databází.
+
+\subsection{SQL Databáze}
+Ačkoli se v práci nebude pracovat s SQL databázemi, nelze je nezmínit hlavně z důvodu porovnání oproti NoSQL databázím. Jen ve stručnosti budou uvedeny hlavní rysy většiny SQL databází. SQL databázemi jsou označovány databáze, které umějí zpracovat dotazy v jazyku SQL. Jedná se především o relační databáze a tak i tato kapitola bude zaměřená právě na ně.
+
+Relační databáze ukládají data do tabulek, které mají mezi sebou pevně definované vztahy. Tabulky mají pevný počet předem daných sloupců a data se ukládají po řádcích. Sloupce mají jedinečný identifikátor a určený datový typ. Každá buňka tabulky může obsahovat jen jednu hodnotu. V případě že je zapotřebí do jedné buňky vložit více hodnot je nutné tabulky propojit pomocí primárních a cizích klíčů. Díky omezené variabilitě ukládaných dat a nutnosti dodržovat striktní formát tabulek je umožněno pomocí jazyku SQL vytvářet nad tabulkami komplexní dotazy.
+
+
+\subsection{NoSQL Databáze}
+Jak již z názvu vyplývá, jendá se o databáze, které nevyužívají pro práci s daty SQL jazyk. NoSQL databáze se vyznačují menší komplexicitou při vytváření dotazů, často se omezující pouze na vkládání, čtení a mazání záznamů, která je však kompenzována vysokou optimalizací pro vyhledávání. Oproti relačním databázím jsou však o mnoho škálovatelnější a tak se může lépe využít pro ukládání velkého množství dat, která neustále přibývají. Škálovatelnost NoSQL databází vyplývá především z faktu, že není potřeba zachovávat vzájemné vztahy mezi tabulkami.
+
+NoSQL databáze mají typicky distribuovanou architekturu, která v kombinaci s replikacemi dat poskytuje dostatečnou odolnost proti výpadkům. S NoSQL databázemi bývá často spojován CAP teorém zobrazující závislosti mezi konzistencí (Consistency), Dostupností (Availability)
+a toleranci k rozdělení (Partitioning tolerance). \ref{fig:cap}
+
+\begin{figure}[h]\centering 
+	\includegraphics[width=0.5\textwidth, angle=0]			{files/cap}
+	\caption[CAP teorém]{CAP teorém}\label{fig:cap}
+\end{figure}
+\subsubsection{Sloupcově orientované databáze}
+Jsou jedním z představitelů NoSQL databází. Vyznačují se především tím, že data ukládají ve sloupcové formě, narozdíl od relačních databází, které ukládají data do řádků. Hlavním představitelem sloupcových databází je databáze HBase a jejímu detailnímu popisu se budou věnovat následující kapitoly.
+\section{Distribuované výpočty}
+Jednoduše řečeno se jedná o přístup, kdy rozdělíme velký komplikovaný výpočet na více menších a jednodušších úloh a tyto úlohy pak provedeme paralelně na více výpočetních uzlech. Hlavní motivace k tomuto jednání je především rychlejší zpracování výsledku. Jedním z možných typů distribuovaných výpočtů je i paradigma Mapreduce. 
+
+\subsection{MapReduce}
+MapReduce je programovací paradigma určené k provádění výpočtů, které by za normálních okolností trvaly značné množství času a to zejména z důvodů velkého množství dat. Tyto výpočty se pak snaží dokončit v přijatelném časovém horizontu. Princip byl poprvé představen v roce 2004 v  práci pro firmu Google jako jedno z opatření pro zvládání obrovského množství dat, se kterým se museli potýkat.
+
+V MapReduce jsou data modelována do párů klíč/hodnota. Tento formát je velmi jednoduchý, přesto se dají téměř všechny údaje takto prezentovat. Tato jednoduchá datová struktura tak umožňuje snadné zpracování dat efektivním způsobem. Klíč a hodnota může být cokoliv. Může se jednat o řetězce, čísla nebo komplexní struktury.
+
+Mapreduce se skládá ze dvou hlavních fází, mapovací fáze a redukční fáze. Nejdříve je spuštěna mapovací funkce, která je dále spočtena nad jednotlivými prvky z množiny uspořádaných dvojic (klíč, hodnota), jež produkuje přechodné klíče a hodnoty.\cite{HadoopDG}
+Poté jsou všechny tyto přechodné hodnoty asociované se stejným klíčem seskupeny a následně poslány se do redukční fáze. Redukční fáze přijme na vstupu klíč a související množinu hodnot. Jako výstup je pak množina uspořádaných dvojic, která splňuje zadaná kritéria.
+\begin{figure}[h]\centering
+	\includegraphics[width=1\textwidth, angle=0]			{files/MapReduce}
+	\caption[Diagram MapReduce procesu]{Diagram MapReduce procesu}\label{fig:mapred}
+\end{figure} 
+
+Jak vstupní data, tak mezivýsledky i finální výsledky jsou ve formátu klíč/hodnota. Jak je vidět na obrázku \ref{fig:mapred} probíhají mapovací a redukční fáze paralelně. Z diagramu je také zřejmé, že mezi mapovací fází a fází míchání(shuffling) dochází k přenosu průběžných výsledků mezi jednotlivými výpočetními uzly. Právě optimalizací přesunů v těchto místech se bude zabývat hlavní část této práce. 
+MapReduce je také často popisována funkcí: 
+
+\begin{eqnarray}
+	map: (k_1, v_1) \rightarrow  list(k_2, v_2) \nonumber \\
+	reduce: (k_2, list(v_2)) \rightarrow list(k_3, v_3) \nonumber 
+\end{eqnarray}
+
+
 
 \chapter{Současný stav a použité technologie}
-V této úvodní kapitole je dán prostor pro seznámení s technologiemi a projekty, se kterými se bude buď přímo pracovat nebo je jejich znalost pro pochopení problematiky nezbytná. Jako první je představen projekt Hadoop\textsuperscript{TM} od firmy Apache\textsuperscript{TM} jako celek. Vše, co bude v této práci představeno, se bude odehrávat v rámci tohoto takzvaného ekosystému. Pro porozumění základní myšlenky projektu Hadoop je také nezbytné vysvětlit programovací model MapReduce. Po uvedení celého Hadoopu jsou detailněji uvedeny produkty, které jsou součástí tohoto ekosystému a se kterými se bude dále pracovat. Jedná se především o databázový systém HBase a také souborový systém HDFS, který je v celém modelu využíván. 
+V této úvodní kapitole je dán prostor pro seznámení s technologiemi a projekty, se kterými se bude buď přímo pracovat nebo je jejich znalost pro pochopení problematiky nezbytná. Jako první je představen projekt Hadoop\textsuperscript{TM} od firmy Apache\textsuperscript{TM} jako celek. Vše, co bude v této práci představeno, se bude odehrávat v rámci tohoto takzvaného ekosystému. Po uvedení celého Hadoopu jsou detailněji uvedeny produkty, které jsou součástí tohoto ekosystému a se kterými se bude dále pracovat. Jedná se především o databázový systém HBase a také souborový systém HDFS, který je v celém modelu využíván. Mimo to je pak zde uvedena ukázka kódu pro typický příklad MapReduce úlohy s postupným popisem zpracování. Na závěr je uvedeno trocha teorie o dělení hypergrafů, jelikož tento problém bude hrát klíčovou roli v celkovém řešení.
 
 
 \section{Hadoop Ekosystém}
-Apache Hadoop je framework který sdružuje projekty  vyvíjející software pro spolehlivé, škálovatelné a paralelní zpracování dat na počítačových clusterech. Je založen na dvou stěžejních  technologiích pocházejících od firmy Google  a to na distribuovaném souborovém systému Google File System (GFS) a na algoritmu MapReduce\cite{HadoopDum}. Všechny klíčové projekty v systému Hadoop jsou združeny  pod Apache Software foundation, která poskytuje podporu pro tyto projekty. Jedná se o open.source software a všechny komponenty jsou psány v programu Java.
+Apache Hadoop je platforma která zastřešuje projekty vyvíjející software pro spolehlivé, škálovatelné a paralelní zpracování dat na počítačových clusterech. Je založen na dvou stěžejních  technologiích pocházejících od firmy Google  a to na distribuovaném souborovém systému Google File System (GFS)\cite{GFS} a na algoritmu MapReduce\cite{HadoopDum}. Všechny klíčové projekty v systému Hadoop jsou združeny  pod Apache Software foundation, která poskytuje podporu pro tyto projekty. Jedná se o open.source software a všechny komponenty jsou psány v programu Java.
 
 \subsection{Základní principy}
 Podstata Hadoopu spočívá v uložení dat na velkém množství výpočetních úzlů spojených do clusterů. Většinou se jedná o běžný hardware. Na těchto uzlech jsou data uložená ve vlastním souborovém Systému HDFS. K výpočtům nad clusterem se využívá princip Mapreduce, který bude osvětlen v následující kapitole. Systém Hadoop je charakteristický především následujícími vlastnostmi, které ho odlišují od klasických databázových systémů.
@@ -77,32 +177,12 @@ Podstata Hadoopu spočívá v uložení dat na velkém množství výpočetních
 
 \end{description}
 
-\subsection{MapReduce}
-MapReduce je programovací paradigma určené k provádění výpočtů, které by za normálních okolností trvaly značné množství času a to zejména z důvodů velkého množství dat. Tyto výpočty se pak snaží dokončit v přijatelném časovém horizontu. Princip byl poprvé představen v roce 2004 v  práci pro firmu Google jako jedno z opatření pro zvládání obrovského množství dat, se kterým se museli potýkat.
 
-V MapReduce jsou data modelována do párů klíč/hodnota. Tento formát je velmi jednoduchý, přesto se dají téměř všechny údaje takto prezentovat. Tato jednoduchá datová struktura tak umožňuje snadné zpracování dat efektivním způsobem. Klíč a hodnota může být cokoliv. Může se jednat o řetězce, čísla nebo komplexní struktury.
-
-Mapreduce se skládá ze dvou hlavních fází, mapovací fáze a redukční fáze. Nejdříve je spuštěna mapovací funkce, která je dále spočtena nad jednotlivými prvky z množiny uspořádaných dvojic (klíč, hodnota), jež produkuje přechodné klíče a hodnoty.\cite{HadoopDG}
-Poté jsou všechny tyto přechodné hodnoty asociované se stejným klíčem seskupeny a následně poslány se do redukční fáze. Redukční fáze přijme na vstupu klíč a související množinu hodnot. Jako výstup je pak množina uspořádaných dvojic, která splňuje zadaná kritéria.
-
-Jak vstupní data, tak mezivýsledky i finální výsledky jsou ve formátu klíč/hodnota. Jak je vidět na obrázku \ref{fig:mapred} probíhají mapovací a redukční fáze paralelně. Z diagramu je také zřejmé, že mezi mapovací fází a fází míchání(shuffling) dochází k přenosu průběžných výsledků mezi jednotlivými výpočetními uzly. Právě optimalizací přesunů v těchto místech se bude zabývat hlavní část této práce. 
-MapReduce je také často popisována funkcí: 
-
-\begin{eqnarray}
-	map: (k_1, v_1) \rightarrow  list(k_2, v_2) \nonumber \\
-	reduce: (k_2, list(v_2)) \rightarrow list(k_3, v_3) \nonumber 
-\end{eqnarray}
-
-\begin{figure}\centering
-	\includegraphics[width=1\textwidth, angle=0]			{files/MapReduce}
-	\caption[Diagram MapReduce procesu]{Diagram MapReduce procesu}\label{fig:mapred}
-\end{figure} 
-
-
+\clearpage
 \subsection{Hadoop Ekosystém}
-Následující kapitola je určena k seznámení s ekosystémem Hadoop, který kromě základních projektů MapReduce a HDFS obsahuje množství dalších projektů. Složení ekosystému se ale liší v závoslosti na konkrétní distribuci Hadoopu. Je sice možné zvolit si tyto aplikace podle svého výběru a využít přímo zdroje od firmy Apache, ale  v praxi se využívají spíše již částečně nakonfigurované distribuce. které navíc nabízejí i možnost placené podpory. Mezi největší hráče na trhu patří distribuce od firem Cloudera, MapR a Hortonworks.\cite{CLOUDERA} Pro účely této práce byla vybrána distribuce Cloudera, protože se jedná o open-source projekt a také kvůli největšímu podílu na trhu.\ref{fig:eko}  
+Následující kapitola je určena k seznámení s ekosystémem Hadoop, který kromě základních modulů MapReduce a HDFS obsahuje množství dalších modulů. Složení ekosystému se ale liší v závoslosti na konkrétní distribuci Hadoopu. Je sice možné zvolit si tyto aplikace podle svého výběru a využít přímo zdroje od firmy Apache, ale v praxi se využívají spíše již částečně nakonfigurované distribuce. které navíc nabízejí i možnost placené podpory. Mezi největší hráče na trhu patří distribuce od firem Cloudera, MapR a Hortonworks.\cite{CLOUDERA} Pro účely této práce byla vybrána distribuce Cloudera, protože se jedná o open-source projekt a také kvůli největšímu podílu na trhu.\ref{fig:eko} V následujícím výpisu se nachází hlavní moduly, které jsou obsaženy ve většině distribucí.
 
-\begin{figure}\centering
+\begin{figure}[h]\centering
 	\includegraphics[width=1\textwidth, angle=0]{files/HadoopEco}
 	\caption[Hadoop Ekosystém]{Hadoop Ekosystém}\label{fig:eko}
 \end{figure}
@@ -146,22 +226,81 @@ Nástroj sloužící k efektivnímu přenosu dat z relačních databází do Had
 Služba pro efektivní získávání, agregování a přesouvání velkého množství streamovaných dat do HDFS. Typicky se používá k ukládání logů z jednoho zdroje (webové logy, bankovní logy) a agreguje je v HDFS pro pozdější zpracování.
 \end{description}
 
+\section{MapReduce v Hadoopu}
+Jak funguje MapReduce na Hadoopu bude demonstorváno na následujícím příkladě WordCount. Je to jednoduchá úloha, kde jak již název napovídá, je úkolem zjistit četnost slov nacházejících se v textu. Uvažujme že zpracováváme dva soubory. první obsahující text "Hello World Bye World"  druhý pak "Hello Hadoop Goodbye Hadoop".
+\begin{enumerate}
+\item Implementace třídy Mapper pomocí metody Map zpracovává po jedné řádce dat ve formátu TextInputFormat. Každou řádku poté rozdělí pedle mezer na tokeny pomocí metody StringTokenizer a emituje key-value pár <Hello, 1>.
+\item pro první soubor emituje map funkce <Hello, 1> <World, 1> <Bye, 1> <World, 1>
+\item pro druhý to je <Hello, 1> <Hadoop, 1> <Goodbye, 1> <Hadoop, 1>
+\item WordCount obsahuje i combiner. Výstup každé map funkce projde skrz lokální combiner (stejný jako v Reduceru) a po seřazení  klíčů provede lokální agregaci dat
+\item výstup první map funkce: <Bye, 1> <Hello, 1> <World, 2>
+\item výstup druhé map funkce  <Goodbye, 1> <Hadoop, 2> <Hello, 1>
+\item Implementace Reducer třídy pomocí metody reduce sečte hodnoty pro stejné klíče
+\item výstup Hadoop jobu pak je <Bye, 1> <Goodbye, 1> <Hadoop, 2> <Hello, 2> <World, 2>
+\end{enumerate}
+\pagebreak
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+
+public class WordCount {
+
+  public static class Map extends MapReduceBase implements Mapper<LongWritable, Text, Text, IntWritable> {
+    private final static IntWritable one = new IntWritable(1);
+    private Text word = new Text();
+
+    public void map(LongWritable key, Text value, OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
+      String line = value.toString();
+      StringTokenizer tokenizer = new StringTokenizer(line);
+      while (tokenizer.hasMoreTokens()) {
+        word.set(tokenizer.nextToken());
+        output.collect(word, one);
+      }
+    }
+  }
+
+  public static class Reduce extends MapReduceBase implements Reducer<Text, IntWritable, Text, IntWritable> {
+    public void reduce(Text key, Iterator<IntWritable> values, OutputCollector<Text, IntWritable> output, Reporter reporter) throws IOException {
+      int sum = 0;
+      while (values.hasNext()) {
+        sum += values.next().get();
+      }
+      output.collect(key, new IntWritable(sum));
+    }
+  }
+
+  public static void main(String[] args) throws Exception {
+    JobConf conf = new JobConf(WordCount.class);
+    conf.setJobName("wordcount");
+    conf.setOutputKeyClass(Text.class);
+    conf.setOutputValueClass(IntWritable.class);
+    conf.setMapperClass(Map.class);
+    conf.setCombinerClass(Reduce.class);
+    conf.setReducerClass(Reduce.class);
+    conf.setInputFormat(TextInputFormat.class);
+    conf.setOutputFormat(TextOutputFormat.class);
+    FileInputFormat.setInputPaths(conf, new Path(args[0]));
+    FileOutputFormat.setOutputPath(conf, new Path(args[1]));
+    JobClient.runJob(conf);
+  }
+}
+\end{lstlisting}
+
 \section{HDFS}
 Hadoop Distributed File Systém (HDFS) nabízí způsob skladování velkých souborů na více samostatných počítačích, který je rozdílný oproti klasickému přístupu skladování dat na jednom stroji s dostatečnou diskovou kapacitou. HDFS je navržen na základech Google File Systemu (GFS) a běží na nativním filesystému (Ext3, Ext4,XFS). HDFS je určen pro skladování především velkých souborů (100 MB a více) v menším počtu (řádově miliony) a k ukládání streamovaných dat. Systém dále není vhodný pro soubory, u nichž se očekává časté upravování, a to protože je možné připisovat data pouze na konec souboru. Systém je odolný proti chybám v replikaci a výpadkům v distribuci dat.\cite{HDFSWEB}
 
-HDFS umožňuje, stejně jako většina běžných souborových systémů, operace čtení, zápisu a mazání souborů a vytváření a mazání adresářů. Vždy, když je načten nový soubor do HDFS, je zreplikován do žádoucího počtu, který určuje replikační faktor (defaultní hodnota je 3) a rozdělen do bloků dat o fixní délce (defaultně 64MB). Tyto bloky jsou pak rozdistribuovány a uloženy  ve vybraných uzlech clusteru určených pro skladování, tzv. DataNodes viz.\ref{fig:hdfs} . V HDFS se informace o souborech neukládají společně s daty, ale jsou uloženy na vyhrazeném serveru nazývaném NameNode. Při přístupu k datům klient nejdříve zadá požadavek na data na NameNode, který následně vrátí adresy databloků s požadovanými daty. NameNode tedy přímo nemanipuluje s daty.
-
-\begin{figure}\centering
+\begin{figure}[h]\centering
 	\includegraphics[width=0.8\textwidth, angle=0]{files/hdfs}
 	\caption[Diagram uložení souboru v systému HDFS]{Diagram uložení souboru v systému HDFS}\label{fig:hdfs}
 \end{figure}
+
+HDFS umožňuje, stejně jako většina běžných souborových systémů, operace čtení, zápisu a mazání souborů a vytváření a mazání adresářů. Vždy, když je načten nový soubor do HDFS, je zreplikován do žádoucího počtu, který určuje replikační faktor (defaultní hodnota je 3) a rozdělen do bloků dat o fixní délce (defaultně 64MB). Tyto bloky jsou pak rozdistribuovány a uloženy  ve vybraných uzlech clusteru určených pro skladování, tzv. DataNodes viz.\ref{fig:hdfs} . V HDFS se informace o souborech neukládají společně s daty, ale jsou uloženy na vyhrazeném serveru nazývaném NameNode. Při přístupu k datům klient nejdříve zadá požadavek na data na NameNode, který následně vrátí adresy databloků s požadovanými daty. NameNode tedy přímo nemanipuluje s daty.
 
 NameNode uchovává a poskytuje strom jmenného prostoru a adresy fyzického umístění bloků ve své operační paměti. Dále ukládá perzistentní záznam těchto adres (kontrolní bod) a registr modifikací (žurnál) pro zotavení z havárie v nativním systému souborů hostitelského počítače. HDFS umožňuje i  vytvoření kopie kontrolního bodu a žurnálu na další výpočetní uzel nazývaný SecondaryNameNode. Ten pak slouží jako záloha dat serveru NameNode  (nenahrazuje tedy funkci primárního NameNode v případě výpadku, pouze poskytuje data pro jeho obnovu). Ve verzi Hadoop 2+ je už možné mít Standby NameNode, který v případě výpadků může primární NameNode plně a okamžitě nahradit. 
 
 Přistupovat k HDFS je možné přímo a to přes nativního klienta nebo pomocí Java nebo C++ API. Dále je možný přístup přes proxy server podporující REST, Thirft a Avro server.
 
 \section{HBase}
-Jedná se o sloupcově orientovanou databázi, někdy označovanou jako Hadoop databáze. HBase podporuje náhodné real-time CRUD operace (narozdíl od HDFS). Je primárně navržená pro uchovávání velkých tabulek o miliardách řádců a milionech sloupcích a jedná se o NoSQL databázi. Nepodporuje tedy přístup založený na SQL jazycích ani relační model. Stejně jako HDFS se vyznačuje jednoduchým klientem a Java API. HBase je založena na projektu Bigtable od Googlu a stejně jako byl Bigtable postaven nad GFS je HBase postavena nad HDFS.\cite{HbaseDG}
+Jedná se o sloupcově orientovanou databázi, někdy označovanou jako Hadoop databáze. HBase podporuje náhodné real-time CRUD operace (narozdíl od HDFS). Je primárně navržená pro uchovávání velkých tabulek o miliardách řádců a milionech sloupcích a jedná se o NoSQL databázi. Nepodporuje tedy přístup založený na SQL jazycích ani relační model. Stejně jako HDFS se vyznačuje jednoduchým klientem a Java API. HBase je založena na projektu BigTable od firmy Google\cite{BigTable} a stejně jako byl BigTable postaven nad GFS je HBase postavena nad HDFS.\cite{HbaseDG}
 
 HBase nebyla zavedena za účelem nahrazení klasických RDBMS a ani k tomuto účelu není využívána. HBase je výhodné použít, jak již bylo řečeno, v případě rozsáhlých tabulek. Výborné výsledky vykazuje při vykonávání jednotlivého náhodného výběru z databáze a při vyhledávání dle klíče. Hbase je také vhodným řešením v případě, že jednotlivé řádky tabulky jsou velmi různorodé a v případě řidkých databází, kdy je velký počet sloupců a většina z nich obsahuje nulovou hodnotu. Nevhodné využití je pak právě pro suplování úloh pro tradiční RDBMs jako jsou transakční aplikace nebo relační analýza.\cite{HBaseWEB}
 
@@ -170,7 +309,7 @@ HBase nebyla zavedena za účelem nahrazení klasických RDBMS a ani k tomuto ú
 
 Data v databázi HBase jsou uložena v tabulkách. Jednotlivé tabulky obsahují řádky. Na každý řádek odkazuje unikátní klíč. Jako hodnota klíče se bere bitové pole. Klíč u HBase tedy může být cokoli, string, long nebo vlastní datová struktura. Každý řádek je složen ze sloupců, které jsou sdruženy do rodin (column families). Tyto rodiny sloupců jsou definovány staticky při vytváření databáze narozdíl od samotných sloupců, které se mohou přidávat libovolně. Data jako taková jsou pak uložena v buňkách. Tyto buňky jsou identifikovány pomocí řádku, rodiny, sloupce a časovou značkou(timestamp). Obsah každé buňky je pak uchováván také jako pole bitů. Data v buňkách jsou navíc verzovány. Každá buňka defaultně uchovává poslední tři zadané hodnoty s tím, že pokud není v dotazu specifikována konkrétní verze, vrací vždy tu nejmladší. Řádky jsou v každé tabulce seřazeny lexikograficky podle svého klíče. Příklad takové tabulky je uveden v obrázku \ref{fig:hbase}.
 
-\begin{figure}\centering
+\begin{figure}[h]\centering
 	\includegraphics[width=1\textwidth, angle=0]{files/hbase}
 	\caption[Datový model HBase]{Datový model HBase}\label{fig:hbase}
 \end{figure}
@@ -233,7 +372,7 @@ je uložení dat v souborovém systému HDFS. Hbase pracuje především s dvěm
 	\caption[Schéma ukládání dat z HBase v HDFS]{Schéma ukládání dat z HBase v HDFS}\label{fig:hbasehdfs}
 \end{figure}
 
-\subsubsection{formát HFile}
+\subsubsection{Formát HFile}
 Formát souboru HFile je navržen tak, aby ukládal data co nejefektivněji. Je založen na formátu souboru TFile z Hadoopu. Soubor obsahuje několik bloků,jak je vidět n obrázku \ref{fig:hfile}, z nichž jsou fixní pouze info a trailer bloky. Tyto bloky jsou uloženy na konci souboru a ukončují tak daný soubor, který se stává neměnným. V index blocích jsou uloženy offsety data a metadata bloků. Jak metadata bloky tak i data bloky jsou nepovinné, nicméně už z podstaty věci jsou data bloky téměř vždy součástí Hfile souboru. Velikost jednotlivých bloků je defaulrtně definována na 64 KB. Je možné tuto velikost změnit v závislosti na očekávané struktuře dotazů na databázi. Čím větší bloky, tím efektivnější bude sekvenční prohledávání databáze, naopak náhodný přístup bude efektivní méně. V jednotlivých blocích se sekvenčně ukládají KeyValue instance v KeyValue formátu. Velikost bloků není fixní, odvíjí se od velikosti poslední vložené key value instance, která se do bloku uloží celá a pak teprve dojde k uzavření bloku. V praxi tedy boky bývají o něco větší než je definovaná hodnota. Je možné také použít libovolný komprimační algoritmus na ukládané data, což ale neovlivní celý proces, protože checksum je dopočítáván až po přidání poslední key value instance.
 \begin{figure}\centering
 	\includegraphics[width=0.8\textwidth, angle=0]{files/HFile}
@@ -267,13 +406,24 @@ Pro řešení problému dělení grafů a hypergrafů se používají předevš�
 \subsection{Definice problému}
 Hypergraf $H=(V,N)$ je definován jako množina vrcholů $V$ a množina	sítí (multihran) $N$ propojujících tyto vrcholy. Každá síť $n \in N$ je podmnožina $n \subseteq V$. Vrcholy v síti $n$ jsou nazývýny $piny$. Velikost sítě se rovná počtu pinů, které obsahuje. Stupeň vrcholu je počet sítí, kterými je spojen. Hypergraph může být i vážený a v tom případě se mohou ohodnotit jak hrany, tak uzly.
 
-....
-
-
 \begin{figure}\centering
 	\includegraphics[width=0.6\textwidth, angle=0]{files/Hypergraph.png}
 	\caption[Reprezentace hypergrafu]{Reprezentace hypergrafu}\label{fig:hypergraph}
 \end{figure}
+
+\medskip
+$\prod = {V_1, V_2, ..., V_k} $ je K-way partition grafu H, pokud jsou dodrženy následující podmínky.
+\begin{itemize}
+\item každá segment $V_k$ je neprázdná podmnožina $V$, tedy $V_k \subseteq V$ a $V_k = 0$ pro $1 \leq k \leq K$
+\item segmenty jsou párově disjunktní tedy $V_k \cap V = 0 $ pro všechna $1 \leq k \leq K$
+\item sjednocení všech $K$ segmentů se rovná $V$
+\end{itemize}
+
+\subsubsection{Rekurzivní bisekce}
+problém k-way partitioning grafů/hypergrafů se obvykle řeší za pomoci rekurzivní bisekce. Proběhne tedy nejdříve rozdělení grafu na dva stejně velké segmenty a pak se stejný postup aplikuje na vznikly podgrafy. Po $log_2K$ fázích je hypergraf rozdělen na $K$ segmentů. program PaToh, který bude v práci pro řešení této úlohy používán však dokáže rozdělit graf pomocí rekurzivní bisekce na libovolných $K$ segmentů. Není tedy při volbě počtu segmentů omezený používání hodnot jež jsou mocniny dvou. Více o tomto problému je poskytnuto v manuálu\footnote{\texttt{http://bmi.osu.edu/umit/PaToH/manual.pdf}} pro tento nástroj. 
+
+
+
 
 \begin{figure}\centering
 	\includegraphics[width=0.6\textwidth, angle=0]{files/bisection.png}
@@ -281,11 +431,11 @@ Hypergraf $H=(V,N)$ je definován jako množina vrcholů $V$ a množina	sítí (
 \end{figure}
 
 
-\chapter{Existující řešení optimalizace distribuce dat pro MapReduce}
-V této kapitole bude představeno řešení, které poskytl M. Liroz-Gistau et al. ve svém článku Data Partitioning for Minimizing Transfered Data in MapReduce \cite{gistau}. V tomto článku se zaměřují na redukování datových přenosů mezi mapovací a redukční fází. V tomto místě přichází na řadu fáze, kde probíhá míchání přechodných klíčů(shuffle phase). Od tohoto řešení se bude poté odvíjet návrh řešení pro databázi HBase. Protože v předchozích kapitolách už byl vysvětlen princip zpracování dat pomocí Map Reduce, může tato kapitola plynule navázat na tyto poznatky. 
+\chapter{Existující řešení pro optimalizaci distribuce dat v MapReduce}
+V této kapitole bude představeno řešení, které poskytl M. Liroz-Gistau et al. ve svém článku Data Partitioning for Minimizing Transfered Data in MapReduce \cite{gistau}. V tomto článku se zaměřují na redukování datových přenosů mezi mapovací a redukční fází. V tomto místě přichází na řadu fáze, kde probíhá míchání intermediate klíčů(shuffle phase). Od tohoto řešení se bude poté odvíjet návrh řešení pro databázi HBase. Protože v předchozích kapitolách už byl vysvětlen princip zpracování dat pomocí Map Reduce, může tato kapitola plynule navázat na tyto poznatky. 
 
 \section{Definice problému}
-Nejdříve je zapotřebí fommálně definovat, jaký problém chceme řešit. Mějme tedy sadu MapReduce úloh, které reprezentují typické zatížení systému a sadu vstupních dat. Předpokládejme, že budoucí MapReduce úlohy budou vykonávat podobné úlohy na podobných datech a budou generovat podobné intermediate key (předpokládá se, že v praxi se vykonávají pořád stejné úlohy, jen dochází například ke zvětšování datasetu o nově zapsané data). 
+Nejdříve je zapotřebí formálně definovat, jaký problém chceme řešit. Mějme tedy sadu MapReduce úloh, které reprezentují typické zatížení systému a sadu vstupních dat. Předpokládejme, že budoucí MapReduce úlohy budou vykonávat podobné úlohy na podobných datech a budou generovat podobné intermediate key (předpokládá se, že v praxi se vykonávají pořád stejné úlohy, jen dochází například ke zvětšování datasetu o nově zapsané data). 
 
 Cílem navrhovaného systému je automatické rozdělení vstupních dat tak, aby u budoucího vykonávání MapReduce úloh byl minimalizován přenos dat mezi jednotlivými uzly v shuffle fázi. Při tomto rozdělování se nebere v úvahu plánování mapovacích a redukčních fází, ale pouze inteligentní rozdělení intermediate klíčů mezi jednotlivé redukční uzly.
 
@@ -308,7 +458,7 @@ Pro vyřešení zadaného problému byla navržena technika pojmenovaná MR-Part
 \subsection{První fáze - Workload Characterization}
 Pro zajištění minimalizace přenosů mezi výpočetními uzly při přechodu z mapovací do redukční fáze je nejdříve zapotřebí zjistit, jaké páry hodnot se generují pro vstupní data a následně je vhodně seskupit. K tomu dochází v monitorovací a kombinační části první fáze.
 \paragraph{Monitoring}
-Nejprve je zapotřebí získat potřebná data z typických MapReduce úloh, u kterých se očekává jejich častější vykonávání. K zachycení těchto dat se využívá třída  \texttt{RecordReader} \footnote{\texttt{RecordReader} je třída, která parsuje vstupní soubor a generuje vstupní páry. Každý datový formát má jiný \texttt{RecordReader}. Soubory tedy obvykle používají stále stejný.} , která je rozšířená o  monitorovací funkci. Monitorovací funkce unikátně identifikuje vstupní páry klíč-hodnota a jejich pozici ve vstupních datech. Pro každou mapovací úlohu se tek vytvoří soubor s metadaty. Vždy, když je načten nový blok s daty, je zároveň vytvořen i nový soubor, obsahující informace o bloku. Následně je iniciován record counter(rc). Pokaždé kdy je načten vstupní pár, inkrementuje se counter o 1. Poté pokud dojde k vytvoření vstupního páru, je vygenerován pár (k, rc). Po dokončení zpracování bloku dat jsou takto vygenerované páry uloženy do již vytvořeného souboru ve formátu $\langle k,\{rc_1, ..., rc_n\}\rangle$.
+Nejprve je zapotřebí získat potřebná data z typických MapReduce úloh, u kterých se očekává jejich častější vykonávání. K zachycení těchto dat se využívá třída  \texttt{RecordReader} \footnote{\texttt{RecordReader} je třída, která parsuje vstupní soubor a generuje vstupní páry. Každý datový formát má jiný \texttt{RecordReader}. Soubory tedy obvykle používají stále stejný.} , která je rozšířená o  monitorovací funkci. Monitorovací funkce unikátně identifikuje vstupní páry klíč-hodnota a jejich pozici ve vstupních datech. Pro každou mapovací úlohu se tak vytvoří soubor s metadaty. Vždy, když je načten nový blok s daty, je zároveň vytvořen i nový soubor obsahující informace o bloku. Následně je iniciován record counter($rc$). Pokaždé, když je načten vstupní pár, inkrementuje se counter o 1. Poté pokud dojde k vytvoření vstupního páru, je vygenerován pár $(k, rc)$. Po dokončení zpracování bloku dat jsou takto vygenerované páry uloženy do již vytvořeného souboru ve formátu $\langle k,\{rc_1, ..., rc_n\}\rangle$ tedy klíč a za ním následně identifikátory řádku, které tento klíč generují.
 \paragraph{Combination}
 Následující fáze již neběží zároveň s jinými úlohami, ale pustí je uživatel ideálně v čase, kdy systém není vytížen jinými výpočty. V kombinační fázi se shromáždí a zkombinují metadata z monitorování a na jejich základě se vygeneruje pro každý vstupní soubor hypergraf. Hypergraf $H = (H_V, H_E)$ je graf, kde každá hyperhrana $e \subseteq H_E$ může propojovat více jak dva vrcholy  $v \subseteq H_V$. Po zpracování metadat se pak do tohoto hypergrafu uloží každý zpracovávaný prvek (vygenerovaný unikátní identifikátor reprezentující typicky řádek ve vstupním souboru).  Poté se přidá hyperhrana, reprezentující klíč a propojí vrcholy, které tento klíč vygenerovaly. Detailní popis algoritmu v pseudokódu je zobrazen na obrázku. \ref{fig:alg1}
 
@@ -319,7 +469,7 @@ Následující fáze již neběží zároveň s jinými úlohami, ale pustí je 
 \end{figure} 
 
 \subsection{Druhá fáze - Repartitioning}
-Nyní, když je vygenerován hypergraf modelující rozložení dat v jednotlivých souborech, je na každý hypergraf aplikován min-cut k-way dělící algoritmus. Tento algoritmus má jako vstup hodnotu $k$ a hypergraf, ze kterého následně vygeneruje $k$ disjunktních podmožin vrcholů tak, aby byla minimalizována suma hran mezi uzly rozdílných podmnožin. Parametr $k$ je nastaven podle počtu bloků ve vstupním souboru. Po provedení tohoto algoritmu by měli být v jednotlivých vygenerovaných podmnožinách seskupeny uzly generující stejný klíč. Následně se použijí tyto podmnožiny k vygenerování nových vstupních souborů, kde už jsou data seřazena tak, aby řádky generující stejný klíč byly maximálně seskupeny. Tímto nově vzniklým souborem je následně nahrazen starý vstupní soubor, který je smazán. Pseudokód algoritmu je uveden na obrázku. \ref{fig:alg2} V algoritmu je uvedená funkce $RR$, která reprezentuje funkci třídy $RecordReader$  použitou pro parsování vstupních souborů. Dále se v kódu oběvuje funkce $RW$ znamenající $RecordWriter$. Její funkce je inverzní k funkci $RecordReader$. V této části je výpočetně nejsložitější vykonání min-cut algoritmu. Min-cut algoritmus spadá do skupiny NP-Complete problémů. Existuje však několik aproximačních algoritmů, které byly navrženy k řešení tohoto problému. V tomto případě byl použit algoritmus \texttt{PATOH} \footnote{\texttt{http://bmi.osu.edu/$\sim$:umit/software.html}}
+Nyní, když je vygenerován hypergraf modelující rozložení dat v jednotlivých souborech, je na každý hypergraf aplikován min-cut k-way dělící algoritmus. Tento algoritmus má jako vstup hodnotu $k$ a hypergraf, ze kterého následně vygeneruje $k$ disjunktních podmožin vrcholů tak, aby byla minimalizována suma hran mezi uzly rozdílných podmnožin. Parametr $k$ je nastaven podle počtu bloků ve vstupním souboru. Po provedení tohoto algoritmu by měly být v jednotlivých vygenerovaných podmnožinách seskupeny uzly generující stejný klíč. Následně se použijí tyto podmnožiny k vygenerování nových vstupních souborů, kde už jsou data seřazena tak, aby řádky generující stejný klíč byly maximálně seskupeny. Tímto nově vzniklým souborem je následně nahrazen starý vstupní soubor, který je smazán. Pseudokód algoritmu je uveden na obrázku. \ref{fig:alg2} V algoritmu je uvedená funkce $RR$, která reprezentuje funkci třídy $RecordReader$  použitou pro parsování vstupních souborů. Dále se v kódu oběvuje funkce $RW$ znamenající $RecordWriter$. Její funkce je inverzní k funkci $RecordReader$. V této části je výpočetně nejsložitější vykonání min-cut algoritmu. Min-cut algoritmus spadá do skupiny NP-Complete problémů. Existuje však několik aproximačních algoritmů, které byly navrženy k řešení tohoto problému. V tomto případě byl použit nástroj \texttt{PaToH} \footnote{\texttt{http://bmi.osu.edu/$\sim$:umit/software.html}}
 
 \begin{figure}\centering
 	\includegraphics[width=1\textwidth, angle=0]{files/alg2}
@@ -343,7 +493,7 @@ MR-Part byl implementován v Hodoop-1.0.4 a otestován na \texttt{Grid5000} \foo
 \subsection{Výsledky}
 
 \paragraph{Množství přenesených dat pro různé typy dotazů} \hfill \\
- Při spustění několika různých úloh \texttt{TPC-H} \footnote{Implementace použitých dotazů: http://www.cs.duke.edu/starfish/mr-apps.html}.  na původních datasetech bylo v shuffle vázi přeneseno cca. 80\% dat. Po provedení dotazů na již upravených datech pak docházelo k přenosu dat  nižším než 10\% pro všechny provedené dotazy.
+Při spustění několika různých úloh \texttt{TPC-H} \footnote{Implementace použitých dotazů: http://www.cs.duke.edu/starfish/mr-apps.html}.  na původních datasetech bylo v shuffle vázi přeneseno cca. 80\% dat. Po provedení dotazů na již upravených datech pak docházelo k přenosu dat  nižším než 10\% pro všechny provedené dotazy.
 
 \paragraph{Množství přenesených dat v závislosti na velikosti clusteru} \hfill \\
 Při provedení vybraného dotazu nad konfiguracemi systému s různým počtem clusterů nedocházelo k žádné výrazné změně v podílu přenesených dat. Jednalo se o konfigurace o 5 až 25 uzly v clusteru.
@@ -573,18 +723,89 @@ Poté co jsme shromáždili potřebná metadata shromažděná při vykonáván�
 Pro reprezentaci hypergrafu jsem použil knihovnu \texttt{Jung}\footnote{\texttt{http://jung.sourceforge.net/}} poskytující implementace různých typů grafů mezi nimiž je i námi požadovaný hypargraf. Při parsování vstupních souborů se postupně vytváří hypergraf.  Každý řádek reprezentuje hyperhranu a vrcholy které jsou touto hranou propojeny. Vždy se tedy vytvoří nová hyperhrana, nesoucí jako svůj identifikátor jméno generovaného klíče, který reprezentuje a postupně ověřuje existenci uzlů, které by měla propojovat. V případě že uzel neexistuje, vytvoří ho a přidá jako jeden ze svých vrcholů. V opačném případě si pouze přidá již existující uzel. Po dokončení parsování souborů s metadaty tedy máme k dispozici strukturu $setHypergraph$ reprezentující kompletní rozložení zátěže datasetu při vykonávání zadaných dotazů.
 
 \subsection{příprava dat pro Min-cut algoritmus}
-Samotné rozdělení grafu pomocí min-cut algoritmus je prováděno za pomoci externího programu PaToH, nicméně, tento program požaduje specifický formát vstupního souboru. Tento soubor je tedy zapotřebí vygenerovat ze stávající reprezentace grafu. Jak již bylo popsáno v dřívější kapitole. PaToH očekává jako vstupní soubor graf v podobě od 0 nebo 1 indexovaný seznam hran a vrcholů jež propojuje.  Vytvořil jsem tedy dvě pole $nodesArray$ a $edgesArray$, do kterých se postupně uloží všechny vrcholy a hrany. Indexy těchto polí pak slouží k vygenerování požadovaného formátu pro PaToH program. Do vytvářeného souboru nejprve uložím hlavičku souboru ve tvaru 0 znamenající výchozí hodnotu indexování a následně počet vrcholů, hran a pinů v grafu. Tyto hodnoty lze jednoduše získat z reprezentace hypergrafu pomocí metod $getVertices()$, $getEdges()$ a počet pinů pomocí metody pro každý uzel $degree(node)$ a sečtené přes všechny uzly v grafu.
+Provedení partitioningu na vzniklém hypergrafu má na starosti třída \texttt{MinCut}. Samotné rozdělení grafu pomocí min-cut algoritmus je prováděno za pomoci externího programu PaToH. Nicméně tento program požaduje specifický formát vstupního souboru. Tento soubor je tedy zapotřebí vygenerovat ze stávající reprezentace grafu, jak již bylo popsáno v dřívější kapitole. PaToH očekává jako vstupní soubor graf v podobě od 0 nebo 1 indexovaný seznam hran a vrcholů jež propojuje.  Vytvořil jsem tedy dvě pole $nodesArray$ a $edgesArray$, do kterých se postupně uloží všechny vrcholy a hrany. K vytvoření polí slouží metody \texttt{mapNodes()} a \texttt{mapEdges()}. Zde je uvedena metoda \texttt{mapNodes()}, metoda \texttt{mapEdges()} je analogická.
+
+\begin{lstlisting}[frame=single]  % Start your code-block
+    
+    private static void mapNodes() {
+        nodes = 0;
+        Collection<String> S = hypergraph.getVertices();
+
+        for (String key : S) {
+            nodesArray.add(nodes, key);
+            nodes++;
+        }
+    }
+\end{lstlisting}
+
+Indexy těchto polí pak slouží k vygenerování požadovaného formátu pro PaToH program. Do vytvářeného souboru nejprve uložím hlavičku souboru ve tvaru 0 znamenající výchozí hodnotu indexování a následně počet vrcholů, hran a pinů v grafu. Tyto hodnoty lze jednoduše získat z reprezentace hypergrafu pomocí metod $getVertices()$, $getEdges()$ a počet pinů pomocí metody pro každý uzel $degree(node)$ a sečtené přes všechny uzly v grafu.
+Dále je nutné nastavit, na kolik segmentů se má hypergraf rozdělit. Počet segmentů určíme podle počtu regionů v původní tabulce. K tomu slouží metoda \texttt{getNumberOfRegions} ve třídě \texttt{Repartitioning}.
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+public int getNumberOfRegions(HTable table){
+        List<HRegionInfo> listOfRegion = hbase.getTableRegions(table.getTableName());
+        return listOfRegion.size();
+    }
 
 
+\end{lstlisting}
 \subsection{Spuštění PaToH a zpracování výsledků}
-Nyní již může dojít k zavolání PaToH programu
+Nyní již může dojít k zavolání PaToH programu:
 \begin{lstlisting}[frame=single]  % Start your code-block
 
 String command = "/patoh ./patohGraph.txt 4 RA=6 UM=U";
 Process p = Runtime.getRuntime().exec(command);
 \end{lstlisting}
 
+Po dokončení běhu programu máme vygenerovaný soubor, ve kterém je uložena řada čísel reprezentující všechny uzly hypergrafu v pořadí v jakém byli ve vstupním souboru. Hodnota čísla pak určuje do kterého segmentu bude uzel spadat. Pokud tedy například dělíme hypergraf na 4 segmenty, bude v souboru řada čísel o hodnotách 0, 1, 2 a 3. 
+
+Nyní je zapotřebí tyto informace zkombinovat s původním hypergrafem. Třída \texttt{MinCut} vytvoří mapu \texttt{partitionedGraph} a vyplní ji postupně tak, že klíč je originální klíč z grafu načtený kvůli dodržení pořadí z pole \texttt{nodesArray} a jako hodnota je uloženo číslo segmentu, do kterého daný uzel bude spadat načtené ze souboru vygenerovaného programem PaToH.
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+        Map<String, Integer> partitionedGraph = new HashMap<>();
+
+        String line;
+        int idInMap = 0;
+        try (
+                InputStream fis = new FileInputStream(new File("./patohGraph.txt.part." + numberOfPartitions));
+                InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
+                BufferedReader br = new BufferedReader(isr)) {
+            while ((line = br.readLine()) != null) {
+
+                String[] tokens = line.split(" ");
+                for (String token : tokens) {
+                    partitionedGraph.put(nodesArray.get(idInMap), Integer.parseInt(token));
+                    idInMap++;
+                }
+            }
+        } catch (IOException ex) {
+                System.out.println (ex.toString());
+                System.out.println("Could not find PaToH file ");
+        }
+\end{lstlisting}
+
+Výstupem  pak je právě tato mapa, podle které se může provést rozmístění řádků z původní tabulky do nově vzniklé.
+
 \subsection{Vytvoření a konfigurace nové tabulky}
+Dalším krokem je vytvoření nové databáze. Kterou nahradíme databázi původní. Nejdříve je nutné získat seznam families z původní tabulky. Protože families se na rozdíl o d sloupců musí přidat při vytváření tabulky. Families z původni tabulky získáme následovně.
+\begin{lstlisting}[frame=single]  % Start your code-block
+
+originalTable = new HTable(conf, originalDB);
+HTableDescriptor originalDBdescriptor = new HTableDescriptor(originalTable);
+Set families = originalDBdescriptor.getFamiliesKeys();
+\end{lstlisting}
+Získané bitové identifikátory jednotlivých family následně využijeme k vytvoření nové instance třídy \texttt{HTableDescriptor}, která reprezentuje tabulku v HBase a nastavíme jí totožné families.
+\begin{lstlisting}[frame=single]  % Start your code-block
+HTableDescriptor newDBdesctiptor = new HTableDescriptor(newDB);
+
+for (Object family : families) {
+    HColumnDescriptor newFamily = new HColumnDescriptor((byte[])family);
+    newDBdesctiptor.addFamily(newFamily);
+        }
+\end{lstlisting}
+Ješte před zapsáním nové tabulky na disk musíme nastavit SPLIT POLICY , na \texttt{KeyPrefixRegionSplitPolicy}, jak jsme se rozhodli při návrhu řešení a nastavíme velikost prefixu, podle kterého se budou v budoucí tabulce záznamy řadit.
+
+
 \subsubsection{Nastavení prozdělení tabulky na regiony}
 \subsection{přesun upravených dat}
 
@@ -619,6 +840,7 @@ Process p = Runtime.getRuntime().exec(command);
 	\item[API] Application Programming Interface
 	\item[SQL] Structured Query Language
 	\item[NoSQL] Not only SQL
+	\item[DBMS] DataBase Management System
 	\item[RDBMS] Relational DataBase Management System
 	\item[WAL] Write-Ahead Log
 	
@@ -626,7 +848,6 @@ Process p = Runtime.getRuntime().exec(command);
 \end{description}
 
 \chapter{Volitelné parametry programu PaToH}\label{ch:patoh}
-
 
 
 \chapter{Obsah přiloženého CD}
