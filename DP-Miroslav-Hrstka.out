@@ -16,18 +16,19 @@
 \BOOKMARK [0][-]{chapter.4}{N\341vrh re\235en\355 pro HBase}{}% 16
 \BOOKMARK [1][-]{section.4.1}{Razen\355 z\341znamu v datab\341zi}{chapter.4}% 17
 \BOOKMARK [1][-]{section.4.2}{Splitting HBase regionu}{chapter.4}% 18
-\BOOKMARK [1][-]{section.4.3}{Ulo\236en\355 DB v upraven\351 podobe}{chapter.4}% 19
-\BOOKMARK [1][-]{section.4.4}{Urcen\355 optim\341ln\355ho poctu segmentu pro del\355c\355 algoritmus}{chapter.4}% 20
-\BOOKMARK [1][-]{section.4.5}{program PaToH}{chapter.4}% 21
+\BOOKMARK [1][-]{section.4.3}{Proveden\355 partitioningu}{chapter.4}% 19
+\BOOKMARK [1][-]{section.4.4}{Ulo\236en\355 DB v upraven\351 podobe}{chapter.4}% 20
+\BOOKMARK [1][-]{section.4.5}{Urcen\355 optim\341ln\355ho poctu segmentu pro del\355c\355 algoritmus}{chapter.4}% 21
 \BOOKMARK [0][-]{chapter.5}{Implementace re\235en\355}{}% 22
 \BOOKMARK [1][-]{section.5.1}{Monitoring}{chapter.5}% 23
 \BOOKMARK [1][-]{section.5.2}{Repartitioning}{chapter.5}% 24
 \BOOKMARK [0][-]{chapter.6}{Testov\341n\355 a vyhodnocen\355 meren\355}{}% 25
-\BOOKMARK [0][-]{chapter*.16}{Z\341ver}{}% 26
-\BOOKMARK [0][-]{section*.18}{Literatura}{}% 27
-\BOOKMARK [0][-]{appendix.A}{Gener\341tor zku\235ebn\355ch dat}{}% 28
-\BOOKMARK [0][-]{appendix.B}{Testovac\355 MapReduce \372lohy}{}% 29
-\BOOKMARK [0][-]{appendix.C}{Instalace Hadoop prostred\355}{}% 30
-\BOOKMARK [0][-]{appendix.D}{Seznam pou\236it\375ch zkratek}{}% 31
-\BOOKMARK [0][-]{appendix.E}{Voliteln\351 parametry programu PaToH}{}% 32
-\BOOKMARK [0][-]{appendix.F}{Obsah prilo\236en\351ho CD}{}% 33
+\BOOKMARK [1][-]{section.6.1}{Vyhodnocen\355}{chapter.6}% 26
+\BOOKMARK [1][-]{section.6.2}{Testov\341n\355}{chapter.6}% 27
+\BOOKMARK [0][-]{chapter*.22}{Z\341ver}{}% 28
+\BOOKMARK [0][-]{section*.24}{Literatura}{}% 29
+\BOOKMARK [0][-]{appendix.A}{Gener\341tor zku\235ebn\355ch dat}{}% 30
+\BOOKMARK [0][-]{appendix.B}{Instalace Hadoop prostred\355}{}% 31
+\BOOKMARK [1][-]{section.B.1}{Pr\355prava na instalaci}{appendix.B}% 32
+\BOOKMARK [0][-]{appendix.C}{Seznam pou\236it\375ch zkratek}{}% 33
+\BOOKMARK [0][-]{appendix.D}{Obsah prilo\236en\351ho CD}{}% 34

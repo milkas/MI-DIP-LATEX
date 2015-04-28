@@ -53,6 +53,10 @@ Team, A.~H.: \emph{{Apache HBase} Reference Guide}. 2015.
 George, L.: \emph{HBase: The Definitive Guide}. O'Reilly Media, prvn\'\i{}
   vyd\'an\'\i{}, 2011, ISBN 1449396100.
 
+\bibitem{efi}
+Předmět MI-EFI - přednáška B-stromy a jejich variace. 2014.
+\urlprefix\biburl{https://edux.fit.cvut.cz/courses/BI-EFA/_media/lectures/bi-efa2014prednaska9-btrees-handout.pdf}
+
 \bibitem{hbasecon}
 HBaseCon. 2015.
 \urlprefix\biburl{http://hbasecon.com/archive.html}
@@ -82,5 +86,9 @@ Ibrahim, S.; Hai, J.; Lu, L.; aj.: Locality/fairness-aware key partitioning for
 \bibitem{split}
 Enis, S.: Apache HBase Region Splitting and Merging. 2013.
 \urlprefix\biburl{http://hortonworks.com/blog/apache-hbase-region-splitting-and-merging/}
+
+\bibitem{inmemory}
+Lin, J.; Dyer, C.: \emph{Data-Intensive Text Processing with MapReduce}. Morgan
+  and Claypool Publishers, 2010, ISBN 1608453421, 9781608453429.
 
 \end{thebibliography}
