@@ -10,9 +10,9 @@
 \contentsline {subsubsection}{\numberline {1.2.2.1}Typy NoSQL datab\IeC {\'a}z\IeC {\'\i }}{6}{subsubsection.1.2.2.1}
 \contentsline {paragraph}{Key-value datab\IeC {\'a}ze}{6}{section*.6}
 \contentsline {paragraph}{Dokumentov\IeC {\v e} orientovan\IeC {\'e} datab\IeC {\'a}ze}{6}{section*.7}
-\contentsline {paragraph}{Objektov\IeC {\v e} orientovan\IeC {\'e} datab\IeC {\'a}ze}{6}{section*.8}
-\contentsline {paragraph}{Grafov\IeC {\'e} datab\IeC {\'a}ze}{6}{section*.9}
-\contentsline {paragraph}{Sloupcov\IeC {\v e} orientovan\IeC {\'e} datab\IeC {\'a}ze}{6}{section*.10}
+\contentsline {paragraph}{Objektov\IeC {\v e} orientovan\IeC {\'e} datab\IeC {\'a}ze}{7}{section*.8}
+\contentsline {paragraph}{Grafov\IeC {\'e} datab\IeC {\'a}ze}{7}{section*.9}
+\contentsline {paragraph}{Sloupcov\IeC {\v e} orientovan\IeC {\'e} datab\IeC {\'a}ze}{7}{section*.10}
 \contentsline {section}{\numberline {1.3}Distribuovan\IeC {\'e} v\IeC {\'y}po\IeC {\v c}ty}{7}{section.1.3}
 \contentsline {subsection}{\numberline {1.3.1}MapReduce}{7}{subsection.1.3.1}
 \contentsline {chapter}{\chapternumberline {2}Sou\IeC {\v c}asn\IeC {\'y} stav a pou\IeC {\v z}it\IeC {\'e} technologie}{9}{chapter.2}
@@ -62,7 +62,7 @@
 \contentsline {subsubsection}{\numberline {4.2.2.3}KeyPrefixRegionSplitPolicy}{36}{subsubsection.4.2.2.3}
 \contentsline {subsection}{\numberline {4.2.3}Ur\IeC {\v c}en\IeC {\'\i } optim\IeC {\'a}ln\IeC {\'\i } politiky}{36}{subsection.4.2.3}
 \contentsline {section}{\numberline {4.3}Proveden\IeC {\'\i } partitioningu}{36}{section.4.3}
-\contentsline {subsection}{\numberline {4.3.1}program PaToH}{36}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.1}Program PaToH}{36}{subsection.4.3.1}
 \contentsline {subsection}{\numberline {4.3.2}Pou\IeC {\v z}it\IeC {\'\i } programu}{37}{subsection.4.3.2}
 \contentsline {subsubsection}{\numberline {4.3.2.1}Vstupn\IeC {\'\i } form\IeC {\'a}t dat}{38}{subsubsection.4.3.2.1}
 \contentsline {subsubsection}{\numberline {4.3.2.2}V\IeC {\'y}stupn\IeC {\'\i } form\IeC {\'a}t dat}{38}{subsubsection.4.3.2.2}
@@ -72,12 +72,13 @@
 \contentsline {section}{\numberline {5.1}Monitoring}{41}{section.5.1}
 \contentsline {subsection}{\numberline {5.1.1}MyTableImputClassBase Class}{42}{subsection.5.1.1}
 \contentsline {subsection}{\numberline {5.1.2}MyTableRecordReader Class}{42}{subsection.5.1.2}
+\contentsline {subsection}{\numberline {5.1.3}V\IeC {\'y}stup monitorovac\IeC {\'\i } f\IeC {\'a}ze}{43}{subsection.5.1.3}
 \contentsline {section}{\numberline {5.2}Repartitioning}{43}{section.5.2}
 \contentsline {subsection}{\numberline {5.2.1}Vytvo\IeC {\v r}en\IeC {\'\i } a reprezentace hypergrafu}{43}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}p\IeC {\v r}\IeC {\'\i }prava dat pro Min-cut algoritmus}{43}{subsection.5.2.2}
+\contentsline {subsection}{\numberline {5.2.2}P\IeC {\v r}\IeC {\'\i }prava dat pro Min-cut algoritmus}{43}{subsection.5.2.2}
 \contentsline {subsection}{\numberline {5.2.3}Spu\IeC {\v s}t\IeC {\v e}n\IeC {\'\i } PaToH a zpracov\IeC {\'a}n\IeC {\'\i } v\IeC {\'y}sledk\IeC {\r u}}{44}{subsection.5.2.3}
-\contentsline {subsection}{\numberline {5.2.4}Vytvo\IeC {\v r}en\IeC {\'\i } a konfigurace nov\IeC {\'e} tabulky}{44}{subsection.5.2.4}
-\contentsline {subsection}{\numberline {5.2.5}p\IeC {\v r}esun upraven\IeC {\'y}ch dat}{45}{subsection.5.2.5}
+\contentsline {subsection}{\numberline {5.2.4}Vytvo\IeC {\v r}en\IeC {\'\i } a konfigurace nov\IeC {\'e} tabulky}{45}{subsection.5.2.4}
+\contentsline {subsection}{\numberline {5.2.5}P\IeC {\v r}esun upraven\IeC {\'y}ch dat}{45}{subsection.5.2.5}
 \contentsline {subsection}{\numberline {5.2.6}Smaz\IeC {\'a}n\IeC {\'\i } p\IeC {\r u}vodn\IeC {\'\i } a p\IeC {\v r}ejmenov\IeC {\'a}n\IeC {\'\i } nov\IeC {\'e} tabulky}{46}{subsection.5.2.6}
 \contentsline {chapter}{\chapternumberline {6}Testov\IeC {\'a}n\IeC {\'\i } a vyhodnocen\IeC {\'\i } m\IeC {\v e}\IeC {\v r}en\IeC {\'\i }}{47}{chapter.6}
 \contentsline {section}{\numberline {6.1}Vyhodnocen\IeC {\'\i }}{47}{section.6.1}
@@ -85,19 +86,18 @@
 \contentsline {subsubsection}{\numberline {6.1.1.1}Konfigurace testovac\IeC {\'\i }ch dat}{49}{subsubsection.6.1.1.1}
 \contentsline {subsubsection}{\numberline {6.1.1.2}V\IeC {\'y}sledky m\IeC {\v e}\IeC {\v r}en\IeC {\'\i } po\IeC {\v c}tu p\IeC {\v r}esouvan\IeC {\'y}ch \IeC {\v r}\IeC {\'a}dk\IeC {\r u} p\IeC {\v r}i repartitioningu}{49}{subsubsection.6.1.1.2}
 \contentsline {subsection}{\numberline {6.1.2}Rozd\IeC {\'\i }ly v po\IeC {\v c}tu emitovan\IeC {\'y}ch hodnot z mapperu}{50}{subsection.6.1.2}
-\contentsline {subsubsection}{\numberline {6.1.2.1}In-mapper combining}{50}{subsubsection.6.1.2.1}
-\contentsline {subsubsection}{\numberline {6.1.2.2}Konfigurace testovac\IeC {\'\i }ch dat}{51}{subsubsection.6.1.2.2}
+\contentsline {subsubsection}{\numberline {6.1.2.1}In-mapper combining}{51}{subsubsection.6.1.2.1}
+\contentsline {subsubsection}{\numberline {6.1.2.2}Konfigurace testovac\IeC {\'\i }ch dat}{52}{subsubsection.6.1.2.2}
 \contentsline {paragraph}{V\IeC {\'y}sledky m\IeC {\v e}\IeC {\v r}en\IeC {\'\i } rozd\IeC {\'\i }l\IeC {\r u} v po\IeC {\v c}tech emitovan\IeC {\'y}ch kl\IeC {\'\i }\IeC {\v c}\IeC {\r u}}{52}{section*.21}
-\contentsline {subsection}{\numberline {6.1.3}Shrnut\IeC {\'\i }}{54}{subsection.6.1.3}
+\contentsline {subsection}{\numberline {6.1.3}Shrnut\IeC {\'\i }}{53}{subsection.6.1.3}
 \contentsline {section}{\numberline {6.2}Testov\IeC {\'a}n\IeC {\'\i }}{54}{section.6.2}
 \contentsline {subsection}{\numberline {6.2.1}Manu\IeC {\'a}ln\IeC {\'\i } testy}{54}{subsection.6.2.1}
-\contentsline {subsection}{\numberline {6.2.2}JUnit testy}{54}{subsection.6.2.2}
-\contentsline {subsection}{\numberline {6.2.3}MRUnit testy}{54}{subsection.6.2.3}
-\contentsline {subsection}{\numberline {6.2.4}V\IeC {\'y}sledky test\IeC {\r u}}{54}{subsection.6.2.4}
-\contentsline {chapter}{Z{\' a}v{\v e}r}{55}{chapter*.22}
-\contentsline {chapter}{Literatura}{57}{section*.24}
-\contentsline {appendix}{\chapternumberline {A}Gener\IeC {\'a}tor zku\IeC {\v s}ebn\IeC {\'\i }ch dat}{59}{appendix.A}
-\contentsline {appendix}{\chapternumberline {B}Instalace Hadoop prost\IeC {\v r}ed\IeC {\'\i }}{61}{appendix.B}
-\contentsline {section}{\numberline {B.1}P\IeC {\v r}\IeC {\'\i }prava na instalaci}{61}{section.B.1}
-\contentsline {appendix}{\chapternumberline {C}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{65}{appendix.C}
-\contentsline {appendix}{\chapternumberline {D}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{67}{appendix.D}
+\contentsline {subsection}{\numberline {6.2.2}Jednotkov\IeC {\'e} testy}{55}{subsection.6.2.2}
+\contentsline {chapter}{Z{\' a}v{\v e}r}{57}{chapter*.22}
+\contentsline {section}{Mo\IeC {\v z}nosti dal\IeC {\v s}\IeC {\'\i }ho rozvoje}{57}{section*.23}
+\contentsline {chapter}{Literatura}{59}{section*.25}
+\contentsline {appendix}{\chapternumberline {A}Gener\IeC {\'a}tor zku\IeC {\v s}ebn\IeC {\'\i }ch dat}{61}{appendix.A}
+\contentsline {appendix}{\chapternumberline {B}Instalace Hadoop prost\IeC {\v r}ed\IeC {\'\i }}{63}{appendix.B}
+\contentsline {section}{\numberline {B.1}P\IeC {\v r}\IeC {\'\i }prava na instalaci}{63}{section.B.1}
+\contentsline {appendix}{\chapternumberline {C}Seznam pou\IeC {\v z}it\IeC {\'y}ch zkratek}{67}{appendix.C}
+\contentsline {appendix}{\chapternumberline {D}Obsah p\IeC {\v r}ilo\IeC {\v z}en\IeC {\'e}ho CD}{69}{appendix.D}

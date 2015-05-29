@@ -12,6 +12,12 @@
 Sklenák, V.: \emph{Data, informace, znalosti a Internet}. Praha : C. H. Beck,
   prvn\'\i{} vyd\'an\'\i{}, 2001, ISBN 80-7179-409-0.
 
+\bibitem{gmr}
+Dean, J.; Ghemawat, S.: MapReduce: Simplified Data Processing on Large
+  Clusters. \emph{Commun. ACM}, ro\v cn\'\i{}k~51, \v c.~1, Leden 2008: s.
+  107--113, ISSN 0001-0782, \doi{10.1145/1327452.1327492}.
+\urlprefix\biburl{http://doi.acm.org/10.1145/1327452.1327492}
+
 \bibitem{HadoopDG}
 White, T.: \emph{Hadoop: The Definitive Guide}. O'Reilly Media, Inc., t\v
   ret\'\i{} vyd\'an\'\i{}, 2012, ISBN 0596521979, 9780596521974.
@@ -27,11 +33,11 @@ deRoos, D.: \emph{Hadoop For Dummies}. O'Reilly Media, Inc., 2014, ISBN
   978-1-118-60755-8.
 
 \bibitem{CLOUDERA}
-{Cloudera} trainings. 2015.
+{Cloudera} trainings. 2015, [2015-01-29].
 \urlprefix\biburl{http://cloudera.com/content/cloudera/en/training/library.html}
 
 \bibitem{HDFSWEB}
-{HDFS} User Guide. 2014.
+{HDFS} User Guide. 2014, [2015-02-16].
 \urlprefix\biburl{http://hadoop.apache.org/docs/r2.3.0/hadoop-project-dist/hadoop-hdfs/HdfsUserGuide.html}
 
 \bibitem{BigTable}
@@ -46,7 +52,7 @@ George, L.: \emph{Hadoop: The Definitive Guide}. O'Reilly Media, Inc.,
   prvn\'\i{} vyd\'an\'\i{}, 2011, ISBN 978-1-4493-9610-7.
 
 \bibitem{HBaseWEB}
-Team, A.~H.: \emph{{Apache HBase} Reference Guide}. 2015.
+Team, A.~H.: \emph{{Apache HBase} Reference Guide}. 2015, [2015-01-18].
 \urlprefix\biburl{http://hbase.apache.org/book.html}
 
 \bibitem{hbase2011}
@@ -54,11 +60,11 @@ George, L.: \emph{HBase: The Definitive Guide}. O'Reilly Media, prvn\'\i{}
   vyd\'an\'\i{}, 2011, ISBN 1449396100.
 
 \bibitem{efi}
-Předmět MI-EFI - přednáška B-stromy a jejich variace. 2014.
+Předmět MI-EFI - přednáška B-stromy a jejich variace. 2014, [2015-03-21].
 \urlprefix\biburl{https://edux.fit.cvut.cz/courses/BI-EFA/_media/lectures/bi-efa2014prednaska9-btrees-handout.pdf}
 
 \bibitem{hbasecon}
-HBaseCon. 2015.
+HBaseCon. 2015, [2015-03-27].
 \urlprefix\biburl{http://hbasecon.com/archive.html}
 
 \bibitem{graph1}
@@ -84,7 +90,7 @@ Ibrahim, S.; Hai, J.; Lu, L.; aj.: Locality/fairness-aware key partitioning for
   mapreduce in the cloud. \emph{CloudCom 2010}, 2010: s. 17--24.
 
 \bibitem{split}
-Enis, S.: Apache HBase Region Splitting and Merging. 2013.
+Enis, S.: Apache HBase Region Splitting and Merging. 2013, [2015-04-06].
 \urlprefix\biburl{http://hortonworks.com/blog/apache-hbase-region-splitting-and-merging/}
 
 \bibitem{inmemory}
